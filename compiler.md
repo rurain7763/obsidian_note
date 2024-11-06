@@ -73,3 +73,14 @@ Stmts ([
 - TypeCheck 가능
 - 최적화 가능
 - 코드 생성 가능
+#### Interpreter
+> AST를 통해 소스코드를 생성
+
+``` mips-asm
+.data
+num: .word 5
+res: .word 0
+
+
+
+```
