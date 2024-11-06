@@ -530,8 +530,6 @@ void DisplayFrame(void) {
     PutDispEnv(&dbuff.disp[currBuff]);
     PutDrawEnv(&dbuff.draw[currBuff]);
 
-    //TODO: ordering draw table
-
     currBuff = !currBuff;
 }
 
@@ -540,7 +538,6 @@ void Setup(void) {
 }
 
 void Update(void) {
-	// TODO : 
 }
 
 void Render(void) {
