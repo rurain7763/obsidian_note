@@ -566,6 +566,7 @@ u_long ot[2][OT_LENGTH];
 char primBuff[2][2048];
 char* nextPrim;
 ```
+cf)[참고](https://courses.pikuma.com/courses/take/ps1-programming-mips-assembly-language/texts/54230293-more-about-ordering-tables)
 
 **그리기**
 ```c
