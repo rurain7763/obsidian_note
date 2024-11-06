@@ -50,4 +50,12 @@ TokenType + Lexeme
 Stmts [
 	Assignment(Ident("num"), Number(5)),
 	Asssgnment(Ident("res"), Number(0)),
-	While
+	WhileStmts(
+		BinaryOp(Ident("num"), Number(0), GT),
+		Stmts [
+	      Assignment(Ident("res"), BinaryOp(Ident("res"), Ident("num"), ADD)),
+	      Assignment(Ident("num"), BinaryOp(Ident("num"), Number(1), SUB))
+	    ]
+	)
+]
+```
