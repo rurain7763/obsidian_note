@@ -558,9 +558,10 @@ ordering table
 ```c
 #define OT_LENGTH 16
 
-// 그려야 하는 primBuffer의 주소를 저장하는 OT(ord)
+// 그려야 하는 object의 primBuffer 상의 주소를 저장하는 OT(ordering table)
 u_long ot[2][OT_LENGTH];
 
+// primitive object의 데이터를 저장하는 buffer
 char primBuff[2][2048];
 char* nextPrim;
 ```
