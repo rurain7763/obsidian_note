@@ -69,4 +69,7 @@ Stmts ([
 - `Number` : 숫자
 - etc
 
-
+**장점**
+- TypeCheck 가능
+- 최적화 가능
+- 코드 생성 가능
