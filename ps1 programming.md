@@ -508,12 +508,12 @@ void ScreenInit(void) {
     setRGB0(&dbuff.draw[0], 63, 0, 127);
     setRGB0(&dbuff.draw[1], 63, 0, 127);
 
-    // 초기 버퍼 설저
+    // 초기 버퍼 설정값을 가지고 있는 변수 세팅
     currBuff = 0;
     PutDispEnv(&dbuff.disp[currBuff]);
     PutDrawEnv(&dbuff.draw[currBuff]);
 
-    // initialize and setup the GTE geometry offsets
+    // Geometry 초기화, 모든 오브젝트를 화면 중앙에 위치시키고, 화면 중앙을 기준으로 설정
     InitGeom();
     SetGeomOffset(SCREEN_CENTER_X, SCREEN_CENTER_Y);
     SetGeomScreen(SCREEN_CENTER_X);
