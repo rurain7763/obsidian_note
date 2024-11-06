@@ -479,6 +479,7 @@ cf) 환경 세팅 : https://github.com/NDR008/VSCodePSX
 #define SCREEN_RES_Y 240
 #define SCREEN_CENTER_X (SCREEN_RES_X >> 1)
 #define SCREEN_CENTER_Y (SCREEN_RES_Y >> 1)
+#define SCREEN_Z 400
 
 // 더블 버퍼링 세팅값을 가지는 구조체
 typedef struct {
@@ -517,7 +518,7 @@ void ScreenInit(void) {
     // 모든 좌표에 화면 중앙값을 더해준다고 생각하면 됨.
     InitGeom();
     SetGeomOffset(SCREEN_CENTER_X, SCREEN_CENTER_Y);
-    SetGeomScreen(SCREEN_CENTER_X);
+    SetGeomScreen(SCREEN_Z);
   
     // 디스플레이 온
     SetDispMask(1);
