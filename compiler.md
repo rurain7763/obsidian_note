@@ -1,3 +1,4 @@
+### Overview
 #### Tokenizer
 ```c
 int num = 5;
@@ -52,10 +53,18 @@ Stmts ([
 	Asssgnment(Ident("res"), Number(0)),
 	WhileStmts(
 		BinaryOp(Ident("num"), Number(0), GT),
-		Stmts [
+		Stmts ([
 	      Assignment(Ident("res"), BinaryOp(Ident("res"), Ident("num"), ADD)),
 	      Assignment(Ident("num"), BinaryOp(Ident("num"), Number(1), SUB))
-	    ]
+	    ])
 	)
 ])
 ```
+
+**종류**
+- `Assignment` : 변수 할당
+- `WhileStmts` : while문
+- `BinaryOp` : 이항 연산
+- `Ident` : 변수 이름
+- `Number` : 숫자
+- etc
