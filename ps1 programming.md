@@ -553,4 +553,13 @@ int main(void) {
     return 0;
 }
 ```
-###### Primitive
+###### Primitive type 그리기
+ordering table
+```c
+#define OT_LENGTH 16
+
+u_long ot[2][OT_LENGTH];
+
+char primBuff[2][2048];
+char* nextPrim;
+```
