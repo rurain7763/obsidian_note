@@ -488,136 +488,70 @@ typedef struct {
 DoubleBuffer dbuff;
 u_short currBuff;
 
-
 void ScreenInit(void) {
-
     // reset gpu
-
     ResetGraph(0);
 
-  
-
     // set the display area of the first buffer
-
     SetDefDispEnv(&dbuff.disp[0], 0,            0, SCREEN_RES_X, SCREEN_RES_Y);
-
     SetDefDrawEnv(&dbuff.draw[0], 0, SCREEN_RES_Y, SCREEN_RES_X, SCREEN_RES_Y);
-
   
-
     // set the display area of the second buffer
-
     SetDefDispEnv(&dbuff.disp[1], 0, SCREEN_RES_Y, SCREEN_RES_X, SCREEN_RES_Y);
-
     SetDefDrawEnv(&dbuff.draw[1], 0,            0, SCREEN_RES_X, SCREEN_RES_Y);
 
-  
-
     // set the back/drawing buffer
-
     dbuff.draw[0].isbg = 1;
-
     dbuff.draw[1].isbg = 1;
 
-  
-
     // set the background clear color (purple)
-
     setRGB0(&dbuff.draw[0], 63, 0, 127);
-
     setRGB0(&dbuff.draw[1], 63, 0, 127);
 
-  
-
     // set the current initial buffer
-
     currBuff = 0;
-
     PutDispEnv(&dbuff.disp[currBuff]);
-
     PutDrawEnv(&dbuff.draw[currBuff]);
-
-  
 
     // initialize and setup the GTE geometry offsets
-
     InitGeom();
-
     SetGeomOffset(SCREEN_CENTER_X, SCREEN_CENTER_Y);
-
     SetGeomScreen(SCREEN_CENTER_X);
-
   
-
     // enable display
-
     SetDispMask(1);
-
 }
 
-  
-
 void DisplayFrame(void) {
-
     DrawSync(0);
-
     VSync(0);
 
-  
-
     PutDispEnv(&dbuff.disp[currBuff]);
-
     PutDrawEnv(&dbuff.draw[currBuff]);
-
-  
 
     //TODO: ordering draw table
 
-  
-
     currBuff = !currBuff;
-
 }
-
-  
 
 void Setup(void) {
-
     ScreenInit();
-
 }
-
-  
 
 void Update(void) {
-
-  
-
+	// TODO : 
 }
-
-  
 
 void Render(void) {
-
     DisplayFrame();
-
 }
 
-  
-
 int main(void) {
-
     Setup();
-
     while(1) {
-
         Update();
-
         Render();
-
     }
-
     return 0;
-
 }
 ```
