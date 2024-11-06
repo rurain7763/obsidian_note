@@ -21,7 +21,14 @@ while(num > 0) {
 	(TOK_NUMBER, "0"),
 	(TOK_SEMICOLON, ";"),
 	(TOK_WHILE, "while"),
+	(TOK_LPAREN, "("),
+	(TOK_IDENTIFIER, "num"),
+	(TOK_GT, ">"),
+	(TOK_NUMBER, "0"),
+	(TOK_RPAREN, ")"),
+	(TOK_LBRACE, "{"),
 	
-	
+	//...
 ]
 ```
+``
