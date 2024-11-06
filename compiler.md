@@ -31,4 +31,10 @@ while(num > 0) {
 	//...
 ]
 ```
-``
+- `TOK_IDENTIFIER` : 변수, 함수, 클래스 등의 이름
+- `TOK_NUMBER` : 숫자
+- `TOK_EQ` : `=`
+- `TOK_SEMICOLON` : `;`
+- `TOK_WHILE` : `while`
+- `TOK_LPAREN` : `(`
+- etc
