@@ -74,13 +74,23 @@ Stmts ([
 - 최적화 가능
 - 코드 생성 가능
 #### Interpreter
-> AST를 통해 소스코드를 생성
+> AST를 통해 해당 CPU의 instruction set에 맞게 코드를 생성하고 실행한다.
 
-``` mips-asm
+ex)
+``` asm
 .data
 num: .word 5
 res: .word 0
 
+.text
+main:
+  lw $t0, num
+  lw $t1, res
+  loop:
+    add $t1, $t1, $t0
+    sub $t0, $t0, 1
+    bgt $t0, 0, loop
 
+//...
 
 ```
