@@ -31,6 +31,11 @@ while(num > 0) {
 	//...
 ]
 ```
+
+**토큰 형식**
+TokenType + Lexeme
+
+**종류**
 - `TOK_IDENTIFIER` : 변수, 함수, 클래스 등의 이름
 - `TOK_NUMBER` : 숫자
 - `TOK_EQ` : `=`
