@@ -465,3 +465,41 @@ Main:
 ```
 #### Psy-Q
 > Psy-Q는 PS1용 게임 개발 툴킷으로, Psygnosis사에서 개발하였습니다. Psy-Q는 PS1용 게임을 개발하기 위한 컴파일러, 링커, 디버거, 에뮬레이터 등을 제공하며, PS1의 하드웨어를 직접 제어할 수 있는 라이브러리도 포함하고 있습니다.
+###### 기본 프레임
+``` c
+// Double buffer structure
+typedef struct {
+	DRAWENV draw[2];
+	DISPENV disp[2];
+} DoubleBuffer;
+
+DououbleBuffer dbuf;
+u_short currBuff;
+
+void ScreenInit(void) {
+	// gpu 초기화
+	// 디스플레이 영역과 그리기 영역 설정
+}
+
+void DisplayFrame(void) {
+	// 
+}
+
+void Setup(void) {}
+
+void Update(void) {}
+
+void Render(void) {
+  DisplayFrame();
+}
+
+int main(void) {
+	Setup();
+	while (1) {
+	    Update();
+	    Render();
+	}
+	return 0;
+}
+}
+```
