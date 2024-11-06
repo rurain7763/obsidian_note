@@ -493,11 +493,11 @@ void ScreenInit(void) {
     // GPU 초기화
     ResetGraph(0);
 
-    // 첫번째 버퍼 설정값 세팅. (0,0,320,240가 전면 버퍼, 0, 240, 320, 240이 후면 버퍼))
+    // 첫번째 버퍼 설정값 세팅. 0,0,320,240가 전면 버퍼, 0,240,320,240이 후면 버퍼
     SetDefDispEnv(&dbuff.disp[0], 0,            0, SCREEN_RES_X, SCREEN_RES_Y);
     SetDefDrawEnv(&dbuff.draw[0], 0, SCREEN_RES_Y, SCREEN_RES_X, SCREEN_RES_Y);
   
-    // 두번째 버퍼 설정값 세팅. (0,240,320,240가 전면 버퍼, 0, 0, 320, 240이 후면 버퍼))
+    // 두번째 버퍼 설정값 세팅. 0,240,320,240가 전면 버퍼, 0,0,320,240이 후면 버퍼
     SetDefDispEnv(&dbuff.disp[1], 0, SCREEN_RES_Y, SCREEN_RES_X, SCREEN_RES_Y);
     SetDefDrawEnv(&dbuff.draw[1], 0,            0, SCREEN_RES_X, SCREEN_RES_Y);
 
