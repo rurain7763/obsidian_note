@@ -568,5 +568,31 @@ char* nextPrim;
 
 **그리기**
 ```c
+ClearOTagR(ot[currBuff], OT_LENGTH);
 
+tile = (TILE*)nextPrim;
+setTile(tile);
+
+setXY0(tile, 82, 32);
+setWH(tile, 64, 64);
+setRGB0(tile, 0, 255, 0);
+addPrim(ot[currBuff], tile);
+nextPrim += sizeof(TILE);
+
+triangle = (POLY_F3*)nextPrim;
+setPolyF3(triangle);
+setXY3(triangle, 64, 100, 200, 150, 50, 220);
+setRGB0(triangle, 255, 0, 255);
+addPrim(ot[currBuff], triangle);
+nextPrim += sizeof(POLY_F3);
+
+quad = (POLY_G4*)nextPrim;
+setPolyG4(quad);
+setXY4(quad, 200, 100, 200, 200, 100, 100, 100, 200);
+setRGB0(quad, 0, 0, 255);
+setRGB1(quad, 255, 0, 0);
+setRGB2(quad, 0, 255, 0);
+setRGB3(quad, 255, 255, 255);
+addPrim(ot[currBuff], quad);
+nextPrim += sizeof(POLY_G4);
 ```
