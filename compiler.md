@@ -12,7 +12,16 @@ while(num > 0) {
 [
 	(TOK_IDENTIFIER, "int"),
 	(TOK_IDENTIFIER, "num"),
-	(TOK_ASSIGN, "="),
+	(TOK_EQ, "="),
+	(TOK_NUMBER, "5"),
+	(TOK_SEMICOLON, ";"),
+	(TOK_IDENTIFIER, "int"),
+	(TOK_IDENTIFIER, "res"),
+	(TOK_EQ, "="),
+	(TOK_NUMBER, "0"),
+	(TOK_SEMICOLON, ";"),
+	(TOK_WHILE, "while"),
+	
 	
 ]
 ```
