@@ -480,6 +480,7 @@ cf) 환경 세팅 : https://github.com/NDR008/VSCodePSX
 #define SCREEN_CENTER_X (SCREEN_RES_X >> 1)
 #define SCREEN_CENTER_Y (SCREEN_RES_Y >> 1)
 
+// 더블 버퍼링 세팅값을 가지는 구조체
 typedef struct {
     DRAWENV draw[2];
     DISPENV disp[2];
@@ -489,10 +490,10 @@ DoubleBuffer dbuff;
 u_short currBuff;
 
 void ScreenInit(void) {
-    // reset gpu
+    // GPU 초기화
     ResetGraph(0);
 
-    // set the display area of the first buffer
+    // 첫번째 버퍼 설정값 세팅 
     SetDefDispEnv(&dbuff.disp[0], 0,            0, SCREEN_RES_X, SCREEN_RES_Y);
     SetDefDrawEnv(&dbuff.draw[0], 0, SCREEN_RES_Y, SCREEN_RES_X, SCREEN_RES_Y);
   
