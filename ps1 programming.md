@@ -466,7 +466,7 @@ Main:
 #### Psy-Q
 > Psy-Q는 PS1용 게임 개발 툴킷으로, Psygnosis사에서 개발하였습니다. Psy-Q는 PS1용 게임을 개발하기 위한 컴파일러, 링커, 디버거, 에뮬레이터 등을 제공하며, PS1의 하드웨어를 직접 제어할 수 있는 라이브러리도 포함하고 있습니다.
 
-cf) 환경 세팅 : (https://github.com/NDR008/VSCodePSX
+cf) 환경 세팅 : https://github.com/NDR008/VSCodePSX
 ###### 기본 프레임
 ``` c
 // Double buffer structure
