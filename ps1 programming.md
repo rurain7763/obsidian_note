@@ -501,15 +501,14 @@ void ScreenInit(void) {
     SetDefDispEnv(&dbuff.disp[1], 0, SCREEN_RES_Y, SCREEN_RES_X, SCREEN_RES_Y);
     SetDefDrawEnv(&dbuff.draw[1], 0,            0, SCREEN_RES_X, SCREEN_RES_Y);
 
-    // set the back/drawing buffer
     dbuff.draw[0].isbg = 1;
     dbuff.draw[1].isbg = 1;
 
-    // set the background clear color (purple)
+    // 배경색 설정
     setRGB0(&dbuff.draw[0], 63, 0, 127);
     setRGB0(&dbuff.draw[1], 63, 0, 127);
 
-    // set the current initial buffer
+    // 초기 버퍼 설저
     currBuff = 0;
     PutDispEnv(&dbuff.disp[currBuff]);
     PutDrawEnv(&dbuff.draw[currBuff]);
