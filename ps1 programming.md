@@ -514,11 +514,12 @@ void ScreenInit(void) {
     PutDrawEnv(&dbuff.draw[currBuff]);
 
     // Geometry 초기화, 모든 오브젝트를 화면 중앙에 위치시키고, 화면 중앙을 기준으로 설정
+    // 모든 좌표에 화면 중앙값을 더해준다고 생각하면 됨.
     InitGeom();
     SetGeomOffset(SCREEN_CENTER_X, SCREEN_CENTER_Y);
     SetGeomScreen(SCREEN_CENTER_X);
   
-    // enable display
+    // 디스플레이 온
     SetDispMask(1);
 }
 
