@@ -605,4 +605,4 @@ nextPrim += sizeof(POLY_G4);
 DrawOTag(ot[currBuff] + OT_LENGTH - 1); // 반전된 순서로 그림
 ```
 #### GTE
-> GTE (Geometry Transformation Engine)는 PS1의 CPU의 Coprocessor로서, 3D 그래픽 처리를 위한 하드웨어 가속기입니다. GTE는 3D 변환, 투영, 클리핑, 광원 계산 등을 하드웨어로 처리하여 CPU의 부담을 줄여줍니다.
+> GTE (Geometry Transformation Engine)는 PS1의 CPU Coprocessor로서, 3D 그래픽 처리를 위한 하드웨어 가속기입니다. GTE는 3D 변환, 투영, 클리핑, 광원 계산 등을 하드웨어로 처리하여 CPU의 부담을 줄여줍니다.
