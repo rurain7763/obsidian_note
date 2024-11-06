@@ -570,15 +570,16 @@ char* nextPrim;
 ```c
 ClearOTagR(ot[currBuff], OT_LENGTH);
 
+// 1. 64x64 크기의 사각형을 그림
 tile = (TILE*)nextPrim;
 setTile(tile);
-
 setXY0(tile, 82, 32);
 setWH(tile, 64, 64);
 setRGB0(tile, 0, 255, 0);
 addPrim(ot[currBuff], tile);
 nextPrim += sizeof(TILE);
 
+// 2. 64x64 크기의 사각형을 그림
 triangle = (POLY_F3*)nextPrim;
 setPolyF3(triangle);
 setXY3(triangle, 64, 100, 200, 150, 50, 220);
@@ -586,6 +587,7 @@ setRGB0(triangle, 255, 0, 255);
 addPrim(ot[currBuff], triangle);
 nextPrim += sizeof(POLY_F3);
 
+// 3. 
 quad = (POLY_G4*)nextPrim;
 setPolyG4(quad);
 setXY4(quad, 200, 100, 200, 200, 100, 100, 100, 200);
