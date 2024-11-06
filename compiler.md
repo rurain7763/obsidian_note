@@ -43,3 +43,5 @@ TokenType + Lexeme
 - `TOK_WHILE` : `while`
 - `TOK_LPAREN` : `(`
 - etc
+#### AST
+> AST(Abstract Syntax Tree)는 컴파일러가 소스코드를 분석하여 만드는 트리 구조의 자료구조이다. 이를 통해 컴파일러는 소스코드를 분석하고 실행 가능한 코드로 변환한다.
