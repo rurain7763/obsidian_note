@@ -558,6 +558,7 @@ ordering table
 ```c
 #define OT_LENGTH 16
 
+// 그려야 하는 primBuffer의 주소를 저장하는 OT(ord)
 u_long ot[2][OT_LENGTH];
 
 char primBuff[2][2048];
