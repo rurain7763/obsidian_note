@@ -7,4 +7,12 @@ while(num > 0) {
   num--;
 }
 ```
-
+해당 코드를 토큰화하면 다음과 같다.
+```
+[
+	(TOK_IDENTIFIER, "int"),
+	(TOK_IDENTIFIER, "num"),
+	(TOK_ASSIGN, "="),
+	
+]
+```
