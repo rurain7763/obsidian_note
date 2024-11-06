@@ -554,14 +554,19 @@ int main(void) {
 }
 ```
 ###### Primitive type 그리기
-ordering table
+**Ordering table**
 ```c
 #define OT_LENGTH 16
 
-// 그려야 하는 object의 primBuffer 상의 주소를 저장하는 OT(ordering table)
+// 그려야 하는 object의 primBuffer에서의 시작 주소를 저장하는 OT(ordering table)
 u_long ot[2][OT_LENGTH];
 
 // primitive object의 데이터를 저장하는 buffer
 char primBuff[2][2048];
 char* nextPrim;
+```
+
+**그리기**
+```c
+
 ```
