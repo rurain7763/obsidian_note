@@ -599,5 +599,6 @@ addPrim(ot[currBuff], quad);
 nextPrim += sizeof(POLY_G4);
 
 // ...
+
 DrawOTag(ot[currBuff] + OT_LENGTH - 1); // 반전된 순서로 그림
 ```
