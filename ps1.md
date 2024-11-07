@@ -636,16 +636,17 @@ u_short faces[] = {
 
 SVECTOR rotation = { 0, 0, 0 };
 VECTOR translation = { 0, 0, 900 };
-VECTOR scale = { ONE, ONE, ONE };
+VECTOR scale = { ONE, ONE, ONE }; // ONE은 1 << 12 (4096)한 값이다
 
 MATRIX worldMatrix;
 	
 void Update(void) {
-	// rot
+	// rotation, translation, scale matrix 구하기
 	RotMatrix(&rotation, &worldMatrix);
 	TransMatrix(&worldMatrix, &translation);
 	ScaleMatrix(&worldMatrix, &scale);
-	
+
+	// 계산한 각각의 matrix 등록
 	SetRotMatrix(&worldMatrix);
 	SetTransMatrix(&worldMatrix);
 	
