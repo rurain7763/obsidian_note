@@ -710,6 +710,12 @@ long num2 = 30 * ONE; // 30.0
 
 //addition
 long add = num1 + num2; // 50.0
+
+//subtraction
 long sub = num1 - num2; // -10.0
+
+//multiplication
+long mul = (num1 * num2) >> 12; // 600.0
+
 ```
 
