@@ -20,7 +20,8 @@ Floating-point number도 마찬가지입니다. 컴퓨터가 숫자를 저장할
 - **비트 수가 많으면 (float64처럼):** 눈금이 촘촘한 자와 같습니다. 훨씬 더 많은 종류의 숫자를 표현할 수 있고, 숫자 사이의 간격이 좁습니다. 즉, resolution이 높습니다. 1.234567을 훨씬 더 정확하게 저장할 수 있습니다.
 예시로
 0.007 = 0.001 resolution
-0
+46.12 = 0.01 resolution
+462.2 = 0.1 resolution
 #### 문자
 - char = ascii, wchar_t = unicode
 - unicode의 대표적 표현 방식
