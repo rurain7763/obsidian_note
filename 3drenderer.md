@@ -73,8 +73,9 @@ void render_color_buffer() {
 ```
 #### Projection Matrix
 - perspective projection
+	[참고 영상1](https://www.youtube.com/watch?v=eoXn6nwV694&t=1397s)
+	[참고 영상2](https://www.youtube.com/watch?v=md3jFANT3UM&t=381s)
 	![img](https://www.scratchapixel.com/images/perspective-matrix/projectionOpenGL.png?)
-	1. z값에 반비례.
 - projection matrix
 	역할
 	 화면 비율(aspect ration : h / w)에 따른 x, y값 조정
@@ -106,8 +107,7 @@ void render_color_buffer() {
 	}
 	```
 	참고
-		[참고 영상1](https://www.youtube.com/watch?v=eoXn6nwV694&t=1397s)
-		[참고 영상2](https://www.youtube.com/watch?v=md3jFANT3UM&t=381s)
+		
 #### View/Camera Matrix
 1. camera position과 반대로 평행이동한다. (camera가 왼쪽으로 이동하면 세상은 오른쪽으로 이동해야하고 오른쪽으로 이동하면 왼쪽으로 이동해야 한다.)
 2. 카메라 축에 inversed한 회전을 적용한다. (camera가 위를 향하면 세상은 아래로 회전해야 하고 아래를 향하면 위로 회전해야 한다.)
