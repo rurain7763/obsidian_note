@@ -647,7 +647,6 @@ void Update(void) {
 	TransMatrix(&worldMatrix, &translation);
 	ScaleMatrix(&worldMatrix, &scale);
 
-	// 계산한 각각의 matrix 등록
 	SetRotMatrix(&worldMatrix); // gte registery에 rotation matrix 등록
 	SetTransMatrix(&worldMatrix); // gte registery에 translation matrix 등록
 	
