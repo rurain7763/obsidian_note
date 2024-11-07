@@ -706,6 +706,10 @@ cf) GTE는 20.12 fixed-point number를 사용한다.
 #define ONE 4096
 
 long num1 = 20 * ONE; // 20.0
-long 
+long num2 = 30 * ONE; // 30.0
+
+//addition
+long add = num1 + num2; // 50.0
+long sub = num1 - num2; // -10.0
 ```
 
