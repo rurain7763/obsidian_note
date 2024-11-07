@@ -639,30 +639,33 @@ VECTOR translation = { 0, 0, 900 };
 VECTOR scale = { ONE, ONE, ONE };
 
 MATRIX worldMatrix;
-
-RotMatrix(&rotation, &worldMatrix);
-TransMatrix(&worldMatrix, &translation);
-ScaleMatrix(&worldMatrix, &scale);
-
-SetRotMatrix(&worldMatrix);
-SetTransMatrix(&worldMatrix);
-
-for(i = 0; i < NUM_FACES * 3; i += 3) {
-	poly = (POLY_G3*)nextPrim;
-	setPolyG3(poly);
-	setRGB0(poly, 0, 255, 255);
-	setRGB1(poly, 255, 0, 255);
-	setRGB2(poly, 255, 255, 0);
-
-	otz = 0;
-	otz += RotTransPers(&vertices[faces[i + 0]], (long*)&poly->x0, &p, &flag);
-	otz += RotTransPers(&vertices[faces[i + 1]], (long*)&poly->x1, &p, &flag);
-	otz += RotTransPers(&vertices[faces[i + 2]], (long*)&poly->x2, &p, &flag);
-	otz /= 3;
-
-	if(otz > 0 && otz < OT_LENGTH) {
-		addPrim(ot[currBuff][otz], poly);
-		nextPrim += sizeof(POLY_G3);
+	
+void Update(void) {
+	// rot
+	RotMatrix(&rotation, &worldMatrix);
+	TransMatrix(&worldMatrix, &translation);
+	ScaleMatrix(&worldMatrix, &scale);
+	
+	SetRotMatrix(&worldMatrix);
+	SetTransMatrix(&worldMatrix);
+	
+	for(i = 0; i < NUM_FACES * 3; i += 3) {
+		poly = (POLY_G3*)nextPrim;
+		setPolyG3(poly);
+		setRGB0(poly, 0, 255, 255);
+		setRGB1(poly, 255, 0, 255);
+		setRGB2(poly, 255, 255, 0);
+	
+		otz = 0;
+		otz += RotTransPers(&vertices[faces[i + 0]], (long*)&poly->x0, &p, &flag);
+		otz += RotTransPers(&vertices[faces[i + 1]], (long*)&poly->x1, &p, &flag);
+		otz += RotTransPers(&vertices[faces[i + 2]], (long*)&poly->x2, &p, &flag);
+		otz /= 3;
+	
+		if(otz > 0 && otz < OT_LENGTH) {
+			addPrim(ot[currBuff][otz], poly);
+			nextPrim += sizeof(POLY_G3);
+		}
 	}
 }
 ```
