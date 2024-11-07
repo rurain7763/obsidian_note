@@ -14,8 +14,7 @@
 	mantisa : 가수, exponent : 지수
 - resolution
 	표현 가능한 두 수 사이의 최소 간격
-	Matisa : 가수
-	Exponent : 지수
+	
 #### 문자
 - char = ascii, wchar_t = unicode
 - unicode의 대표적 표현 방식
