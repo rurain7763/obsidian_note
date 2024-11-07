@@ -13,6 +13,8 @@ ex) -3.375
 ![img](https://devocean.sk.com/editorImg/2023/9/12/150e6ff4ef7a02673d86aa0caae3ecbca2c168364ae1f153ee25660e1ea2a017)
 mantisa : 가수, exponent : 지수
 ###### resolution
+다른 말로는 ULP(Unit in the Last Place)라고도 합니다. resolution은 숫자를 얼마나 정밀하게 표현할 수 있는지를 나타냅니다. 눈금이 촘촘할수록 resolution이 높습니다.
+
 - **1cm 단위로만 눈금이 있는 자:** 1cm, 2cm, 3cm... 이런 식으로만 측정할 수 있습니다. 1.5cm, 2.3cm처럼 그 사이 값은 정확히 측정할 수 없죠. 이 자의 resolution은 낮습니다.
 - **1mm 단위로 눈금이 있는 자:** 1.1cm, 1.2cm, 1.3cm... 훨씬 더 정밀하게 측정할 수 있습니다. 이 자의 resolution은 높습니다.
 Floating-point number도 마찬가지입니다. 컴퓨터가 숫자를 저장할 때 사용하는 비트(0과 1)가 눈금과 같은 역할을 합니다.
