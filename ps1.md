@@ -678,7 +678,7 @@ void Update(void) {
             &otz, 
             &flag);
 
-		// -
+		// 0보다 작으면 해당 삼각형 무시
         if(nclip <= 0) {
             continue;
         }
