@@ -649,14 +649,16 @@ void Update(void) {
 	// 계산한 각각의 matrix 등록
 	SetRotMatrix(&worldMatrix);
 	SetTransMatrix(&worldMatrix);
-	
+
+	// 각 face를 순회하면서 삼각형 그리기
 	for(i = 0; i < NUM_FACES * 3; i += 3) {
 		poly = (POLY_G3*)nextPrim;
 		setPolyG3(poly);
 		setRGB0(poly, 0, 255, 255);
 		setRGB1(poly, 255, 0, 255);
 		setRGB2(poly, 255, 255, 0);
-	
+
+		// depth buffer가 없으므로 z값을 평균내어 그림
 		otz = 0;
 		otz += RotTransPers(&vertices[faces[i + 0]], (long*)&poly->x0, &p, &flag);
 		otz += RotTransPers(&vertices[faces[i + 1]], (long*)&poly->x1, &p, &flag);
