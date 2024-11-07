@@ -723,5 +723,6 @@ long mul = (num1 * num2) >> 12; // 600.0
 long div = (num1 << 12) / num2; // 0.6666666666666666
 #else V2
 long div = (num1 << ONE) /  num2; // 0.6666666666666666
+#endif
 ```
 
