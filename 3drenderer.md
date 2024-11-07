@@ -77,31 +77,36 @@ void render_color_buffer() {
 [참고 영상1](https://www.youtube.com/watch?v=eoXn6nwV694&t=1397s)
 [참고 영상2](https://www.youtube.com/watch?v=md3jFANT3UM&t=381s)
 
-###### d
+###### 역할
+1. 화면 비율(aspect ration : h / w)에 따른 x, y값 조정
+		$x * aspect$
+2. field of view에 따른 x, y값 조정
+		$x * 1 / tan(a)$
+		$y * 1 / tan(a)$
+	 x, y을 -1~1 사이로 z값을 0 ~ 1 사이로 normalization 하기.
+		$(zfar / (zfar - znear) * z) - (afar / (zfar - znear) * znear)$
 	
-	코드
-	```cpp
-	mat4_t mat4_make_perspective(float fov, float aspect, float znear, float zfar) {
-		mat4_t ret = {{
-			{0, 0, 0, 0},
-			{0, 0, 0, 0},
-			{0, 0, 0, 0},
-			{0, 0, 0, 0}
-		}};
-	
-		float fov_factor = 1 / tan(fov / 2.0);
-		float lamda = zfar / (zfar - znear);
-		ret.m[0][0] = aspect * fov_factor;
-		ret.m[1][1] = fov_factor;
-		ret.m[2][2] = lamda;
-		ret.m[2][3] = -lamda * znear;
-		ret.m[3][2] = 1.0;
-		
-		return ret;
-	}
-	```
-	참고
-		
+###### 코드
+```cpp
+mat4_t mat4_make_perspective(float fov, float aspect, float znear, float zfar) {
+mat4_t ret = {{
+	{0, 0, 0, 0},
+	{0, 0, 0, 0},
+	{0, 0, 0, 0},
+	{0, 0, 0, 0}
+}};
+
+float fov_factor = 1 / tan(fov / 2.0);
+float lamda = zfar / (zfar - znear);
+ret.m[0][0] = aspect * fov_factor;
+ret.m[1][1] = fov_factor;
+ret.m[2][2] = lamda;
+ret.m[2][3] = -lamda * znear;
+ret.m[3][2] = 1.0;
+
+return ret;
+}
+```	
 #### View/Camera Matrix
 1. camera position과 반대로 평행이동한다. (camera가 왼쪽으로 이동하면 세상은 오른쪽으로 이동해야하고 오른쪽으로 이동하면 왼쪽으로 이동해야 한다.)
 2. 카메라 축에 inversed한 회전을 적용한다. (camera가 위를 향하면 세상은 아래로 회전해야 하고 아래를 향하면 위로 회전해야 한다.)
