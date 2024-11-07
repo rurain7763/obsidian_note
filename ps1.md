@@ -691,3 +691,5 @@ void Update(void) {
 	}
 }
 ```
+#### Fixed-Point number
+> ps1은 소
