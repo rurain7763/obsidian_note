@@ -72,8 +72,6 @@ void render_color_buffer() {
 }
 ```
 #### Projection Matrix
-- orthographic projection
-	1. z값 무시
 - perspective projection
 	![img](https://www.scratchapixel.com/images/perspective-matrix/projectionOpenGL.png?)
 	1. z값에 반비례.
