@@ -730,14 +730,17 @@ long div = (num1 << ONE) /  num2; // 0.6666666666666666
 - address(1byte): 받아야 할 대상의 주소 ex) 0x01 :  1번 컨트롤러, 0x81 : 메모리 카드
 - command + parameters: 명령
 ###### 코드
+LIBETC.h 라이브러리를 사용하여 컨트롤러 입력을 받는다.
 ```c
 u_long padState;
 
 void Setup(void) {
+	// 첫번째 컨트롤러 초기화
 	PadInit(0);
 }
 
 void Update(void) {
+	// 첫버
 	padState = PadRead(0);
 
 	if(padState & _PAD(0, PADLleft)) {
