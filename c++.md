@@ -11,7 +11,8 @@
 	7. 0b1100 0000 0101 1000 0000 0000 0000 0000 으로 저장됨
 - resolution
 	표현 가능한 두 수 사이의 최소 간격
-	Matisa : 유효
+	Matisa : 유효숫자 부분
+	Exponent : 지수
 #### 문자
 - char = ascii, wchar_t = unicode
 - unicode의 대표적 표현 방식
