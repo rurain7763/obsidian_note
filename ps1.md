@@ -665,13 +665,9 @@ void Update(void) {
 		otz += RotTransPers(&vertices[faces[i + 1]], (long*)&poly->x1, &p, &flag);
 		otz += RotTransPers(&vertices[faces[i + 2]], (long*)&poly->x2, &p, &flag);
 		otz /= 3;
-	
-		if(otz > 0 && otz < OT_LENGTH) {
-			addPrim(ot[currBuff][otz], poly);
-			nextPrim += sizeof(POLY_G3);
-		}
-#else
-	nclip = RotAverageNclip3(
+#elif CULLING
+		// dot product값을 
+		nclip = RotAverageNclip3(
             &vertices[faces[i + 0]], 
             &vertices[faces[i + 1]], 
             &vertices[faces[i + 2]], 
@@ -686,6 +682,11 @@ void Update(void) {
             continue;
         }
 #endif
+	
+		if(otz > 0 && otz < OT_LENGTH) {
+			addPrim(ot[currBuff][otz], poly);
+			nextPrim += sizeof(POLY_G3);
+		}
 	}
 }
 ```
