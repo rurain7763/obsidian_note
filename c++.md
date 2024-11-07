@@ -11,7 +11,7 @@
 	7. 0b1100 0000 0101 1000 0000 0000 0000 0000 으로 저장됨
 - 용어
 	![img](https://devocean.sk.com/editorImg/2023/9/12/150e6ff4ef7a02673d86aa0caae3ecbca2c168364ae1f153ee25660e1ea2a017)
-	
+	mantisa : 가수, exponent : 지수
 - resolution
 	표현 가능한 두 수 사이의 최소 간격
 	Matisa : 가수
