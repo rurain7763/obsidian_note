@@ -666,7 +666,7 @@ void Update(void) {
 		otz += RotTransPers(&vertices[faces[i + 2]], (long*)&poly->x2, &p, &flag);
 		otz /= 3;
 #elif CULLING
-		// dot product값을 
+		// 함수의 반환값을 이용하여 culling (아마도 dot product값을 던져 주는듯?)
 		nclip = RotAverageNclip3(
             &vertices[faces[i + 0]], 
             &vertices[faces[i + 1]], 
@@ -678,6 +678,7 @@ void Update(void) {
             &otz, 
             &flag);
 
+		// -
         if(nclip <= 0) {
             continue;
         }
