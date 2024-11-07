@@ -648,9 +648,9 @@ void Update(void) {
 	ScaleMatrix(&worldMatrix, &scale);
 
 	// 계산한 각각의 matrix 등록
-	SetRotMatrix(&worldMatrix);
-	SetTransMatrix(&worldMatrix);
-
+	SetRotMatrix(&worldMatrix); // gte registery에 rotation matrix 등록
+	SetTransMatrix(&worldMatrix); // gte registery에 translation matrix 등록
+	
 	// 각 face를 순회하면서 삼각형 그리기
 	for(i = 0; i < NUM_FACES * 3; i += 3) {
 		poly = (POLY_G3*)nextPrim;
