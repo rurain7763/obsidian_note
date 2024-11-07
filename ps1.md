@@ -634,7 +634,7 @@ u_short faces[] = {
     0, 7, 3 
 };
 
-SVECTOR rotation = { 0, 0, 0 };
+SVECTOR rotation = { 0, 0, 0 }; // 0 ~ 4096이 0 ~ 360도를 의미
 VECTOR translation = { 0, 0, 900 };
 VECTOR scale = { ONE, ONE, ONE }; // ONE은 1 << 12 (4096)한 값이다 (fixed-point number를 사용하기 때문)
 )
