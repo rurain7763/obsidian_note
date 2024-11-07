@@ -733,6 +733,17 @@ long div = (num1 << ONE) /  num2; // 0.6666666666666666
 ```c
 u_long padState;
 
-void Setup(void) 
+void Setup(void) {
+	PadInit(0);
+}
+
+void Update(void) {
+	padState = PadRead(0);
+
+	if(padState & _PAD(0, PADLleft)) {
+		// Do something
+	}
+}
+
 ```
 
