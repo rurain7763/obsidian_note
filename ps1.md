@@ -740,7 +740,7 @@ void Setup(void) {
 }
 
 void Update(void) {
-	// 첫버
+	// 첫번째 째 컨트롤러 입력 상태 읽기
 	padState = PadRead(0);
 
 	if(padState & _PAD(0, PADLleft)) {
