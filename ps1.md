@@ -726,5 +726,5 @@ long div = (num1 << ONE) /  num2; // 0.6666666666666666
 ```
 #### Contoller input
 > ps1의 컨트롤러는 CPU 메모리를 공유하지 않는 별도의 하드웨어로 구성되어 있습니다. 컨트롤러는 버튼, 스틱, 트리거 등을 포함하며, 버튼을 누르거나 스틱을 움직이면 컨트롤러가 패킷을 생성하여 CPU에 전달합니다.
-> 패킷은 address + command + parameter로 구성되어 있습니다. address는 컨트롤러의 주소, command는 버튼 누름 여부, parameter는 버튼의 상태를 나타냅니다.
+> 패킷은 address + command + parameter로 구성되어 있습니다.
 
