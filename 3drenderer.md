@@ -72,10 +72,10 @@ void render_color_buffer() {
 }
 ```
 #### Projection Matrix
-- perspective projection
+###### perspective projection
+![img](https://www.scratchapixel.com/images/perspective-matrix/projectionOpenGL.png?)
 	[참고 영상1](https://www.youtube.com/watch?v=eoXn6nwV694&t=1397s)
 	[참고 영상2](https://www.youtube.com/watch?v=md3jFANT3UM&t=381s)
-	![img](https://www.scratchapixel.com/images/perspective-matrix/projectionOpenGL.png?)
 - projection matrix
 	역할
 	 화면 비율(aspect ration : h / w)에 따른 x, y값 조정
