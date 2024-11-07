@@ -696,4 +696,7 @@ void Update(void) {
 
 cf) 반대 개념으로는 Floating-Point number가 있다. 현대 컴퓨터에서는 대부분 IEEE 754 표준을 따르는 32비트 또는 64비트의 부동 소수점을 사용한다.
 ###### 16.16 fixed-point number
-1
+16비트 정수부와 16비트 소수부로 나누어 표현한다. 예를 들어 1.0은 0x00010000으로 표현한다.
+###### 20.12 fixed-point number
+20비트 정수부와 12비트 소수부로 나누어 표현한다. 예를 들어 1.0은 0x00100000으로 표현한다.
+cf) GTE는 20.12 fixed-point number를 사용한다.
