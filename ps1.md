@@ -606,3 +606,63 @@ DrawOTag(ot[currBuff] + OT_LENGTH - 1); // 반전된 순서로 그림
 ```
 #### GTE
 > GTE (Geometry Transformation Engine)는 PS1의 CPU Coprocessor로서, 3D 그래픽 처리를 위한 하드웨어 가속기입니다. GTE는 3D 변환, 투영, 클리핑, 광원 계산 등을 하드웨어로 처리하여 CPU의 부담을 줄여줍니다.
+###### Cube 그리기
+```c
+SVECTOR vertices[] = {
+    { -128, -128, -128 },
+    {  128, -128, -128 },
+    { 128, -128, 128 },
+    { -128, -128, 128 },
+    { -128, 128, -128 },
+    {  128, 128, -128 },
+    { 128, 128, 128 },
+    { -128, 128, 128 }
+};
+
+u_short faces[] = {
+    0, 3, 2,
+    0, 2, 1,
+    4, 0, 1,
+    4, 1, 5,
+    7, 4, 5,
+    7, 5, 6,
+    5, 1, 2,
+    5, 2, 6,
+    2, 3, 7,
+    2, 7, 6,
+    0, 4, 7,
+    0, 7, 3 
+};
+
+SVECTOR rotation = { 0, 0, 0 };
+VECTOR translation = { 0, 0, 900 };
+VECTOR scale = { ONE, ONE, ONE };
+
+MATRIX worldMatrix;
+
+RotMatrix(&rotation, &worldMatrix);
+TransMatrix(&worldMatrix, &translation);
+ScaleMatrix(&worldMatrix, &scale);
+
+SetRotMatrix(&worldMatrix);
+SetTransMatrix(&worldMatrix);
+
+for(i = 0; i < NUM_FACES * 3; i += 3) {
+	poly = (POLY_G3*)nextPrim;
+	setPolyG3(poly);
+	setRGB0(poly, 0, 255, 255);
+	setRGB1(poly, 255, 0, 255);
+	setRGB2(poly, 255, 255, 0);
+
+	otz = 0;
+	otz += RotTransPers(&vertices[faces[i + 0]], (long*)&poly->x0, &p, &flag);
+	otz += RotTransPers(&vertices[faces[i + 1]], (long*)&poly->x1, &p, &flag);
+	otz += RotTransPers(&vertices[faces[i + 2]], (long*)&poly->x2, &p, &flag);
+	otz /= 3;
+
+	if(otz > 0 && otz < OT_LENGTH) {
+		addPrim(ot[currBuff][otz], poly);
+		nextPrim += sizeof(POLY_G3);
+	}
+}
+```
