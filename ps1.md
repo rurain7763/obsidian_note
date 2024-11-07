@@ -636,7 +636,8 @@ u_short faces[] = {
 
 SVECTOR rotation = { 0, 0, 0 };
 VECTOR translation = { 0, 0, 900 };
-VECTOR scale = { ONE, ONE, ONE }; // ONE은 1 << 12 (4096)한 값이다
+VECTOR scale = { ONE, ONE, ONE }; // ONE은 1 << 12 (4096)한 값이다 (fixed-point number를 사용하기 때문)
+)
 
 MATRIX worldMatrix;
 	
