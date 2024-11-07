@@ -658,6 +658,7 @@ void Update(void) {
 		setRGB1(poly, 255, 0, 255);
 		setRGB2(poly, 255, 255, 0);
 
+#if NO_CULLING
 		// depth buffer가 없으므로 z값을 평균내어 그림
 		otz = 0;
 		otz += RotTransPers(&vertices[faces[i + 0]], (long*)&poly->x0, &p, &flag);
@@ -669,6 +670,22 @@ void Update(void) {
 			addPrim(ot[currBuff][otz], poly);
 			nextPrim += sizeof(POLY_G3);
 		}
+#else
+	nclip = RotAverageNclip3(
+            &vertices[faces[i + 0]], 
+            &vertices[faces[i + 1]], 
+            &vertices[faces[i + 2]], 
+            (long*)&poly->x0, 
+            (long*)&poly->x1, 
+            (long*)&poly->x2, 
+            &p,
+            &otz, 
+            &flag);
+
+        if(nclip <= 0) {
+            continue;
+        }
+#endif
 	}
 }
 ```
