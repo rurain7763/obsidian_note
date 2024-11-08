@@ -25,5 +25,7 @@ new_age = int(age) + 1 # Type casting
 - bool()
 - etc
 ```python
-
+first_num = float(input("First: "))
+second_num = float(input("Second: "))
+print("Sum: " + str(first_num + second_num))
 ```
