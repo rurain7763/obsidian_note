@@ -24,6 +24,7 @@ new_age = int(age) + 1 # Type casting
 - str()
 - bool()
 - etc
+###### 테스트 코드
 ```python
 first_num = float(input("First: "))
 second_num = float(input("Second: "))
