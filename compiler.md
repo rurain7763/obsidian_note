@@ -106,10 +106,12 @@ for(int i = 0; i < strlen(str); i++) {
   if(isDigit(c)) { 
 	  if(!isDigit(str[i + 1])) {
 		  // add token
-	  } 
+	  }
   }
+  // ...
   else if(c == ' ') {
-	  
+	  start++;
+	  cur++;	  
   }
 }
 ```
