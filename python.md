@@ -9,3 +9,7 @@ is_new = True
 ```python
 name = input("What is your name? ")
 ```
+#### Output
+```python
+print("Hello " + name)
+```
