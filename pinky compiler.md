@@ -196,3 +196,11 @@ class Lexer:
 Context-free grammar는 이처럼 문장을 구성하는 규칙을 정의하는 방식입니다. 각 규칙은 다른 규칙과 상관없이 독립적으로 적용될 수 있습니다.
 ###### BNF(Backus-Naur Form) 표기법
 > CFG를 표기하는 방법 중 하나로, `::=`를 사용하여 정의한다.
+
+**BNF 표기법 예시**
+```
+<expr> ::= <term> + <expr> | <term> - <expr> | <term>
+<term> ::= <factor> * <term> | <factor> / <term> | <factor>
+<factor> ::= ( <expr> ) | <number>
+<number> ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+```
