@@ -5,3 +5,7 @@ name = "John"
 age = 20
 is_new = True
 ```
+#### Input
+```python
+name = input("What is your name? ")
+```
