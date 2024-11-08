@@ -103,7 +103,11 @@ int start = 0;
 int curr = 0;
 for(int i = 0; i < strlen(str); i++) {
   char c = str[i];
-  if(isDigit(c)) { // ... }
+  if(isDigit(c)) { 
+	  if(!isDigit(str[i + 1])) {
+		  // add token
+	  } 
+  }
   else if(c == ' ') {
 	  
   }
