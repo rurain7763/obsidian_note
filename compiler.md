@@ -96,4 +96,8 @@ main:
 #### Implementation
 ##### Lexer
 > 소스코드를 토큰화한다.
-
+###### Scanning algorithm
+```c
+char str[] = "int num = 5;";
+int 
+```
