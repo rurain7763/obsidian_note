@@ -200,7 +200,7 @@ Context-free grammar는 이처럼 문장을 구성하는 규칙을 정의하는 
 **BNF 표기법 예시**
 ```
 <expr> ::= <term> + <expr> | <term> - <expr> | <term> // expr는 term + expr 이거나 term - expr 이거난 term 단일이다
-<term> ::= <factor> * <term> | <factor> / <term> | <factor> // 
-<factor> ::= ( <expr> ) | <number>
-<number> ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+<term> ::= <factor> * <term> | <factor> / <term> | <factor> // term은 factor * term 이거나 factor / term 이거나 factor 단일이다
+<factor> ::= ( <expr> ) | <number> // factor는 (expr) 이거나 number 단일이다
+<number> ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 // number는 0~9 중 하나이다
 ```
