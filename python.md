@@ -24,3 +24,6 @@ new_age = int(age) + 1 # Type casting
 - str()
 - bool()
 - etc
+```python
+
+```
