@@ -133,10 +133,11 @@ class Lexer:
         self.curr = self.curr + 1
         return ch
 
-	# 
+	# 현재 start - curr 까지의 문자를 tokens에 추가
     def add_token(self, token_type):
         self.tokens.append(Token(token_type, self.source[self.start:self.curr]))
 
+	# source를 읽어 토큰화한 후 tokens 반환
     def tokenize(self):
         while self.curr < len(self.source):
             self.start = self.curr
