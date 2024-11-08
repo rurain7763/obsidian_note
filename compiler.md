@@ -103,7 +103,7 @@ int start = 0;
 int curr = 0;
 for(int i = 0; i < strlen(str); i++) {
   char c = str[i];
-  // TODO: 숫자인가? 문자인가에 따라서 처리
-  curr++;
+  if(isDigit(c)) { // ... }
+  else if()
 }
 ```
