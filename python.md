@@ -13,7 +13,7 @@ name = input("What is your name? ")
 ```python
 print("Hello " + name)
 ```
-#### Type er
+#### Type casting
 ```python
 age = input("What is your age? ")
 new_age = age + 1 # Type error : str + int
