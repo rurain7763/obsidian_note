@@ -167,3 +167,5 @@ class Lexer:
         
         return self.tokens
 ```
+###### 개선점
+현재 토근화 클래스는 token에 새로운 string
