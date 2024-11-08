@@ -99,5 +99,17 @@ main:
 ###### Scanning algorithm
 ```c
 char str[] = "int num = 5;";
-int 
+int start = 0;
+int curr = 0;
+for(int i = 0; i < strlen(str); i++) {
+  char c = str[i];
+  if(c == ' ') {
+    if(start != curr) {
+      char* lexeme = substr(str, start, curr);
+      tokens.push_back(lexeme);
+    }
+    start = curr = i + 1;
+  }
+  curr++;
+}
 ```
