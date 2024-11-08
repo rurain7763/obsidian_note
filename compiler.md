@@ -92,5 +92,8 @@ main:
     bgt $t0, 0, loop
 
 //...
-
 ```
+#### Implementation
+##### Lexer
+> 소스코드를 토큰화한다.
+
