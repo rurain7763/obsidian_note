@@ -97,7 +97,7 @@ main:
 ```
 #### Implementation
 ##### Lexer
-> 소스코드를 토큰화한다. 문법은 신경쓰지 않는다. (있으면 안도)
+> 소스코드를 토큰화한다. 문법은 신경쓰지 않는다. (있으면 안되는 문자나 잘못된 입력은 예외)
 ###### Scanning algorithm
 ```c
 char str[] = "int num = 5;";
