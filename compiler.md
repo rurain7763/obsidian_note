@@ -103,13 +103,7 @@ int start = 0;
 int curr = 0;
 for(int i = 0; i < strlen(str); i++) {
   char c = str[i];
-  if(c == ' ') {
-    if(start != curr) {
-      char* lexeme = substr(str, start, curr);
-      tokens.push_back(lexeme);
-    }
-    start = curr = i + 1;
-  }
+  // TODO: 숫자인가? 문자인가에 따라서 처리
   curr++;
 }
 ```
