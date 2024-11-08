@@ -121,17 +121,19 @@ for(int i = 0; i < strlen(str); i++) {
 class Lexer:
     def __init__(self, source):
         self.source = source
-        self.start = 0
-        self.curr = 0
-        self.line = 1
+        self.start = 0 # 토큰 시작 인덱스
+        self.curr = 0 # 현재 인덱스
+        self.line = 1 
         self.tokens = []
         pass
 
+	# 현재 curr 위치의 문자 반환 후 curr 증가
     def advance(self):
         ch = self.source[self.curr]
         self.curr = self.curr + 1
         return ch
-    
+
+	# 
     def add_token(self, token_type):
         self.tokens.append(Token(token_type, self.source[self.start:self.curr]))
 
