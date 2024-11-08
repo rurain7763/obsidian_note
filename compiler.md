@@ -104,6 +104,8 @@ int curr = 0;
 for(int i = 0; i < strlen(str); i++) {
   char c = str[i];
   if(isDigit(c)) { // ... }
-  else if()
+  else if(c == ' ') {
+	  
+  }
 }
 ```
