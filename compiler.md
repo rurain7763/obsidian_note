@@ -150,7 +150,7 @@ class Lexer:
 
 	# 현재 start(포함) - curr(미포함) 까지의 문자를 tokens에 추가
     def add_token(self, token_type):
-        self.tokens.append(Token(token_type, self.source[self.start:self.curr]))
+        self.tokens.append(Token(token_type, self.source[self.start:self.curr], self.line))
 
 	# source를 읽어 토큰화한 후 tokens 반환
     def tokenize(self):
@@ -161,7 +161,7 @@ class Lexer:
             elif ch == '-': self.add_token(TOK_MINUS)
             elif ch == '*': self.add_token(TOK_STAR)
             elif ch == '/': self.add_token(TOK_SLASH)
-            
+            # etc
         
         return self.tokens
 ```
