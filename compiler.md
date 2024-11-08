@@ -108,7 +108,7 @@ for(int i = 0; i < strlen(str); i++) {
 		  // add token
 	  }
   }
-  // ...
+  else if(isOperator(c)) { //... }
   else if(c == ' ') {
 	  start++;
 	  cur++;	  
