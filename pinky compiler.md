@@ -172,4 +172,6 @@ class Lexer:
 #### Parser
 > 문법 체크 및 AST 생성
 ###### CFG(Context-Free Grammar)
-###### BNF() 표기법
+> 
+###### BNF(Backus-Naur Form) 표기법
+> CFG를 표기하는 방법 중 하나로, `::=`를 사용하여 정의한다.
