@@ -133,6 +133,21 @@ class Lexer:
         self.curr = self.curr + 1
         return ch
 
+	# 현재 curr 위치의 문자 반환
+    def peek(self):
+        return self.source[self.curr]
+
+	# curr 위치의 다음 문자 반환
+    def lookahead(self, n = 1):
+        return self.source[self.curr + n]
+
+	# 현재 문자와 expected가 같은지 확인 후 같으면 curr 증가 후 True 반환
+    def match(self, expected):
+        if self.source[self.curr] != expected:
+            return False
+        self.curr = self.curr + 1
+        return True
+
 	# 현재 start(포함) - curr(미포함) 까지의 문자를 tokens에 추가
     def add_token(self, token_type):
         self.tokens.append(Token(token_type, self.source[self.start:self.curr]))
@@ -142,14 +157,11 @@ class Lexer:
         while self.curr < len(self.source):
             self.start = self.curr
             ch = self.advance()
-            if ch == '+': 
-                self.add_token(TOK_PLUS)
-            elif ch == '-': 
-                self.add_token(TOK_MINUS)
-            elif ch == '*':
-                self.add_token(TOK_STAR)
-            elif ch == '/':
-                self.add_token(TOK_SLASH)
+            if ch == '+': self.add_token(TOK_PLUS)
+            elif ch == '-': self.add_token(TOK_MINUS)
+            elif ch == '*': self.add_token(TOK_STAR)
+            elif ch == '/': self.add_token(TOK_SLASH)
+            
         
         return self.tokens
 ```
