@@ -202,42 +202,43 @@ public:
 ![img](https://denyskryvytskyi.github.io/assets/img/event-system/class-diagram.png)
 장점 : 커플링을 없앤다.
 ###### 구현 종류
-- blocking
-	이벤트가 발생하면 즉시 처리한다.
-	```cpp
-	class DamageSystem {
-		void Setup() {
-			eventBus->Subscribe<>(); //
-		}
+**blocking**
+이벤트가 발생하면 즉시 처리한다.
+```cpp
+class DamageSystem {
+	void Setup() {
+		eventBus->Subscribe<>(); //
+	}
 
-		void OnCollision() {
+	void OnCollision() {
+		// ...
+	}
+};
+class CollisionSystem {
+	void Update() {
+		//...
+		evnetBus->EmitEvent<>();
+	}
+};
+```
+
+**unblocking**
+발생 시 바로 처리 하지 않고 마지막에 몰아서 처리한다.
+```cpp
+class DamageSystem {
+	void Update() {
+		if(eventBus->GetEvnet<>()) {
 			// ...
 		}
-	};
-	class CollisionSystem {
-		void Update() {
-			//...
-			evnetBus->EmitEvent<>();
-		}
-	};
-	```
-- unblocking
-	발생 시 바로 처리 하지 않고 마지막에 몰아서 처리한다.
-	```cpp
-	class DamageSystem {
-		void Update() {
-			if(eventBus->GetEvnet<>()) {
-				// ...
-			}
-		}
-	};
-	class CollisionSystem {
-		void Update() {
-			// ...
-			evnetBus->EmitEvent<>();
-		}
-	};
-	```
+	}
+};
+class CollisionSystem {
+	void Update() {
+		// ...
+		evnetBus->EmitEvent<>();
+	}
+};
+```
 #### Tagging & Groupping Entities
 ```cpp
 class Registry {
