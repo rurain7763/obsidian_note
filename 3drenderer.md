@@ -196,8 +196,10 @@ void draw_line(int x0, int y0, int x1, int y1, uint32_t color) {
 ![img](http://www.sunshine2k.de/coding/java/TriangleRasterization/generalTriangle.png)
 boundary를 기준으로 위의 삼각형(flat_bottom), 아래 삼각형(flat_top)을 나누어서 그린다.
 위의 사진은 v4 포인트의 x값을 찾기 위한 공식이다. (y4의 경우 y2와 같으므로 쉽게 구할 수 있다.)
+
 ![img](http://www.sunshine2k.de/coding/java/TriangleRasterization/bresenhamIdea.png)
 1, 2의 기울기를 각각 구하고 start_x와 end_x를 구하여 해당 사이의 모든 픽셀에 색을 칠한다.
+
 ```cpp
 void draw_flat_bottom_triangle(int x0, int y0, int x1, int y1, int x2, int y2, uint32_t color) {
 	// 기울기를 y값 증가에 따른 x값으로 구함
@@ -306,6 +308,7 @@ for(int i = 0; i < len_triangles; i++) {
 
 z값의 평균을 사용하기 때문에 정확하지 않음 (아래와 같은 그림은 표현하지 못한다.)
 ![img](https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Painters_problem.svg/220px-Painters_problem.svg.png)
+
 **2차 해결**
 depth buffer : 픽셀 마다 z값을 저장한 배열
 배열 clear 시 전부 1로 초기화
@@ -389,6 +392,7 @@ view_mat = mat4_look_at(camera.position, target, up);
 ![img](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZUmxgiU5V7lDW18VRtOCaxyCTwQnFnzohhw&s)
 clipping이란 위 그림처럼 특정부분에서 벗어난 부분을 잘라 새로운 polygon 형태를 만드는 기술이다
 주의할 점은 여러군데가 잘릴 수 있다는 것
+
 ![img](https://learnwebgl.brown37.net/_images/viewing_frustum.png)
 view frustrum의 경우 6개의 해당하는 clipping plane을 모두 계산한다.
 6개를 계산할 때 first clipping의 결과로 나온 polygon을 그대로 second clipping에 전달해야 한다. (독립적으로 시행 x)
