@@ -114,22 +114,22 @@ camera position과 반대로 평행이동한다. (camera가 왼쪽으로 이동�
 ![img](https://docs.tizen.org/application/native/guides/graphics/media/view_matrix.png)
 
 ```c
-	mat4_t mat4_look_at(vec3_t eye, vec3_t target, vec3_t up) {
-		vec3_t z = vec3_sub(target, eye);
-		vec3_normalize(&z);
-		vec3_t x = vec3_cross(up, z);
-		vec3_normalize(&x);
-		vec3_t y = vec3_cross(z, x);
-	
-		mat4_t ret = {{
-			{ x.x, x.y, x.z, -vec3_dot(x, eye) },
-			{ y.x, y.y, y.z, -vec3_dot(y, eye) },
-			{ z.x, z.y, z.z, -vec3_dot(z, eye) },
-			{ 0, 0, 0, 1 }
-		}};
-		return ret;
-	}
-	```
+mat4_t mat4_look_at(vec3_t eye, vec3_t target, vec3_t up) {
+	vec3_t z = vec3_sub(target, eye);
+	vec3_normalize(&z);
+	vec3_t x = vec3_cross(up, z);
+	vec3_normalize(&x);
+	vec3_t y = vec3_cross(z, x);
+
+	mat4_t ret = {{
+		{ x.x, x.y, x.z, -vec3_dot(x, eye) },
+		{ y.x, y.y, y.z, -vec3_dot(y, eye) },
+		{ z.x, z.y, z.z, -vec3_dot(z, eye) },
+		{ 0, 0, 0, 1 }
+	}};
+	return ret;
+}
+```
 #### Coordinate System
 - 왼손 좌표계 사용 (z가 커지는 방향이 스크린 쪽으로 들어가는 방향)
 - model space -> world space(world matrix 곱하기) -> view/camera space(view matrix 곱하기) -> screen space(projection matrix 곱하기)
@@ -199,67 +199,67 @@ boundary를 기준으로 위의 삼각형(flat_bottom), 아래 삼각형(flat_to
 ![img](http://www.sunshine2k.de/coding/java/TriangleRasterization/bresenhamIdea.png)
 1, 2의 기울기를 각각 구하고 start_x와 end_x를 구하여 해당 사이의 모든 픽셀에 색을 칠한다.
 ```cpp
-	void draw_flat_bottom_triangle(int x0, int y0, int x1, int y1, int x2, int y2, uint32_t color) {
-		// 기울기를 y값 증가에 따른 x값으로 구함
-		float inv_slop_1 = (x1 - x0) / (float)(y1 - y0);
-		float inv_slop_2 = (x2 - x0) / (float)(y2 - y0);
+void draw_flat_bottom_triangle(int x0, int y0, int x1, int y1, int x2, int y2, uint32_t color) {
+	// 기울기를 y값 증가에 따른 x값으로 구함
+	float inv_slop_1 = (x1 - x0) / (float)(y1 - y0);
+	float inv_slop_2 = (x2 - x0) / (float)(y2 - y0);
+	
+	float start_x = x0, end_x = x0;
+	for(int i = y0; i <= y2; i++) {
+		draw_line(start_x, i, end_x, i, color);\
+		start_x += inv_slop_1;
+		end_x += inv_slop_2;
+	}
+}
+
+void draw_flat_top_triangle(int x0, int y0, int x1, int y1, int x2, int y2, uint32_t color) {
+	// 기울기를 y값 증가에 따른 x값으로 구함
+	float inv_slop_1 = (x2 - x0) / (float)(y2 - y0);
+	float inv_slop_2 = (x2 - x1) / (float)(y2 - y1);
+	
+	float start_x = x2, end_x = x2;
+	for(int i = y2; i >= y1; i--) 
+		draw_line(start_x, i, end_x, i, color);
+		start_x -= inv_slop_1;
+		end_x -= inv_slop_2;
+	}
+}
+
+void draw_filled_triangle(int x0, int y0, int x1, int y1, int x2, int y2, uint32_t color) {
+	// y값이 큰 순서대로 정렬
+	if(y0 > y1) {
+		int_swap(&x0, &x1);
+		int_swap(&y0, &y1);
+	}
+
+	if(y1 > y2) {
+		int_swap(&x1, &x2);
+		int_swap(&y1, &y2);
+	}
+
+	if(y0 > y1) {
+		int_swap(&x0, &x1);
+		int_swap(&y0, &y1);
+	}
+
+	if(y1 == y2) {
+		// 위쪽 삼각형만 그리기
+		draw_flat_bottom_triangle(x0, y0, x1, y1, x2, y2, color);
+	} else if(y0 == y1) {
+		// 아래쪽 삼각형만 그리기
+		draw_flat_top_triangle(x0, y0, x1, y1, x2, y2, color);
+	} else {
+		// midpoint 찾기
+		int my = y1;
+		int mx = ((x2 - x0) * (y1 - y0)) / (float)(y2 - y0) + x0;
 		
-		float start_x = x0, end_x = x0;
-		for(int i = y0; i <= y2; i++) {
-			draw_line(start_x, i, end_x, i, color);\
-			start_x += inv_slop_1;
-			end_x += inv_slop_2;
-		}
+		// flat_bottom 삼각형 그리기
+		draw_flat_bottom_triangle(x0, y0, x1, y1, mx, my, color);
+		// flat_top 삼각형 그리기
+		draw_flat_top_triangle(x1, y1, mx, my, x2, y2, color);
 	}
-	
-	void draw_flat_top_triangle(int x0, int y0, int x1, int y1, int x2, int y2, uint32_t color) {
-		// 기울기를 y값 증가에 따른 x값으로 구함
-		float inv_slop_1 = (x2 - x0) / (float)(y2 - y0);
-		float inv_slop_2 = (x2 - x1) / (float)(y2 - y1);
-		
-		float start_x = x2, end_x = x2;
-		for(int i = y2; i >= y1; i--) 
-			draw_line(start_x, i, end_x, i, color);
-			start_x -= inv_slop_1;
-			end_x -= inv_slop_2;
-		}
-	}
-	
-	void draw_filled_triangle(int x0, int y0, int x1, int y1, int x2, int y2, uint32_t color) {
-		// y값이 큰 순서대로 정렬
-		if(y0 > y1) {
-			int_swap(&x0, &x1);
-			int_swap(&y0, &y1);
-		}
-	
-		if(y1 > y2) {
-			int_swap(&x1, &x2);
-			int_swap(&y1, &y2);
-		}
-	
-		if(y0 > y1) {
-			int_swap(&x0, &x1);
-			int_swap(&y0, &y1);
-		}
-	
-		if(y1 == y2) {
-			// 위쪽 삼각형만 그리기
-			draw_flat_bottom_triangle(x0, y0, x1, y1, x2, y2, color);
-		} else if(y0 == y1) {
-			// 아래쪽 삼각형만 그리기
-			draw_flat_top_triangle(x0, y0, x1, y1, x2, y2, color);
-		} else {
-			// midpoint 찾기
-			int my = y1;
-			int mx = ((x2 - x0) * (y1 - y0)) / (float)(y2 - y0) + x0;
-			
-			// flat_bottom 삼각형 그리기
-			draw_flat_bottom_triangle(x0, y0, x1, y1, mx, my, color);
-			// flat_top 삼각형 그리기
-			draw_flat_top_triangle(x1, y1, mx, my, x2, y2, color);
-		}
-	}
-	```
+}
+```
 #### Back face culling
 ```cpp
 // 삼각형 a, b, c에 대해
@@ -305,30 +305,30 @@ Painter algorithm
 
 z값의 평균을 사용하기 때문에 정확하지 않음 (아래와 같은 그림은 표현하지 못한다.)
 ![img](https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Painters_problem.svg/220px-Painters_problem.svg.png)
-2차 해결
-	depth buffer : 픽셀 마다 z값을 저장한 배열
-	배열 clear 시 전부 1로 초기화
-	픽셀이 그려질때마다 depth buffer에 저장되어 있는 값과 비교하여 더 작으면 갱신하고 그린다.
-	```c
-	// w값은 projection 되기 전의 z값임
-	// 역전된 w이므로 w가 클수록 최종값은 작다
-	// 그러므로 1.0에서 역전된 w를 빼줘서 값을 flip한다. (w의 max값은 1 이므로)
-	// cf) w값을 역전한 이유는 w값은 linear한 값이 아니기 때문이다.
-	inv_w = 1.0 - inv_w;
-	if(inv_w < z_buffer[window_width * y + x]) {
-		// draw this pixel!
-		z_buffer[window_width * y + x] = inv_w;
-	}
-	```
+**2차 해결**
+depth buffer : 픽셀 마다 z값을 저장한 배열
+배열 clear 시 전부 1로 초기화
+픽셀이 그려질때마다 depth buffer에 저장되어 있는 값과 비교하여 더 작으면 갱신하고 그린다.
+```c
+// w값은 projection 되기 전의 z값임
+// 역전된 w이므로 w가 클수록 최종값은 작다
+// 그러므로 1.0에서 역전된 w를 빼줘서 값을 flip한다. (w의 max값은 1 이므로)
+// cf) w값을 역전한 이유는 w값은 linear한 값이 아니기 때문이다.
+inv_w = 1.0 - inv_w;
+if(inv_w < z_buffer[window_width * y + x]) {
+	// draw this pixel!
+	z_buffer[window_width * y + x] = inv_w;
+}
+```
 #### Light and Shading
-- Flat Shading
-	```cpp
-	uint32_t face_color = mesh_face.color;
-	// 글로벌 라이트와 법선 벡터를 내적하여 나온 값을 light factor로 사용
-	float light_factor = -vec3_dot(global_light.direction, normal);
-	// 적용
-	face_color = apply_light_intensity(face_color, light_factor);
-	```
+**Flat Shading**
+```cpp
+uint32_t face_color = mesh_face.color;
+// 글로벌 라이트와 법선 벡터를 내적하여 나온 값을 light factor로 사용
+float light_factor = -vec3_dot(global_light.direction, normal);
+// 적용
+face_color = apply_light_intensity(face_color, light_factor);
+```
 #### Texturing
 - uv 좌표계
 	![img|500](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjGA619DubbMIueWY2zF6_XTKpl-s5tf58-A&s)
