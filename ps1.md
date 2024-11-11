@@ -797,4 +797,6 @@ char* FileRead(const char* filename, u_long* size) {
 ###### .BIN file 
 `model.bin`
 첫번째 바이트는 vertices의 갯수
-
+그 이후 바이트는 x, y, z 순으로 vertices의 갯수만큼
+이 후 나오는 첫 바이트는 faces의 갯수
+그 이
