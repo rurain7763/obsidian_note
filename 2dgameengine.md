@@ -422,5 +422,4 @@ lua.new_usertype<Entity>(
 	"entity",
 	"get_id", &Entity::GetID,
 );
-```
-- 
+``` 
