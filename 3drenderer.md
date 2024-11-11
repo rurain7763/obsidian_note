@@ -193,14 +193,12 @@ void draw_line(int x0, int y0, int x1, int y1, uint32_t color) {
 }
 ```
 #### Draw triangle
-**1차 해결**
 ![img](http://www.sunshine2k.de/coding/java/TriangleRasterization/generalTriangle.png)
 boundary를 기준으로 위의 삼각형(flat_bottom), 아래 삼각형(flat_top)을 나누어서 그린다.
 위의 사진은 v4 포인트의 x값을 찾기 위한 공식이다. (y4의 경우 y2와 같으므로 쉽게 구할 수 있다.)
-
 ![img](http://www.sunshine2k.de/coding/java/TriangleRasterization/bresenhamIdea.png)
-	1, 2의 기울기를 각각 구하고 start_x와 end_x를 구하여 해당 사이의 모든 픽셀에 색을 칠한다.
-	```cpp
+1, 2의 기울기를 각각 구하고 start_x와 end_x를 구하여 해당 사이의 모든 픽셀에 색을 칠한다.
+```cpp
 	void draw_flat_bottom_triangle(int x0, int y0, int x1, int y1, int x2, int y2, uint32_t color) {
 		// 기울기를 y값 증가에 따른 x값으로 구함
 		float inv_slop_1 = (x1 - x0) / (float)(y1 - y0);
@@ -262,7 +260,6 @@ boundary를 기준으로 위의 삼각형(flat_bottom), 아래 삼각형(flat_to
 		}
 	}
 	```
-- 2차 해결
 #### Back face culling
 ```cpp
 // 삼각형 a, b, c에 대해
@@ -279,10 +276,10 @@ if(vec3_dot(normal, to_camera) < 0) {
 }
 ```
 #### Z Buffer
-- 1차 해결
-	Painter algorithm
-	![img](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlxn3IpeyWGH2gbm2odLkma1KZqTruXBKkew&s)
-	```cpp
+**1차 해결**
+Painter algorithm
+![img](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlxn3IpeyWGH2gbm2odLkma1KZqTruXBKkew&s)
+```cpp
 	// 삼각형 세 점의 평균 z값을 구한다.
 	float avg_depth = (transformed_vertices[0].z + transformed_vertices[1].z + transformed_vertices[2].z) / 3;
 	
@@ -305,9 +302,10 @@ if(vec3_dot(normal, to_camera) < 0) {
 		// draw
 	}
 	```
-	z값의 평균을 사용하기 때문에 정확하지 않음 (아래와 같은 그림은 표현하지 못한다.)
-	![img](https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Painters_problem.svg/220px-Painters_problem.svg.png)
-- 2차 해결
+
+z값의 평균을 사용하기 때문에 정확하지 않음 (아래와 같은 그림은 표현하지 못한다.)
+![img](https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Painters_problem.svg/220px-Painters_problem.svg.png)
+2차 해결
 	depth buffer : 픽셀 마다 z값을 저장한 배열
 	배열 clear 시 전부 1로 초기화
 	픽셀이 그려질때마다 depth buffer에 저장되어 있는 값과 비교하여 더 작으면 갱신하고 그린다.
