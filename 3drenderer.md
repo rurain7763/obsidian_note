@@ -332,36 +332,36 @@ face_color = apply_light_intensity(face_color, light_factor);
 #### Texturing
 ###### uv 좌표계
 ![img|500](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjGA619DubbMIueWY2zF6_XTKpl-s5tf58-A&s)
-- texture란
-	`uint32_t`(ARGB)의 배열
-- 이론 및 구현
-	barycentric coordinates
-		![img](https://www.scratchapixel.com/images/ray-triangle/barycentric.png?)
+###### Texture
+`uint32_t`(ARGB)의 배열
+###### 구현
+**barycentric coordinates**
+![img](https://www.scratchapixel.com/images/ray-triangle/barycentric.png?)
 		a의 weight 값은 w이다
 		b의 weight 값은 u이다
 		c의 weight 값은 v이다
 		$w + v + u = 1$이 성립한다
 		ABC = ABP + BCP + CAP
 		$w = (PC cross PB) / (AB cross AC)$
-	```c++
-	vec3_t barycentric_weights(vec2_t a, vec2_t b, vec2_t c, vec2_t p) {
-		vec2_t ac = vec2_sub(c, a);
-		vec2_t ab = vec2_sub(b, a);
-		vec2_t ap = vec2_sub(p, a);
-		vec2_t pc = vec2_sub(c, p);
-		vec2_t pb = vec2_sub(b, p);
-		
-		// ac x ab 전체 삼각형 크기. 아래는 2d의 외적을 표현. z값의 크기가 나옴
-		float total_area = ac.x * ab.y - ac.y * ab.x;
-		vec3_t ret = {
-			.x = (pc.x * pb.y - pc.y * pb.x) / total_area,
-			.y = (ac.x * ap.y - ac.y * ap.x) / total_area
-		};
-		ret.z = 1.0 - ret.x - ret.y;
-		
-		return ret;
-	}
-	```
+```c++
+vec3_t barycentric_weights(vec2_t a, vec2_t b, vec2_t c, vec2_t p) {
+	vec2_t ac = vec2_sub(c, a);
+	vec2_t ab = vec2_sub(b, a);
+	vec2_t ap = vec2_sub(p, a);
+	vec2_t pc = vec2_sub(c, p);
+	vec2_t pb = vec2_sub(b, p);
+	
+	// ac x ab 전체 삼각형 크기. 아래는 2d의 외적을 표현. z값의 크기가 나옴
+	float total_area = ac.x * ab.y - ac.y * ab.x;
+	vec3_t ret = {
+		.x = (pc.x * pb.y - pc.y * pb.x) / total_area,
+		.y = (ac.x * ap.y - ac.y * ap.x) / total_area
+	};
+	ret.z = 1.0 - ret.x - ret.y;
+	
+	return ret;
+}
+```
 #### Camera
 **FPS camera model**
 ```cpp
