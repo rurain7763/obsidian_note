@@ -280,28 +280,28 @@ if(vec3_dot(normal, to_camera) < 0) {
 Painter algorithm
 ![img](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlxn3IpeyWGH2gbm2odLkma1KZqTruXBKkew&s)
 ```cpp
-	// 삼각형 세 점의 평균 z값을 구한다.
-	float avg_depth = (transformed_vertices[0].z + transformed_vertices[1].z + transformed_vertices[2].z) / 3;
-	
-	// 평균 z 값이 작은 순서대로 정렬
-	// z 값이 작을 수 록 마지막에 그린다.
-	int len_triangle = array_length(triangles_to_render);
-	for(int i = len_triangle - 1; i > 0; i--) {
-		for(int j = 0; j < i; j++) {
-			if(triangles_to_render[j].avg_depth < triangles_to_render[j + 1].avg_depth) {
-				triangle_t tmp = triangles_to_render[j];
-				triangles_to_render[j] = triangles_to_render[j + 1];
-				triangles_to_render[j + 1] = tmp;
-			}
+// 삼각형 세 점의 평균 z값을 구한다.
+float avg_depth = (transformed_vertices[0].z + transformed_vertices[1].z + transformed_vertices[2].z) / 3;
+
+// 평균 z 값이 작은 순서대로 정렬
+// z 값이 작을 수 록 마지막에 그린다.
+int len_triangle = array_length(triangles_to_render);
+for(int i = len_triangle - 1; i > 0; i--) {
+	for(int j = 0; j < i; j++) {
+		if(triangles_to_render[j].avg_depth < triangles_to_render[j + 1].avg_depth) {
+			triangle_t tmp = triangles_to_render[j];
+			triangles_to_render[j] = triangles_to_render[j + 1];
+			triangles_to_render[j + 1] = tmp;
 		}
 	}
-	
-	// 정렬된 순서대로 삼각형을 그린다
-	int len_triangles = array_length(triangles_to_render);
-	for(int i = 0; i < len_triangles; i++) {
-		// draw
-	}
-	```
+}
+
+// 정렬된 순서대로 삼각형을 그린다
+int len_triangles = array_length(triangles_to_render);
+for(int i = 0; i < len_triangles; i++) {
+	// draw
+}
+```
 
 z값의 평균을 사용하기 때문에 정확하지 않음 (아래와 같은 그림은 표현하지 못한다.)
 ![img](https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Painters_problem.svg/220px-Painters_problem.svg.png)
@@ -337,12 +337,14 @@ face_color = apply_light_intensity(face_color, light_factor);
 ###### 구현
 **barycentric coordinates**
 ![img](https://www.scratchapixel.com/images/ray-triangle/barycentric.png?)
-		a의 weight 값은 w이다
-		b의 weight 값은 u이다
-		c의 weight 값은 v이다
-		$w + v + u = 1$이 성립한다
-		ABC = ABP + BCP + CAP
-		$w = (PC cross PB) / (AB cross AC)$
+a의 weight 값은 w이다
+b의 weight 값은 u이다
+c의 weight 값은 v이다
+$w + v + u = 1$이 성립한다
+ABC = ABP + BCP + CAP
+$w = (PC cross PB) / (AB cross AC)$
+
+**코드**
 ```c++
 vec3_t barycentric_weights(vec2_t a, vec2_t b, vec2_t c, vec2_t p) {
 	vec2_t ac = vec2_sub(c, a);
