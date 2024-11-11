@@ -279,6 +279,7 @@ if(vec3_dot(normal, to_camera) < 0) {
 **1차 해결**
 Painter algorithm
 ![img](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlxn3IpeyWGH2gbm2odLkma1KZqTruXBKkew&s)
+
 ```cpp
 // 삼각형 세 점의 평균 z값을 구한다.
 float avg_depth = (transformed_vertices[0].z + transformed_vertices[1].z + transformed_vertices[2].z) / 3;
