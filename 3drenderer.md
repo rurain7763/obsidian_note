@@ -106,8 +106,8 @@ return ret;
 }
 ```
 #### View/Camera Matrix
-1. camera position과 반대로 평행이동한다. (camera가 왼쪽으로 이동하면 세상은 오른쪽으로 이동해야하고 오른쪽으로 이동하면 왼쪽으로 이동해야 한다.)
-2. 카메라 축에 inversed한 회전을 적용한다. (camera가 위를 향하면 세상은 아래로 회전해야 하고 아래를 향하면 위로 회전해야 한다.)
+camera position과 반대로 평행이동한다. (camera가 왼쪽으로 이동하면 세상은 오른쪽으로 이동해야하고 오른쪽으로 이동하면 왼쪽으로 이동해야 한다.)
+카메라 축에 inversed한 회전을 적용한다. (camera가 위를 향하면 세상은 아래로 회전해야 하고 아래를 향하면 위로 회전해야 한다.)
 	![img|500](https://europe1.discourse-cdn.com/unity/original/4X/c/9/2/c9224bdebc5a2a3b38d3cecdc626efeb184b89cc.png)
 	![img](https://docs.tizen.org/application/native/guides/graphics/media/view_matrix.png)
 	```c
