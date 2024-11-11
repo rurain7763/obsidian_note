@@ -794,3 +794,7 @@ char* FileRead(const char* filename, u_long* size) {
     return buffer;
 }
 ```
+###### .BIN file 
+`model.bin`
+첫번째 바이트는 vertices의 갯수
+
