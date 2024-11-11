@@ -752,3 +752,12 @@ void Update(void) {
 > sector가 기본 단위이며, 1 sector는 2048 bytes로 구성되어 있습니다. sector의 그룹은 track이라고 하며, track의 그룹은 session이라고 합니다.
 > ISO-9660 파일 시스템을 사용하여 CD-ROM에 파일을 저장합니다. ISO-9660은 CD-ROM 파일 시스템의 표준으로, 파일 이름, 디렉터리 구조, 파일 속성 등을 정의합니다.
 
+```
+CD
+├── Session 1
+│   ├── Track 1
+│   │   ├── Textures
+│   │   │   ├── texture1.bmp
+│   │   │   ├── texture2.bmp
+
+```
