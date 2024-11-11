@@ -783,7 +783,7 @@ char* FileRead(const char* filename, u_long* size) {
         }
 
         CdControl(CdlSetloc, (u_char*)&file.pos, 0); // Set the location of the file
-        CdReadFile(buffer, (u_long*)buffer, CdlModeSpeed); // Read the file
+        CdRead(num_sectors, (u_long*)buffer, CdlModeSpeed); // Read the file
         CdReadSync(0, 0); // wait for the read to finish
 
         *size = file.size;
