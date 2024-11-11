@@ -363,29 +363,30 @@ face_color = apply_light_intensity(face_color, light_factor);
 	}
 	```
 #### Camera
-- FPS camera model
-	```cpp
-	typedef struct {
-		vec3_t position;
-		vec3_t direction;
-		vec3_t forward_velocity;
-		float yaw;	
-	} camera_t;
-	```
-	view matrix 구하기
-	```cpp
-	vec3_t up = {0, 1, 0};
-	vec3_t forward = {0, 0, 1};
-	camera.direction = vec3_rotate_y(forward, camera.yaw);
-	vec3_t target = vec3_add(camera.position, camera.direction);
-	view_mat = mat4_look_at(camera.position, target, up);
-	```
+**FPS camera model**
+```cpp
+typedef struct {
+	vec3_t position;
+	vec3_t direction;
+	vec3_t forward_velocity;
+	float yaw;	
+} camera_t;
+```
+
+**View matrix 구하기**
+```cpp
+vec3_t up = {0, 1, 0};
+vec3_t forward = {0, 0, 1};
+camera.direction = vec3_rotate_y(forward, camera.yaw);
+vec3_t target = vec3_add(camera.position, camera.direction);
+view_mat = mat4_look_at(camera.position, target, up);
+```
 #### Clipping
-- 이론 
-	![img](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZUmxgiU5V7lDW18VRtOCaxyCTwQnFnzohhw&s)
-	clipping이란 위 그림처럼 특정부분에서 벗어난 부분을 잘라 새로운 polygon 형태를 만드는 기술이다
-	주의할 점은 여러군데가 잘릴 수 있다는 것
-	![img](https://learnwebgl.brown37.net/_images/viewing_frustum.png)
+이론 
+![img](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZUmxgiU5V7lDW18VRtOCaxyCTwQnFnzohhw&s)
+clipping이란 위 그림처럼 특정부분에서 벗어난 부분을 잘라 새로운 polygon 형태를 만드는 기술이다
+주의할 점은 여러군데가 잘릴 수 있다는 것
+![img](https://learnwebgl.brown37.net/_images/viewing_frustum.png)
 	view frustrum의 경우 6개의 해당하는 clipping plane을 모두 계산한다.
 	6개를 계산할 때 first clipping의 결과로 나온 polygon을 그대로 second clipping에 전달해야 한다. (독립적으로 시행 x)
 - Plane
