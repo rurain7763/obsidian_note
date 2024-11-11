@@ -108,9 +108,12 @@ return ret;
 #### View/Camera Matrix
 camera position과 반대로 평행이동한다. (camera가 왼쪽으로 이동하면 세상은 오른쪽으로 이동해야하고 오른쪽으로 이동하면 왼쪽으로 이동해야 한다.)
 카메라 축에 inversed한 회전을 적용한다. (camera가 위를 향하면 세상은 아래로 회전해야 하고 아래를 향하면 위로 회전해야 한다.)
-	![img|500](https://europe1.discourse-cdn.com/unity/original/4X/c/9/2/c9224bdebc5a2a3b38d3cecdc626efeb184b89cc.png)
-	![img](https://docs.tizen.org/application/native/guides/graphics/media/view_matrix.png)
-	```c
+
+![img|500](https://europe1.discourse-cdn.com/unity/original/4X/c/9/2/c9224bdebc5a2a3b38d3cecdc626efeb184b89cc.png)
+
+![img](https://docs.tizen.org/application/native/guides/graphics/media/view_matrix.png)
+
+```c
 	mat4_t mat4_look_at(vec3_t eye, vec3_t target, vec3_t up) {
 		vec3_t z = vec3_sub(target, eye);
 		vec3_normalize(&z);
@@ -190,11 +193,12 @@ void draw_line(int x0, int y0, int x1, int y1, uint32_t color) {
 }
 ```
 #### Draw triangle
-- 1차 해결
-	![img](http://www.sunshine2k.de/coding/java/TriangleRasterization/generalTriangle.png)
-	boundary를 기준으로 위의 삼각형(flat_bottom), 아래 삼각형(flat_top)을 나누어서 그린다.
-	위의 사진은 v4 포인트의 x값을 찾기 위한 공식이다. (y4의 경우 y2와 같으므로 쉽게 구할 수 있다.)
-	![img](http://www.sunshine2k.de/coding/java/TriangleRasterization/bresenhamIdea.png)
+**1차 해결**
+![img](http://www.sunshine2k.de/coding/java/TriangleRasterization/generalTriangle.png)
+boundary를 기준으로 위의 삼각형(flat_bottom), 아래 삼각형(flat_top)을 나누어서 그린다.
+위의 사진은 v4 포인트의 x값을 찾기 위한 공식이다. (y4의 경우 y2와 같으므로 쉽게 구할 수 있다.)
+
+![img](http://www.sunshine2k.de/coding/java/TriangleRasterization/bresenhamIdea.png)
 	1, 2의 기울기를 각각 구하고 start_x와 end_x를 구하여 해당 사이의 모든 픽셀에 색을 칠한다.
 	```cpp
 	void draw_flat_bottom_triangle(int x0, int y0, int x1, int y1, int x2, int y2, uint32_t color) {
