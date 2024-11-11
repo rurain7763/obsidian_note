@@ -764,7 +764,8 @@ CD
 │   │   │   ├── model2.obj
 ```
 ###### make iso
-32bit machine : [영상](https://courses.pikuma.com/courses/take/ps1-programming-mips-assembly-language/lessons/54232873-cd-rom-basics
+32bit machine : [영상](https://courses.pikuma.com/courses/take/ps1-programming-mips-assembly-language/lessons/54232873-cd-rom-basics)
+64bit machine : [영상](https://courses.pikuma.com/courses/take/ps1-programming-mips-assembly-language/lessons/54232971-generating-an-iso-on-windows-11)
 ###### file read
 ```c
 char* FileRead(const char* filename, u_long* size) {
