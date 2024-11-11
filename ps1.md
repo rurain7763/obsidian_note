@@ -766,5 +766,31 @@ CD
 ###### make iso
 32bit machine : [영상](https://courses.pikuma.com/courses/take/ps1-programming-mips-assembly-language/lessons/54232873-cd-rom-basics
 ###### file read
-```
+```c
+char* FileRead(const char* filename, u_long* size) {
+    CdlFILE file;
+    int num_sectors;
+    char* buffer = NULL;
+
+    *size = 0;
+    if(CdSearchFile(&file, (char*)filename)) {
+        num_sectors = (file.size + (CD_SECTOR_SIZE - 1)) / CD_SECTOR_SIZE;
+
+        buffer = (char*)malloc(num_sectors * CD_SECTOR_SIZE);
+        if(!buffer) {
+            printf("Failed to allocate memory for file: %s\n", filename);
+            return buffer;
+        }
+
+        CdControl(CdlSetloc, (u_char*)&file.pos, 0); // Set the location of the file
+        CdReadFile(buffer, (u_long*)buffer, CdlModeSpeed); // Read the file
+        CdReadSync(0, 0); // wait for the read to finish
+
+        *size = file.size;
+    } else {
+        printf("File not found: %s\n", filename);
+    }
+
+    return buffer;
+}
 ```
