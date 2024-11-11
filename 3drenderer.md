@@ -382,70 +382,70 @@ vec3_t target = vec3_add(camera.position, camera.direction);
 view_mat = mat4_look_at(camera.position, target, up);
 ```
 #### Clipping
-이론 
+###### 정의 
 ![img](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZUmxgiU5V7lDW18VRtOCaxyCTwQnFnzohhw&s)
 clipping이란 위 그림처럼 특정부분에서 벗어난 부분을 잘라 새로운 polygon 형태를 만드는 기술이다
 주의할 점은 여러군데가 잘릴 수 있다는 것
 ![img](https://learnwebgl.brown37.net/_images/viewing_frustum.png)
-	view frustrum의 경우 6개의 해당하는 clipping plane을 모두 계산한다.
-	6개를 계산할 때 first clipping의 결과로 나온 polygon을 그대로 second clipping에 전달해야 한다. (독립적으로 시행 x)
-- Plane
-	3DPlane은 아래 코드와 같이 점과 방향으로만 정의한다. (점의 경우 plane안에 있는 어떤 점이든 가능하다 즉 3DPlane은 크기가 무한하다.) : [view frustrum의 plane 구하기](https://courses.pikuma.com/courses/take/learn-computer-graphics-programming/lessons/15960054-defining-frustum-planes-points-normals)
-	```c
+view frustrum의 경우 6개의 해당하는 clipping plane을 모두 계산한다.
+6개를 계산할 때 first clipping의 결과로 나온 polygon을 그대로 second clipping에 전달해야 한다. (독립적으로 시행 x)
+###### Plane
+3DPlane은 아래 코드와 같이 점과 방향으로만 정의한다. (점의 경우 plane안에 있는 어떤 점이든 가능하다 즉 3DPlane은 크기가 무한하다.) : [view frustrum의 plane 구하기](https://courses.pikuma.com/courses/take/learn-computer-graphics-programming/lessons/15960054-defining-frustum-planes-points-normals)
+```c
 	typedef struct {
 		vec3_t point;
 		vec3_t normal; // inside 방향
 	} plane_t;
  	```
- 	plane 안쪽에 존재하는지 구하는 법 : $(Q - Point) (dot) Normal > 0$
+ plane 안쪽에 존재하는지 구하는 법 : $(Q - Point) (dot) Normal > 0$
  	plane과 2점 사이의 선의 교차 점 구하는 법 : [intersection between line and plane](https://courses.pikuma.com/courses/take/learn-computer-graphics-programming/lessons/16098011-intersection-between-line-plane)
 	plane과 polygon의 교차점을 구하는 방법과 plane안쪽의 모든 점을 구하는 방법 : [clipping a polygon against a plane](https://courses.pikuma.com/courses/take/learn-computer-graphics-programming/lessons/15961052-clipping-a-polygon-against-a-plane)
-- 코드
-	```c
-	void clip_polygon_against_plane(polygon_t* polygon, int plane) {
-		vec3_t plane_point = frustum_planes[plane].point;
-		vec3_t plane_normal = frustum_planes[plane].normal;
-		
-		vec3_t inside_vertex[MAX_NUM_POLY_VERTICES];
-		int num_inside_vertex = 0;
-		
-		vec3_t* prev_vertex = &polygon->vertices[polygon->num_vertices - 1];
-		float prev_dot = vec3_dot(vec3_sub(*prev_vertex, plane_point), plane_normal);  
-		
-		for(int i = 0; i < polygon->num_vertices; i++) {
-			vec3_t* cur_vertex = &polygon->vertices[i];
-			float cur_dot = vec3_dot(vec3_sub(*cur_vertex, plane_point), plane_normal);
-		
-			// 평면을 기준으로 두 점이 다른 쪽에 위치하는 경우 교차점 계산
-			if(cur_dot * prev_dot < 0) {
-				// linear fomula를 이용하여 교차 점 구하기
-				float t = cur_dot / (cur_dot - prev_dot);
-				vec3_t insertion_vertex = vec3_add(*cur_vertex, vec3_mul(vec3_sub(*prev_vertex, *cur_vertex), t));
-				inside_vertex[num_inside_vertex++] = insertion_vertex;
-			}
+코드
+```c
+void clip_polygon_against_plane(polygon_t* polygon, int plane) {
+	vec3_t plane_point = frustum_planes[plane].point;
+	vec3_t plane_normal = frustum_planes[plane].normal;
+	
+	vec3_t inside_vertex[MAX_NUM_POLY_VERTICES];
+	int num_inside_vertex = 0;
+	
+	vec3_t* prev_vertex = &polygon->vertices[polygon->num_vertices - 1];
+	float prev_dot = vec3_dot(vec3_sub(*prev_vertex, plane_point), plane_normal);  
+	
+	for(int i = 0; i < polygon->num_vertices; i++) {
+		vec3_t* cur_vertex = &polygon->vertices[i];
+		float cur_dot = vec3_dot(vec3_sub(*cur_vertex, plane_point), plane_normal);
+	
+		// 평면을 기준으로 두 점이 다른 쪽에 위치하는 경우 교차점 계산
+		if(cur_dot * prev_dot < 0) {
+			// linear fomula를 이용하여 교차 점 구하기
+			float t = cur_dot / (cur_dot - prev_dot);
+			vec3_t insertion_vertex = vec3_add(*cur_vertex, vec3_mul(vec3_sub(*prev_vertex, *cur_vertex), t));
+			inside_vertex[num_inside_vertex++] = insertion_vertex;
+		}
 
-			// 현재 점이 평면의 안쪽에 있으면 추가
-			if(cur_dot > 0) {
-				inside_vertex[num_inside_vertex++] = *cur_vertex;
-			}
-			
-			prev_vertex = cur_vertex;
-			prev_dot = cur_dot;
+		// 현재 점이 평면의 안쪽에 있으면 추가
+		if(cur_dot > 0) {
+			inside_vertex[num_inside_vertex++] = *cur_vertex;
 		}
 		
-		// 결과물 복사
-		for(int i = 0; i < num_inside_vertex; i++) {
-			polygon->vertices[i] = inside_vertex[i];
-		}
-		polygon->num_vertices = num_inside_vertex;	
-	}	  
-		
-	void clip_polygon(polygon_t* polygon) {
-		clip_polygon_against_plane(polygon, LEFT_FRUSTUM_PLANE);
-		clip_polygon_against_plane(polygon, RIGHT_FRUSTUM_PLANE);
-		clip_polygon_against_plane(polygon, TOP_FRUSTUM_PLANE);
-		clip_polygon_against_plane(polygon, BOTTOM_FRUSTUM_PLANE);
-		clip_polygon_against_plane(polygon, NEAR_FRUSTUM_PLANE);
-		clip_polygon_against_plane(polygon, FAR_FRUSTUM_PLANE);
+		prev_vertex = cur_vertex;
+		prev_dot = cur_dot;
 	}
-	```
+	
+	// 결과물 복사
+	for(int i = 0; i < num_inside_vertex; i++) {
+		polygon->vertices[i] = inside_vertex[i];
+	}
+	polygon->num_vertices = num_inside_vertex;	
+}	  
+	
+void clip_polygon(polygon_t* polygon) {
+	clip_polygon_against_plane(polygon, LEFT_FRUSTUM_PLANE);
+	clip_polygon_against_plane(polygon, RIGHT_FRUSTUM_PLANE);
+	clip_polygon_against_plane(polygon, TOP_FRUSTUM_PLANE);
+	clip_polygon_against_plane(polygon, BOTTOM_FRUSTUM_PLANE);
+	clip_polygon_against_plane(polygon, NEAR_FRUSTUM_PLANE);
+	clip_polygon_against_plane(polygon, FAR_FRUSTUM_PLANE);
+}
+```
