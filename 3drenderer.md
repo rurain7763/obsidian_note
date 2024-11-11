@@ -392,15 +392,15 @@ view frustrum의 경우 6개의 해당하는 clipping plane을 모두 계산한�
 ###### Plane
 3DPlane은 아래 코드와 같이 점과 방향으로만 정의한다. (점의 경우 plane안에 있는 어떤 점이든 가능하다 즉 3DPlane은 크기가 무한하다.) : [view frustrum의 plane 구하기](https://courses.pikuma.com/courses/take/learn-computer-graphics-programming/lessons/15960054-defining-frustum-planes-points-normals)
 ```c
-	typedef struct {
-		vec3_t point;
-		vec3_t normal; // inside 방향
-	} plane_t;
- 	```
+typedef struct {
+	vec3_t point;
+	vec3_t normal; // inside 방향
+} plane_t;
+```
  plane 안쪽에 존재하는지 구하는 법 : $(Q - Point) (dot) Normal > 0$
  	plane과 2점 사이의 선의 교차 점 구하는 법 : [intersection between line and plane](https://courses.pikuma.com/courses/take/learn-computer-graphics-programming/lessons/16098011-intersection-between-line-plane)
 	plane과 polygon의 교차점을 구하는 방법과 plane안쪽의 모든 점을 구하는 방법 : [clipping a polygon against a plane](https://courses.pikuma.com/courses/take/learn-computer-graphics-programming/lessons/15961052-clipping-a-polygon-against-a-plane)
-코드
+###### 코드
 ```c
 void clip_polygon_against_plane(polygon_t* polygon, int plane) {
 	vec3_t plane_point = frustum_planes[plane].point;
