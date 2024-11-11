@@ -404,9 +404,9 @@ typedef struct {
 	vec3_t normal; // inside 방향
 } plane_t;
 ```
- plane 안쪽에 존재하는지 구하는 법 : $(Q - Point) (dot) Normal > 0$
- 	plane과 2점 사이의 선의 교차 점 구하는 법 : [intersection between line and plane](https://courses.pikuma.com/courses/take/learn-computer-graphics-programming/lessons/16098011-intersection-between-line-plane)
-	plane과 polygon의 교차점을 구하는 방법과 plane안쪽의 모든 점을 구하는 방법 : [clipping a polygon against a plane](https://courses.pikuma.com/courses/take/learn-computer-graphics-programming/lessons/15961052-clipping-a-polygon-against-a-plane)
+plane 안쪽에 존재하는지 구하는 법 : $(Q - Point) (dot) Normal > 0$
+plane과 2점 사이의 선의 교차 점 구하는 법 : [intersection between line and plane](https://courses.pikuma.com/courses/take/learn-computer-graphics-programming/lessons/16098011-intersection-between-line-plane)
+plane과 polygon의 교차점을 구하는 방법과 plane안쪽의 모든 점을 구하는 방법 : [clipping a polygon against a plane](https://courses.pikuma.com/courses/take/learn-computer-graphics-programming/lessons/15961052-clipping-a-polygon-against-a-plane)
 ###### 코드
 ```c
 void clip_polygon_against_plane(polygon_t* polygon, int plane) {
