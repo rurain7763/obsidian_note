@@ -766,3 +766,5 @@ CD
 ###### make iso
 32bit machine : [영상](https://courses.pikuma.com/courses/take/ps1-programming-mips-assembly-language/lessons/54232873-cd-rom-basics
 ###### file read
+```
+```
