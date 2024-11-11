@@ -764,4 +764,4 @@ CD
 │   │   │   ├── model2.obj
 ```
 ###### make iso
-32bit : [영상](https://courses.pikuma.com/courses/take/ps1-programming-mips-assembly-language/lessons/54232873-cd-rom-basics)
+32bit machine : [영상](https://courses.pikuma.com/courses/take/ps1-programming-mips-assembly-language/lessons/54232873-cd-rom-basics)
