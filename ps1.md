@@ -606,3 +606,191 @@ DrawOTag(ot[currBuff] + OT_LENGTH - 1); // 반전된 순서로 그림
 ```
 #### GTE
 > GTE (Geometry Transformation Engine)는 PS1의 CPU Coprocessor로서, 3D 그래픽 처리를 위한 하드웨어 가속기입니다. GTE는 3D 변환, 투영, 클리핑, 광원 계산 등을 하드웨어로 처리하여 CPU의 부담을 줄여줍니다.
+###### Cube 그리기
+```c
+SVECTOR vertices[] = {
+    { -128, -128, -128 },
+    {  128, -128, -128 },
+    { 128, -128, 128 },
+    { -128, -128, 128 },
+    { -128, 128, -128 },
+    {  128, 128, -128 },
+    { 128, 128, 128 },
+    { -128, 128, 128 }
+};
+
+u_short faces[] = {
+    0, 3, 2,
+    0, 2, 1,
+    4, 0, 1,
+    4, 1, 5,
+    7, 4, 5,
+    7, 5, 6,
+    5, 1, 2,
+    5, 2, 6,
+    2, 3, 7,
+    2, 7, 6,
+    0, 4, 7,
+    0, 7, 3 
+};
+
+SVECTOR rotation = { 0, 0, 0 }; // 0 ~ 4096이 0 ~ 360도를 의미
+VECTOR translation = { 0, 0, 900 };
+VECTOR scale = { ONE, ONE, ONE }; // ONE은 1 << 12 (4096)한 값이다 (fixed-point number를 사용하기 때문)
+)
+
+MATRIX worldMatrix;
+	
+void Update(void) {
+	// rotation, translation, scale matrix 구하기
+	RotMatrix(&rotation, &worldMatrix);
+	TransMatrix(&worldMatrix, &translation);
+	ScaleMatrix(&worldMatrix, &scale);
+
+	SetRotMatrix(&worldMatrix); // gte registery에 rotation matrix 등록
+	SetTransMatrix(&worldMatrix); // gte registery에 translation matrix 등록
+	
+	// 각 face를 순회하면서 삼각형 그리기
+	for(i = 0; i < NUM_FACES * 3; i += 3) {
+		poly = (POLY_G3*)nextPrim;
+		setPolyG3(poly);
+		setRGB0(poly, 0, 255, 255);
+		setRGB1(poly, 255, 0, 255);
+		setRGB2(poly, 255, 255, 0);
+
+#if NO_CULLING
+		// depth buffer가 없으므로 z값을 평균내어 그림
+		otz = 0;
+		otz += RotTransPers(&vertices[faces[i + 0]], (long*)&poly->x0, &p, &flag);
+		otz += RotTransPers(&vertices[faces[i + 1]], (long*)&poly->x1, &p, &flag);
+		otz += RotTransPers(&vertices[faces[i + 2]], (long*)&poly->x2, &p, &flag);
+		otz /= 3;
+#elif CULLING
+		// 함수의 반환값을 이용하여 culling (아마도 dot product값을 던져 주는듯?)
+		nclip = RotAverageNclip3(
+            &vertices[faces[i + 0]], 
+            &vertices[faces[i + 1]], 
+            &vertices[faces[i + 2]], 
+            (long*)&poly->x0, 
+            (long*)&poly->x1, 
+            (long*)&poly->x2, 
+            &p,
+            &otz, 
+            &flag);
+
+		// 0보다 작으면 해당 삼각형 무시
+        if(nclip <= 0) {
+            continue;
+        }
+#endif
+	
+		if(otz > 0 && otz < OT_LENGTH) {
+			addPrim(ot[currBuff][otz], poly);
+			nextPrim += sizeof(POLY_G3);
+		}
+	}
+}
+```
+#### Fixed-Point number
+> ps1은 FPU(floating-Point Unit)가 없어 소수를 지원하지 않는다. 따라서 고정 소수점을 사용하여 소수를 표현한다. 고정 소수점은 정수부와 소수부로 나누어 표현한다. 예를 들어 16비트 고정 소수점은 8비트 정수부와 8비트 소수부로 나누어 표현한다.
+
+cf) 반대 개념으로는 Floating-Point number가 있다. 현대 컴퓨터에서는 대부분 IEEE 754 표준을 따르는 32비트 또는 64비트의 부동 소수점을 사용한다.
+###### 16.16 fixed-point number
+16비트 정수부(부호 비트 포함)와 16비트 소수부로 나누어 표현한다. 예를 들어 1.0은 0x00010000으로 표현한다.
+###### 20.12 fixed-point number
+20비트 정수부(부호 비트 포함)와 12비트 소수부로 나누어 표현한다. 예를 들어 1.0은 0x00100000으로 표현한다.
+cf) GTE는 20.12 fixed-point number를 사용한다. `long` type으로 표현한다.
+
+**연산**
+```c
+#define ONE 4096
+
+long num1 = 20 * ONE; // 20.0
+long num2 = 30 * ONE; // 30.0
+
+//addition
+long add = num1 + num2; // 50.0
+
+//subtraction
+long sub = num1 - num2; // -10.0
+
+//multiplication
+long mul = (num1 * num2) >> 12; // 600.0
+
+//division
+#if V1
+long div = (num1 << 12) / num2; // 0.6666666666666666
+#else V2
+long div = (num1 << ONE) /  num2; // 0.6666666666666666
+#endif
+```
+#### Contoller input
+> ps1의 컨트롤러는 CPU 메모리를 공유하지 않는 별도의 하드웨어로 구성되어 있습니다. 컨트롤러는 버튼, 스틱, 트리거 등을 포함하며, 버튼을 누르거나 스틱을 움직이면 컨트롤러가 패킷을 생성하여 컨트롤러 버스 통해 CPU에게 전달합니다. 패킷은 address + command + parameter로 구성되어 있습니다.
+###### 패킷 구조
+- address(1byte): 받아야 할 대상의 주소 ex) 0x01 :  1번 컨트롤러, 0x81 : 메모리 카드
+- command + parameters: 명령
+###### 코드
+LIBETC.h 라이브러리를 사용하여 컨트롤러 입력을 받는다.
+```c
+u_long padState;
+
+void Setup(void) {
+	// 첫번째 컨트롤러 초기화
+	PadInit(0);
+}
+
+void Update(void) {
+	// 첫번째 째 컨트롤러 입력 상태 읽기
+	padState = PadRead(0);
+
+	if(padState & _PAD(0, PADLleft)) {
+		// Do something
+	}
+}
+```
+#### CD-ROM
+> sector가 기본 단위이며, 1 sector는 2048 bytes로 구성되어 있습니다. sector의 그룹은 track이라고 하며, track의 그룹은 session이라고 합니다.
+> ISO-9660 파일 시스템을 사용하여 CD-ROM에 파일을 저장합니다. ISO-9660은 CD-ROM 파일 시스템의 표준으로, 파일 이름, 디렉터리 구조, 파일 속성 등을 정의합니다.
+###### 저장 구조 예시
+```
+CD
+├── Session 1
+│   ├── Track 1
+│   │   ├── Textures
+│   │   │   ├── texture1.bmp
+│   │   │   ├── texture2.bmp
+│   │   ├── Models
+│   │   │   ├── model1.obj
+│   │   │   ├── model2.obj
+```
+###### make iso
+32bit machine : [영상](https://courses.pikuma.com/courses/take/ps1-programming-mips-assembly-language/lessons/54232873-cd-rom-basics
+###### file read
+```c
+char* FileRead(const char* filename, u_long* size) {
+    CdlFILE file;
+    int num_sectors;
+    char* buffer = NULL;
+
+    *size = 0;
+    if(CdSearchFile(&file, (char*)filename)) {
+        num_sectors = (file.size + (CD_SECTOR_SIZE - 1)) / CD_SECTOR_SIZE;
+
+        buffer = (char*)malloc(num_sectors * CD_SECTOR_SIZE);
+        if(!buffer) {
+            printf("Failed to allocate memory for file: %s\n", filename);
+            return buffer;
+        }
+
+        CdControl(CdlSetloc, (u_char*)&file.pos, 0); // Set the location of the file
+        CdRead(num_sectors, (u_long*)buffer, CdlModeSpeed); // Read the file
+        CdReadSync(0, 0); // wait for the read to finish
+
+        *size = file.size;
+    } else {
+        printf("File not found: %s\n", filename);
+    }
+
+    return buffer;
+}
+```
