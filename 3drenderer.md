@@ -330,8 +330,8 @@ float light_factor = -vec3_dot(global_light.direction, normal);
 face_color = apply_light_intensity(face_color, light_factor);
 ```
 #### Texturing
-- uv 좌표계
-	![img|500](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjGA619DubbMIueWY2zF6_XTKpl-s5tf58-A&s)
+###### uv 좌표계
+![img|500](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjGA619DubbMIueWY2zF6_XTKpl-s5tf58-A&s)
 - texture란
 	`uint32_t`(ARGB)의 배열
 - 이론 및 구현
