@@ -312,11 +312,14 @@ def unary(self):
 	else:
 		return self.primary()
 
+def factor(self):
+	return self.unary()
+	
 def term(self):
-	expr = self.unary()
+	expr = self.factor()
 	while self.match(TOK_STAR) or self.match(TOK_SLASH):
 		op = self.previous_token()
-		right = self.unary()
+		right = self.factor()
 		expr = BinOp(op, expr, right)
 	return expr
 
