@@ -197,12 +197,14 @@ Context-free grammar는 이처럼 문장을 구성하는 규칙을 정의하는 
 ###### BNF(Backus-Naur Form) 표기법
 > CFG를 표기하는 방법 중 하나로, `::=`, `|`를 사용하여 정의한다.
 
-**BNF 표기법 예시**
+**BNF 표기**
 ```
-<expr> ::= <term> + <expr> | <term> - <expr> | <term> // expr는 term + expr 이거나 term - expr 이거난 term 단일이다
-<term> ::= <factor> * <term> | <factor> / <term> | <factor> // term은 factor * term 이거나 factor / term 이거나 factor 단일이다
-<factor> ::= ( <expr> ) | <number> // factor는 (expr) 이거나 number 단일이다
-<number> ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 // number는 0~9 중 하나이다
+<expr> ::= <term> (('+' | '-') <term>)*
+<term> ::= <factor> (('*' | '/') <factor>)*
+<factor> ::= <unary>
+<unary> ::= ('+' | '-' | '~') <unary> | <primary>
+<primary> ::= <integer> | <float> | <grouping> | <bool> | <string>
+<grouping> ::= '(' <expr> ')'
 ```
 참고 영상 : [video](https://courses.pikuma.com/courses/take/create-a-programming-language-compiler/lessons/59251675-grammar-for-simple-expressions)
 ###### Helper method
@@ -282,16 +284,6 @@ class Grouping(Expr):
     def __init__(self, value):
         assert isinstance(value, Expr), value
         self.value = value
-```
-
-**BNF 표기**
-```
-<expr> ::= <term> (('+' | '-') <term>)*
-<term> ::= <factor> (('*' | '/') <factor>)*
-<factor> ::= <unary>
-<unary> ::= ('+' | '-' | '~') <unary> | <primary>
-<primary> ::= <integer> | <float> | <grouping>
-<grouping> ::= '(' <expr> ')'
 ```
 
 **코드**
