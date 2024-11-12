@@ -207,14 +207,33 @@ Context-free grammar는 이처럼 문장을 구성하는 규칙을 정의하는 
 참고 영상 : [video](https://courses.pikuma.com/courses/take/create-a-programming-language-compiler/lessons/59251675-grammar-for-simple-expressions)
 ###### Helper method
 ```python
-def match(self, expected):
-	if self.curr >= len(self.tokens) or self.tokens[self.curr].token_type != expected:
-		return False
-	self.curr = self.curr + 1
-	return True
+def peek(self):
+        return self.tokens[self.curr]
+        
+    def advance(self):
+        token = self.peek()
+        self.curr = self.curr + 1
+        return token
 
-def previous_token(self):
-	return self.tokens[self.curr - 1]
+    def is_next(self, expected):
+        if self.curr >= len(self.tokens): return False
+        return self.peek().token_type == expected
+
+    def expect(self, expected):
+        if self.curr >= len(self.tokens):
+            raise SyntaxError(f'Expected {expected!r}, found EOF')
+        elif self.peek().token_type != expected:
+            raise SyntaxError(f'Expected {expected!r}, found {self.peek().token_type!r}')
+        else:
+            return self.advance()
+
+    def match(self, expected):
+        if self.curr >= len(self.tokens) or self.peek().token_type != expected: return False
+        self.curr = self.curr + 1
+        return True
+
+    def previous_token(self):
+        return self.tokens[self.curr - 1]
 ```
 ###### Expression
 ```python
