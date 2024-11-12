@@ -253,5 +253,7 @@ class Grouping(Expr):
 <expr> ::= <term> (('+' | '-') <term>)*
 <term> ::= <factor> (('*' | '/') <factor>)*
 <factor> ::= <unary>
-<unary> ::= ('+' | '-') <unary> | <primary>
+<unary> ::= ('+' | '-' | '~') <unary> | <primary>
+<primary> ::= <integer> | <float> | <grouping>
+<<grouping> ::= '(' <expr> ')'
 ```
