@@ -61,21 +61,21 @@ Component-Based Design
 ![img|500](https://cdn.hytale.com/cad0c691a614edc8c7f07aee46c605b8_flecs_diagram_02.jpg)	
 1차 구현은 아래와 같다.
 ```cpp
-	class Component {
-		virtual Update();
+class Component {
+	virtual Update();
+}
+
+class TransformComponent {
+	virtual void Update() {
+		//...
 	}
-	
-	class TransformComponent {
-		virtual void Update() {
-			//...
-		}
-	}
-	
-	class Entity {
-		vector<Component*> components;
-		void Update();
-	}	
-	```
+}
+
+class Entity {
+	vector<Component*> components;
+	void Update();
+}	
+```
 위와 같은 코드의 문제점은 동적 할당된 여기저기의 `Component`를 찾아서 `Update`해야 하므로 CPU에서 매번 로딩해야하는 문제점 발생.
 
 따라서 아래와 같은 방식(ECS)으로 해결.
@@ -232,6 +232,7 @@ class DamageSystem {
 		}
 	}
 };
+
 class CollisionSystem {
 	void Update() {
 		// ...
