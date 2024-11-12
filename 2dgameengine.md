@@ -58,7 +58,7 @@ public:
 다중 상속 시 diamond problem(ex. class2와 class3에서 class1의 함수를 오버라이드 했을때 어떤 함수를 호출해야 하나?) 발생.
 ###### 2차 접근
 Component-Based Design
-![img|500](https://cdn.hytale.com/cad0c691a614edc8c7f07aee46c605b8_flecs_diagram_02.jpg)	
+![img|500](https://cdn.hytale.com/cad0c691a614edc8c7f07aee46c605b8_flecs_diagram_02.jpg)
 1차 구현은 아래와 같다.
 ```cpp
 class Component {
