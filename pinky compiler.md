@@ -205,7 +205,17 @@ Context-free grammar는 이처럼 문장을 구성하는 규칙을 정의하는 
 <number> ::= 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 // number는 0~9 중 하나이다
 ```
 참고 영상 : [video](https://courses.pikuma.com/courses/take/create-a-programming-language-compiler/lessons/59251675-grammar-for-simple-expressions)
-###### Helper me
+###### Helper method
+```python
+def match(self, expected):
+	if self.curr >= len(self.tokens) or self.tokens[self.curr].token_type != expected:
+		return False
+	self.curr = self.curr + 1
+	return True
+
+def previous_token(self):
+	return self.tokens[self.curr - 1]
+```
 ###### Expression
 ```python
 class Expr:
@@ -257,4 +267,9 @@ class Grouping(Expr):
 <unary> ::= ('+' | '-' | '~') <unary> | <primary>
 <primary> ::= <integer> | <float> | <grouping>
 <grouping> ::= '(' <expr> ')'
+```
+
+**코드**
+```python
+
 ```
