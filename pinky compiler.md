@@ -248,4 +248,7 @@ class Grouping(Expr):
         self.value = value
 ```
 
-**BNF**
+**BNF 표기**
+```
+<expr> ::= <term> ( ('+' | '-') <term> )*)
+```
