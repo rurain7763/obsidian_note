@@ -331,3 +331,7 @@ def expr(self):
 		expr = BinOp(op, expr, right)
 	return expr
 ```
+#### Interpreter
+> AST를 통해 해당 CPU의 instruction set에 맞게 코드를 생성하고 실행한다.
+###### Expression
+AST를 주
