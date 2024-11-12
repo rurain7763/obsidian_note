@@ -251,4 +251,7 @@ class Grouping(Expr):
 **BNF 표기**
 ```
 <expr> ::= <term> (('+' | '-') <term>)*
+<term> ::= <factor> (('*' | '/') <factor>)*
+<factor> ::= <unary>
+<unary> ::= ('+' | '-') <unary> | <primary>
 ```
