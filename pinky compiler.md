@@ -332,9 +332,27 @@ def expr(self):
 	return expr
 ```
 #### Interpreter
-> AST를 통해 해당 CPU의 instruction set에 맞게 코드를 생성하고 실행한다.
+> AST를 통해 해당 CPU의 instruction set에 맞게 코드를 생성하고 실행한다. (모든 cpu instruction set을 다루기는 어렵기 때문에 이번 프로젝트에서는 pytho)
 ###### Expression
 AST를 후위 순회하여 계산한다.
 ```python
-
+def interpret(self, ast):
+	if isinstance(ast, Integer):
+		return float(ast.value)
+	elif isinstance(ast, Float):
+		return float(ast.value)
+	elif isinstance(ast, Grouping):
+		return self.interpret(ast.value)
+	elif isinstance(ast, BinOp):
+		left = self.interpret(ast.left)
+		right = self.interpret(ast.right)
+		if ast.op.token_type == TOK_PLUS: return left + right
+		elif ast.op.token_type == TOK_MINUS: return left - right
+		elif ast.op.token_type == TOK_STAR: return left * right
+		elif ast.op.token_type == TOK_SLASH: return left / right
+	elif isinstance(ast, UnOp):
+		val = self.interpret(ast.operand)
+		if ast.op.token_type == TOK_PLUS: return +val
+		elif ast.op.token_type == TOK_MINUS: return -val
+		elif ast.op.token_type == TOK_NOT: return not val
 ```
