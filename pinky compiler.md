@@ -216,18 +216,12 @@ class Integer(Expr):
     def __init__(self, value):
         assert isinstance(value, int), value
         self.value = value
-    
-    def __repr__(self):
-        return f'Integer[{self.value}]'
 
 class Float(Expr):
     # 3.141592
     def __init__(self, value):
         assert isinstance(value, float), value
         self.value = value
-    
-    def __repr__(self):
-        return f'Float[{self.value}]'
 
 class UnOp(Expr):
     # -x
@@ -236,9 +230,6 @@ class UnOp(Expr):
         assert isinstance(operand, Expr), operand
         self.op = op
         self.operand = operand
-
-    def __repr__(self):
-        return f'UnOp({self.op.lexeme!r}, {self.operand})'
 
 class BinOp(Expr):
     # x + y
@@ -250,15 +241,9 @@ class BinOp(Expr):
         self.left = left
         self.right = right
 
-    def __repr__(self):
-        return f'BinOp({self.op.lexeme!r}, {self.left}, {self.right})'
-
 class Grouping(Expr):
     # ( <Expr> )
     def __init__(self, value):
         assert isinstance(value, Expr), value
         self.value = value
-
-    def __repr__(self):
-        return f'Grouping({self.value})'
 ```
