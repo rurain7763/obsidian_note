@@ -271,5 +271,38 @@ class Grouping(Expr):
 
 **코드**
 ```python
+def primary(self):
+	if self.match(TOK_INTEGER): return Integer(int(self.previous_token().lexeme))
+	elif self.match(TOK_FLOAT): return Float(float(self.previous_token().lexeme))
+	elif self.match(TOK_LPAREN):
+		expr = self.expr()
+		if self.match(TOK_RPAREN): return Grouping(expr)
+		else: raise SyntaxError(f'Error: ")" expected.')
 
+def unary(self):
+	if self.match(TOK_PLUS) or self.match(TOK_MINUS) or self.match(TOK_NOT):
+		op = self.previous_token()
+		operand = self.unary()
+		return UnOp(op, operand)
+	else:
+		return self.primary()
+
+def factor(self):
+	return self.unary()
+	
+def term(self):
+	expr = self.factor()
+	while self.match(TOK_STAR) or self.match(TOK_SLASH):
+		op = self.previous_token()
+		right = self.factor()
+		expr = BinOp(op, expr, right)
+	return expr
+
+def expr(self):
+	expr = self.term()
+	while self.match(TOK_PLUS) or self.match(TOK_MINUS):
+		op = self.previous_token()
+		right = self.term()
+		expr = BinOp(op, expr, right)
+	return expr
 ```
