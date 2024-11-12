@@ -255,5 +255,5 @@ class Grouping(Expr):
 <factor> ::= <unary>
 <unary> ::= ('+' | '-' | '~') <unary> | <primary>
 <primary> ::= <integer> | <float> | <grouping>
-<<grouping> ::= '(' <expr> ')'
+<grouping> ::= '(' <expr> ')'
 ```
