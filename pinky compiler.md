@@ -353,9 +353,11 @@ elif isinstance(ast, UnOp):
 
 **LogicalOp**
 ```python
-elif isinstance(ast, LogicalOp):
-  left = self.interpret(ast.left)
-  right = self.interpret(ast.right)
-  if ast.op.token_type == TOK_AND: return left and right
-  elif ast.op.token_type == TOK_OR: return left or right
+#
+ elif isinstance(ast, LogicalOp):
+	left_type, left_value = self.interpret(ast.left)
+	if (ast.op.token_type == TOK_AND and left_value) or (ast.op.token_type == TOK_OR and not left_value):
+		return self.interpret(ast.right)
+	else:
+		return (left_type, left_value)
 ```
