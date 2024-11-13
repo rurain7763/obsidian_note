@@ -220,7 +220,7 @@ def advance(self):
 	return token
 
 # 현재 토큰의 token_type이 expected와 같은지 확인
-def is_next(self, expected):
+def check(self, expected):
 	if self.curr >= len(self.tokens): return False
 	return self.peek().token_type == expected
 
