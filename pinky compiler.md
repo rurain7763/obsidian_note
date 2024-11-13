@@ -219,12 +219,12 @@ def advance(self):
 	self.curr = self.curr + 1
 	return token
 
-# 다음 토큰의 token_type이 expected와 같은지 확인
+# 현재 토큰의 token_type이 expected와 같은지 확인
 def is_next(self, expected):
 	if self.curr >= len(self.tokens): return False
 	return self.peek().token_type == expected
 
-# 다음 토큰의 token_type이 expected와 같은지 확인 후 같으면 curr 증가, 그렇지 안다면 예외 발생
+# 현재 토큰의 token_type이 expected와 같은지 확인 후 같으면 curr 증가, 그렇지 안다면 예외 발생
 def expect(self, expected):
 	if self.curr >= len(self.tokens):
 		raise SyntaxError(f'Expected {expected!r}, found EOF')
@@ -233,7 +233,7 @@ def expect(self, expected):
 	else:
 		return self.advance()
 
-# 다음 토큰의 token_type이 expected와 같은지 확인 후 같으면 curr 증가, 그렇지 않다면 False 반환
+# 현재 토큰의 token_type이 expected와 같은지 확인 후 같으면 curr 증가, 그렇지 않다면 False 반환
 def match(self, expected):
 	if self.curr >= len(self.tokens) or self.peek().token_type != expected: return False
 	self.curr = self.curr + 1
