@@ -353,8 +353,8 @@ elif isinstance(ast, UnOp):
 
 **LogicalOp**
 ```python
-#
- elif isinstance(ast, LogicalOp):
+# and의 경우 왼쪽이 이미 false라면 오른쪽을 계산할 필요가 없고, or의 경우 왼쪽이 이미 true라면 오른쪽을 계산할 필요가 없다.
+elif isinstance(ast, LogicalOp):
 	left_type, left_value = self.interpret(ast.left)
 	if (ast.op.token_type == TOK_AND and left_value) or (ast.op.token_type == TOK_OR and not left_value):
 		return self.interpret(ast.right)
