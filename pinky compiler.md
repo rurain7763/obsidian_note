@@ -334,6 +334,23 @@ class Stmt(Node):
     # perform action (while, if, assign, etc)
     pass
 
+class PrintStmt(Stmt):
+    def __init__(self, value : Expr, line):
+        assert isinstance(value, Expr), value
+        self.value = value
+        self.line = line
+
+class WhileStmt(Stmt):
+    pass
+
+class Assignment(Stmt):
+    pass
+
+# IfStmt, etc...
+```
+
+**코드**
+```python
 
 ```
 #### Interpreter
