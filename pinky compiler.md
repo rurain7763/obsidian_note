@@ -329,6 +329,7 @@ def expr(self):
 > AST를 통해 해당 CPU의 instruction set에 맞게 코드를 생성하고 실행한다. (모든 cpu instruction set을 다루기는 힘들기 때문에 이번 프로젝트에서는 python을 interface로 활용한다)
 ###### Expression
 AST를 후위 순회하여 계산한다.
+
 ```python
 def interpret(self, ast):
 	if isinstance(ast, Integer):
