@@ -351,7 +351,30 @@ class Assignment(Stmt):
 
 **코드**
 ```python
+def print_stmt(self):
+	if self.match(TOK_PRINT):
+		val = self.expr()
+		return PrintStmt(val, self.previous_token().line)
 
+def stmt(self):
+	if self.peek().token_type == TOK_PRINT:
+		return self.print_stmt()
+	#elif self.peek().token_type == TOK_IF:
+	#    return self.if_stmt()
+	#elif self.peek().token_type == TOK_FOR:
+	#    return self.for_stmt()
+	#elif self.peek().token_type == TOK_WHILE:
+	#    return self.while_stmt()
+	#elif self.peek().token_type == TOK_FUNC:
+	#    return self.func_stmt()
+	#else:
+		# wtf
+
+def stmts(self):
+	stmts = []
+	while self.curr < len(self.tokens):
+		stmts.append(self.stmt())
+	return Stmts(stmts, self.previous_token().line)
 ```
 #### Interpreter
 > AST를 통해 해당 CPU의 instruction set에 맞게 코드를 생성하고 실행한다. (모든 cpu instruction set을 다루기는 힘들기 때문에 이번 프로젝트에서는 python을 interface로 활용한다)
