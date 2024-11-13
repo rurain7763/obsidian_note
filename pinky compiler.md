@@ -245,7 +245,7 @@ def previous_token(self):
 ```
 ###### Expression
 ```python
-class Expr:
+class Expr(Node):
     # x + (3 * y)
     pass
 
@@ -330,6 +330,10 @@ def expr(self):
 **위 코드는 +,-, x, /만 적용된 코드임**
 ###### Statement
 ```python
+class Stmt(Node):
+    # perform action (while, if, assign, etc)
+    pass
+
 
 ```
 #### Interpreter
