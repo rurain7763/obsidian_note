@@ -355,8 +355,7 @@ class Assignment(Stmt):
 print_stmt := 'print' expr
 
 if_stmt := 
-	'if' expr 'then'
-		stmts
+	'if' expr 'then' stmts
 		('elif' expr 'then' stmts)*
 		('else' stmts)?
 	'end'
