@@ -309,7 +309,7 @@ def factor(self):
 	
 def term(self):
 	expr = self.factor()
-	while self.match(TOK_STAR) or self.match(TOK_SLASH):
+	while self.match(TOK_STAR) or self.match(TOK_SLASH) or self.match(TOK_CARET):
 		op = self.previous_token()
 		right = self.factor()
 		expr = BinOp(op, expr, right)
@@ -347,8 +347,4 @@ def interpret(self, ast):
 		if ast.op.token_type == TOK_PLUS: return +val
 		elif ast.op.token_type == TOK_MINUS: return -val
 		elif ast.op.token_type == TOK_NOT: return not val
-```
-위 코드는 문제점이 있음. `1 + 2 > 3 == true`, `12.12 + "cm"` 코드들을 처리하지 못함. 따라서 아래와 같이 수정
-```python
-
 ```
