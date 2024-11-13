@@ -417,4 +417,5 @@ if isinstance(node, Stmts):
 elif isinstance(node, PrintStmt):
 	type, value = self.interpret(node.value)
 	print(value)
+
 ```
