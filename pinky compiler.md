@@ -261,6 +261,8 @@ class Float(Expr):
         assert isinstance(value, float), value
         self.value = value
 
+# string, bool, etc
+
 class UnOp(Expr):
     # -x
     def __init__(self, op : Token, operand : Expr):
