@@ -261,7 +261,7 @@ class Float(Expr):
         assert isinstance(value, float), value
         self.value = value
 
-# string, bool, etc
+# string, bool, etc...
 
 class UnOp(Expr):
     # -x
@@ -281,7 +281,7 @@ class BinOp(Expr):
         self.left = left
         self.right = right
 
-# ㅣㅐㅎ
+# LogicalOp, etc...
 
 class Grouping(Expr):
     # ( <Expr> )
