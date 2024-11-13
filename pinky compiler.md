@@ -329,6 +329,8 @@ def expr(self):
 ```
 **위 코드는 +,-, x, /만 적용된 코드임**
 ###### Statement
+> 프로그램은 여러 statement로 구성되어 있다. (if, while, assign, print, etc)
+
 ```python
 class Stmt(Node):
     # perform action (while, if, assign, etc)
@@ -399,15 +401,10 @@ elif isinstance(ast, UnOp):
 	if ast.op.token_type == TOK_PLUS: return +val
 	elif ast.op.token_type == TOK_MINUS: return -val
 	elif ast.op.token_type == TOK_NOT: return not val
+
 ```
 
 **LogicalOp**
 ```python
-# and의 경우 왼쪽이 이미 false라면 오른쪽을 계산할 필요가 없고, or의 경우 왼쪽이 이미 true라면 오른쪽을 계산할 필요가 없다.
-elif isinstance(ast, LogicalOp):
-	left_type, left_value = self.interpret(ast.left)
-	if (ast.op.token_type == TOK_AND and left_value) or (ast.op.token_type == TOK_OR and not left_value):
-		return self.interpret(ast.right)
-	else:
-		return (left_type, left_value)
+
 ```
