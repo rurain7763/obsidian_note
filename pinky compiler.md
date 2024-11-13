@@ -331,23 +331,31 @@ def expr(self):
 ###### Expression
 AST를 후위 순회하여 계산한다.
 ```python
-def interpret(self, ast):
-	if isinstance(ast, Integer):
-		return float(ast.value)
-	elif isinstance(ast, Float):
-		return float(ast.value)
-	elif isinstance(ast, Grouping):
-		return self.interpret(ast.value)
-	elif isinstance(ast, BinOp):
-		left = self.interpret(ast.left)
-		right = self.interpret(ast.right)
-		if ast.op.token_type == TOK_PLUS: return left + right
-		elif ast.op.token_type == TOK_MINUS: return left - right
-		elif ast.op.token_type == TOK_STAR: return left * right
-		elif ast.op.token_type == TOK_SLASH: return left / right
-	elif isinstance(ast, UnOp):
-		val = self.interpret(ast.operand)
-		if ast.op.token_type == TOK_PLUS: return +val
-		elif ast.op.token_type == TOK_MINUS: return -val
-		elif ast.op.token_type == TOK_NOT: return not val
+if isinstance(ast, Integer):
+	return float(ast.value)
+elif isinstance(ast, Float):
+	return float(ast.value)
+elif isinstance(ast, Grouping):
+	return self.interpret(ast.value)
+elif isinstance(ast, BinOp):
+	left = self.interpret(ast.left)
+	right = self.interpret(ast.right)
+	if ast.op.token_type == TOK_PLUS: return left + right
+	elif ast.op.token_type == TOK_MINUS: return left - right
+	elif ast.op.token_type == TOK_STAR: return left * right
+	elif ast.op.token_type == TOK_SLASH: return left / right
+elif isinstance(ast, UnOp):
+	val = self.interpret(ast.operand)
+	if ast.op.token_type == TOK_PLUS: return +val
+	elif ast.op.token_type == TOK_MINUS: return -val
+	elif ast.op.token_type == TOK_NOT: return not val
+```
+
+**LogicalOp**
+```python
+elif isinstance(ast, LogicalOp):
+  left = self.interpret(ast.left)
+  right = self.interpret(ast.right)
+  if ast.op.token_type == TOK_AND: return left and right
+  elif ast.op.token_type == TOK_OR: return left or right
 ```
