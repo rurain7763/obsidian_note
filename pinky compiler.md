@@ -351,7 +351,13 @@ class Assignment(Stmt):
 # IfStmt, etc...
 ```
 
-
+```
+print_stmt := 'print' expr
+if_stmt := 
+	'if' expr 'then'
+	
+	'end'
+```
 
 **코드**
 ```python
