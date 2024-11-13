@@ -348,4 +348,4 @@ def interpret(self, ast):
 		elif ast.op.token_type == TOK_MINUS: return -val
 		elif ast.op.token_type == TOK_NOT: return not val
 ```
-위 코드는 문제점이 있음. `1 + 2 > 3 == true` 를 
+위 코드는 문제점이 있음. `1 + 2 > 3 == true`, `12.12 + "cm"` 코드들을 처리하지 못함. 따라서 아래와 
