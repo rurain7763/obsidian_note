@@ -837,3 +837,13 @@ uv값 말고도 TPAGE(texture page)와 CLUT(color look-up table)을 지정해야
 ###### TPAGE
 하나의 page는 1024 x 512 크기의 frame buffer에 16 x 2 개의 cell로 나누어져 있는 것 중에 하나이다. (cell은 64 x 256 크기)
 TPAGE는 frame buffer 상의 page의 시작 위치이고 그리고자 하는 texture의 offset 값이라고 생각하면 된다.
+###### CLUT
+CLUT는 color look-up table로서 texture의 색상을 지정한다.
+###### TIM 파일
+TIM 파일은 텍스처 이미지를 저장하는 파일이다. TIM 파일은 header와 이미지 데이터로 구성되어 있다.
+```c
+struct {
+	u_long crect;
+	
+} TIM_IMAGE;
+```
