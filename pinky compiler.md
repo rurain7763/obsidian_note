@@ -490,7 +490,8 @@ def interpret(self, ast, env):
 		val = env.get_value(node.name)
 		if val == None:
 		  runtime_error(f'Variable {node.name} is not defined.', node.line)
-		elif val[1] =
+		elif val[1] == None:
+		  runtime_error(f'Variable {node.name} is not initialized.', node.line)
 		else:
 		  return val
     elif isinstance(node, IfStmt):
