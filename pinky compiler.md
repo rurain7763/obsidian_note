@@ -530,7 +530,7 @@ class WhileStmt(Stmt):
 ###### ForStmt
 ```python
 class ForStmt(Stmt):
-	# for <assignment>, <expr>, <expr>? do
+	# for <assignment>, <expr>, <expr>? do <stmts> end
     def __init__(self, assignment : Assignment, condition_val : Expr, step_val : Expr, do_stmts : Stmts, line):
         assert isinstance(assignment, Assignment), assignment
         assert isinstance(condition_val, Expr), condition
@@ -574,4 +574,18 @@ elif isinstance(node, WhileStmt):
 	while value:
 		self.interpret(node.do_stmts, env.new_env())
 		type, value = self.interpret(node.condition, env)
+elif isinsinstance(node, ForStmt):
+	self.interpret(node.assignment, env)
+	type, value = self.interpret(node.condition_val, env)
+	if type != TYPE_INT:
+	runtime_error('Condition is not an integer expression', node.line)
+	
+	while value:
+	self.interpret(node.do_stmts, env.new_env())
+	self.interpret(node.assignment, env)
+	type, value = self.interpret(node.condition_val, env)
+	if type != TYPE_INT:
+	  runtime_error('Condition is not an integer expression', node.line)
+	if node.step_val != None:
+	  self.interpret(node.step_val, env)
 ```
