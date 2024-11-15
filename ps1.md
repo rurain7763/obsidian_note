@@ -835,4 +835,4 @@ texture를 vram에 로드해야 한다.
 uv값은 left-top이 (0, 0)이고 right-bottom이 (texture_width, texture_height)이다.
 uv값 말고도 TPAGE(texture page)와 CLUT(color look-up table)을 지정해야 한다.
 ###### TPAGE
-1024 x 512 크기의 frame buffer에 16 **
+하나의 page는 1024 x 512 크기의 frame buffer에 16 x 2 개의 cell로 나누어져 있는 
