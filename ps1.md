@@ -831,4 +831,4 @@ if(bytes) {
 }
 ```
 #### Textured polygon
-
+uv값은 left-top이 (0, 0)이고 right-bottom이 (1, 1)이다.
