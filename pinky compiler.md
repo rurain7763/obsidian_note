@@ -442,24 +442,12 @@ class Assignment(Stmt):
 ```
 
 ```python
-# parser에 추가
-    if self.check(TOK_PRINT):
-            return self.print_stmt('')
-        elif self.check(TOK_PRINTLN):
-            return self.print_stmt('\n')
-        elif self.check(TOK_IF):
-            return self.if_stmt()
-        #elif self.peek().token_type == TOK_FOR:
-        #    return self.for_stmt()
-        #elif self.peek().token_type == TOK_WHILE:
-        #    return self.while_stmt()
-        #elif self.peek().token_type == TOK_FUNC:
-        #    return self.func_stmt()
-        else:
-            left = self.expr()
-            if self.match(TOK_ASSIGN):
-                right = self.expr()
-                return Assignment(left, right, self.previous_token().line)
-            else:
-                pass
+# parser::stmt()
+# example) num := 5;
+left = self.expr()
+if self.match(TOK_ASSIGN):
+	right = self.expr()
+	return Assignment(left, right, self.previous_token().line)
+else:
+	pass
 ```
