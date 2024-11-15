@@ -831,4 +831,5 @@ if(bytes) {
 }
 ```
 #### Textured polygon
-uv값은 left-top이 (0, 0)이고 right-bottom이 (1, 1)이다.
+uv값은 left-top이 (0, 0)이고 right-bottom이 (texture_width, texture_height)이다.
+uv값 말고도 TPAGE(texture page)와 CLUT()
