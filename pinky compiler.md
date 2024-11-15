@@ -527,6 +527,20 @@ class WhileStmt(Stmt):
         self.do_stmts = do_stmts
         self.line = line
 ```
+###### ForStmt
+```python
+class ForStmt(Stmt):
+    def __init__(self, assignment : Assignment, condition_val : Expr, step_val : Expr, do_stmts : Stmts, line):
+        assert isinstance(assignment, Assignment), assignment
+        assert isinstance(condition_val, Expr), condition
+        assert step_val is None or isinstance(step_val, Expr), step_val
+        assert isinstance(do_stmts, Stmts), do_stmts
+        self.assignment = assignment
+        self.condition_val = condition_val
+        self.step_val = step_val
+        self.do_stmts = do_stmts     
+        self.line = line
+```
 ###### Parser
 ```python
 def while_stmt(self):
