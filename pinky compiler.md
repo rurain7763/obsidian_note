@@ -442,6 +442,7 @@ class Identifier(Expr):
 ###### Assignment
 ```python
 class Assignment(Stmt):
+	# x := 4, y := x + 3, etc...
     def __init__(self, left : Expr, right : Expr, line):
         assert isinstance(left, Expr), left
         assert isinstance(right, Expr), right
