@@ -430,3 +430,13 @@ elif isinstance(node, PrintStmt):
 # etc ...
 ```
 #### Variable
+###### Assignment
+```python
+class Assignment(Stmt):
+    def __init__(self, left : Expr, right : Expr, line):
+        assert isinstance(left, Expr), left
+        assert isinstance(right, Expr), right
+        self.left = left
+        self.right = right
+        self.line = line
+```
