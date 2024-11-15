@@ -511,11 +511,21 @@ def interpret(self, ast, env):
 ###### WhileStmt
 ```python
 class WhileStmt(Stmt):
-	# 
+	# while <expr> do <stmts> end
     def __init__(self, condition : Expr, do_stmts : Stmts, line):
         assert isinstance(condition, Expr), condition
         assert isinstance(do_stmts, Stmts), do_stmts
         self.condition = condition
         self.do_stmts = do_stmts
         self.line = line
+```
+###### interpreter
+```python
+elif isinstance(node, WhileStmt):
+  while True:
+    type, value = self.interpret(node.condition, env)
+    if type != TYPE_BOOL:
+      runtime_error('Condition is not a boolean expression', node.line)
+    if not value: break
+    self.interpret(node.do_stmts, env.new_env())
 ```
