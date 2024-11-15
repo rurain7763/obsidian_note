@@ -842,8 +842,16 @@ CLUT는 color look-up table로서 texture의 색상을 지정한다.
 ###### TIM 파일
 TIM 파일은 텍스처 이미지를 저장하는 파일이다. TIM 파일은 header와 이미지 데이터로 구성되어 있다.
 ```c
-struct {
-	u_long crect;
-	
+// libgpu.h의 TIM_IMAGE 구조체
+typedef struct {
+	u_long  mode;		/* pixel mode */
+	RECT	*crect;		/* CLUT rectangle on frame buffer */
+	u_long	*caddr;		/* CLUT address on main memory */
+	RECT	*prect;		/* texture image rectangle on frame buffer */
+	u_long	*paddr;		/* texture image address on main memory */
 } TIM_IMAGE;
+```
+###### 코드
+```c
+
 ```
