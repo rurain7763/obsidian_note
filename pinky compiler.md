@@ -483,15 +483,18 @@ class Environment:
 interpret을 하여 현재 코드를 실행 경우 해당 environment에서 변수를 찾도록 한다.
 ```python
 def interpret(self, ast, env):
-    if isinstance(node, IfStmt):
-            type, value = self.interpret(node.condition, env)
-            if type != TYPE_BOOL:
-                runtime_error('Condition is not a boolean expression', node.line)
-                
-			# 새로운 블록이 생성되었으므로 현재 환경을 부모로 가지는 새로운 환경을 생성하고 넘겨준다.
-            if value:
-                return self.interpret(node.then_stmts, env.new_env())
-            else:
-                return self.interpret(node.else_stmts, env.new_env())
+	if isinstance(node, Assignment):
+		r_type, r_value = self.interpret(node.right, env)
+		env.set_vale(node.left.name, (r_type, r_value))
+    elif isinstance(node, IfStmt):
+		type, value = self.interpret(node.condition, env)
+		if type != TYPE_BOOL:
+			runtime_error('Condition is not a boolean expression', node.line)
+			
+		# 새로운 블록이 생성되었으므로 현재 환경을 부모로 가지는 새로운 환경을 생성하고 넘겨준다.
+		if value:
+			return self.interpret(node.then_stmts, env.new_env())
+		else:
+			return self.interpret(node.else_stmts, env.new_env())
     # etc ...
 ```
