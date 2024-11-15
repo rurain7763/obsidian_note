@@ -486,6 +486,13 @@ def interpret(self, ast, env):
 	if isinstance(node, Assignment):
 		r_type, r_value = self.interpret(node.right, env)
 		env.set_vale(node.left.name, (r_type, r_value))
+	elif isinstance(node, Identifier):
+		val = env.get_value(node.name)
+		if val == None:
+		  runtime_error(f'Variable {node.name} is not defined.', node.line)
+		elif val[1] =
+		else:
+		  return val
     elif isinstance(node, IfStmt):
 		type, value = self.interpret(node.condition, env)
 		if type != TYPE_BOOL:
