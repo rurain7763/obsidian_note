@@ -480,6 +480,14 @@ class Environment:
     def new_env(self):
         return Environment(parent=self)
 ```
+###### Parser
+```python
+else:
+	left = self.expr()
+    if self.match(TOK_ASSIGN):
+        right = self.expr()
+        return Assignment(left, right, self.previous_token().line)
+```
 ###### Interpreter
 interpret을 하여 현재 코드를 실행 경우 해당 environment에서 변수를 찾도록 한다.
 ```python
@@ -522,10 +530,11 @@ class WhileStmt(Stmt):
 ###### interpreter
 ```python
 elif isinstance(node, WhileStmt):
-  while True:
-    type, value = self.interpret(node.condition, env)
-    if type != TYPE_BOOL:
-      runtime_error('Condition is not a boolean expression', node.line)
-    if not value: break
-    self.interpret(node.do_stmts, env.new_env())
+	type, value = self.interpret(node.condition, env)
+	if type != TYPE_BOOL:
+		runtime_error('Condition is not a boolean expression', node.line)
+
+	while value:
+		self.interpret(node.do_stmts, env.new_env())
+		type, value = self.interpret(node.condition, env)
 ```
