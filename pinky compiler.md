@@ -550,6 +550,19 @@ def while_stmt(self):
 	do_stmts = self.stmts()
 	self.expect(TOK_END)
 	return WhileStmt(condition, do_stmts, self.previous_token().line)
+
+def for_stmt(self):
+	self.expect(TOK_FOR)
+	assignment = self.assignment()
+	self.expect(TOK_TO)
+	condition_val = self.expr()
+	if self.match(TOK_STEP):
+	else: step_val = None
+	step_val = self.expr()
+	self.expect(TOK_DO)
+	do_stmts = self.stmts()
+	self.expect(TOK_END)
+	return ForStmt(assignment, condition_val, step_val, do_stmts, self.previous_token().line)
 ```
 ###### Interpreter
 ```python
