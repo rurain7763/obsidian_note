@@ -609,4 +609,7 @@ elif isinsinstance(node, ForStmt):
 			new_env.set_vale(var_name, (cur_type, cur_val))
 ```
 #### Compiler-Compilers
-> 컴파일러를 만ㄷ
+> 컴파일러를 만드는 컴파일러라는 의미.
+> 대표적으로 YACC, Bison, ANTLR, etc가 있다.
+> 해당 컴파일러들은 
+> 대부분 사람들은 직접 컴파일러를 만들기보다 이러한 도구를 사용한다.
