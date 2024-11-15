@@ -575,17 +575,35 @@ elif isinstance(node, WhileStmt):
 		self.interpret(node.do_stmts, env.new_env())
 		type, value = self.interpret(node.condition, env)
 elif isinsinstance(node, ForStmt):
-	self.interpret(node.assignment, env)
-	type, value = self.interpret(node.condition_val, env)
-	if type != TYPE_INT:
-	runtime_error('Condition is not an integer expression', node.line)
-	
-	while value:
-	self.interpret(node.do_stmts, env.new_env())
-	self.interpret(node.assignment, env)
-	type, value = self.interpret(node.condition_val, env)
-	if type != TYPE_INT:
-	  runtime_error('Condition is not an integer expression', node.line)
+	new_env = env.new_env()
+	self.interpret(node.assignment, new_env)
+	cond_type, cond_val = self.interpret(node.condition_val, new_env)
+	if cond_type != TYPE_NUMBER:
+		runtime_error('Condition is not a number expression', node.line)
+
 	if node.step_val != None:
-	  self.interpret(node.step_val, env)
+		step_type, step_val = self.interpret(node.step_val, new_env)
+		if step_type != TYPE_NUMBER:
+			runtime_error('Step is not a number expression', node.line)
+	else:
+		step_type = TYPE_NUMBER
+		step_val = 1
+
+	var_name = node.assignment.left.name
+	cur_type, cur_val = new_env.get_value(var_name)
+	# 혅재 값이 조건 값보다 작다면
+  
+	if cur_val <= cond_val:
+		while cur_val <= cond_val:
+			self.interpret(node.do_stmts, new_env.new_env())
+			cur_type, cur_val = new_env.get_value(var_name)
+			cur_val = cur_val + step_val
+			new_env.set_vale(var_name, (cur_type, cur_val))
+	else:
+		if node.step_val == None: step_val = -1
+		while cur_val >= cond_val:
+			self.interpret(node.do_stmts, new_env.new_env())
+			cur_type, cur_val = new_env.get_value(var_name)
+			cur_val = cur_val + step_val
+			new_env.set_vale(var_name, (cur_type, cur_val))
 ```
