@@ -441,18 +441,6 @@ class Assignment(Stmt):
         self.line = line
 ```
 
-**Parser::s**
-```python
-# parser::stmt()
-# example) num := 5;
-left = self.expr()
-if self.match(TOK_ASSIGN):
-	right = self.expr()
-	return Assignment(left, right, self.previous_token().line)
-else:
-	pass
-```
-
 **Environment**
 > 현재 블록에서 사용할 수 있는 변수들을 저장하는 공간 (함수 호출이나 if 블록 생성 시 새로운 environment 생성)
 > Environment는 부모를 가지며, 부모의 변수에 접근할 수 있다.
@@ -471,3 +459,5 @@ class Environment:
     def env_new(self):
         return Environment(parent=self)
 ```
+
+****
