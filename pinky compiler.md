@@ -508,3 +508,14 @@ def interpret(self, ast, env):
     # etc ...
 ```
 #### Loop
+###### WhileStmt
+```python
+class WhileStmt(Stmt):
+	# 
+    def __init__(self, condition : Expr, do_stmts : Stmts, line):
+        assert isinstance(condition, Expr), condition
+        assert isinstance(do_stmts, Stmts), do_stmts
+        self.condition = condition
+        self.do_stmts = do_stmts
+        self.line = line
+```
