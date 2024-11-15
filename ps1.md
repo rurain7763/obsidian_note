@@ -796,4 +796,36 @@ char* FileRead(const char* filename, u_long* size) {
 }
 ```
 
-**파일 read 이후 **
+**파일 read 이후 모델링 데이터 불러오기 예시**
+```c
+bytes = FileRead("\\MODEL.BIN;1", &size);
+    
+if(bytes) {
+	u_long bytesRead = 0;
+	cube.numVertices = GetShortBE(bytes, &bytesRead);
+	cube.vertices = (SVECTOR*)malloc3(cube.numVertices * sizeof(SVECTOR));
+	for(short i = 0; i < cube.numVertices; i++) {
+		cube.vertices[i].vx = GetShortBE(bytes, &bytesRead);
+		cube.vertices[i].vy = GetShortBE(bytes, &bytesRead);
+		cube.vertices[i].vz = GetShortBE(bytes, &bytesRead);
+	}
+
+	cube.numFaces = GetShortBE(bytes, &bytesRead) << 2;
+	cube.faces = (short*)malloc3(cube.numFaces * sizeof(short));
+	for(short i = 0; i < cube.numFaces; i++) {
+		cube.faces[i] = GetShortBE(bytes, &bytesRead);
+		printf("%d\n", cube.faces[i]);
+	}
+
+	cube.numColors = (short)GetByte(bytes, &bytesRead);
+	cube.colors = (CVECTOR*)malloc3(cube.numColors * sizeof(CVECTOR));
+	for(char i = 0; i < cube.numColors; i++) {
+		cube.colors[i].r = (short)GetByte(bytes, &bytesRead);
+		cube.colors[i].g = (short)GetByte(bytes, &bytesRead);
+		cube.colors[i].b = (short)GetByte(bytes, &bytesRead);
+		cube.colors[i].cd = (short)GetByte(bytes, &bytesRead);
+	}
+
+	free(bytes);
+}
+```
