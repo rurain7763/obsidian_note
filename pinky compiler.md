@@ -468,7 +468,7 @@ class Environment:
         return Environment(parent=self)
 ```
 ###### Interpreter
-interpret을 하여 현재 코드를 실행 경우 현재 environment를 넘겨주어 해당 environment에서 변수를 찾도록 한다.
+interpret을 하여 현재 코드를 실행 경우 해당 environment에서 변수를 찾도록 한다.
 ```python
 def interpret(self, ast, env):
     if isinstance(node, IfStmt):
