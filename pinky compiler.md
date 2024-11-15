@@ -468,13 +468,14 @@ class Environment:
         return Environment(parent=self)
 ```
 ###### Interpreter
+이제 interpret을 할 경우 현재 environment를 넘겨주어 해당 environment에서 변수를 찾도록 한다.
 ```python
 def interpret(self, ast, env):
     if isinstance(node, IfStmt):
             type, value = self.interpret(node.condition, env)
             if type != TYPE_BOOL:
                 runtime_error('Condition is not a boolean expression', node.line)
-
+			# 새로운 블록이 생성되었으므로 현재 
             if value:
                 return self.interpret(node.then_stmts, env.new_env())
             else:
