@@ -866,11 +866,11 @@ if(bytes) {
 	OpenTIM(bytes);
 	ReadTIM(&tim);
 
-	// color 데이터를 vram에 로드
+	// texture 데이터를 vram에 로드
 	LoadImage(&tim.prect, tim.paddr);
 	DrawSync(0);
 
-	// clu
+	// clut 데이터를 vram에 로드
 	if(tim.mode & 0x8) {
 		LoadImage(&tim.crect, tim.caddr);
 		DrawSync(0);
