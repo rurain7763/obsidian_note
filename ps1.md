@@ -795,3 +795,5 @@ char* FileRead(const char* filename, u_long* size) {
     return buffer;
 }
 ```
+
+**파일 read 이후 **
