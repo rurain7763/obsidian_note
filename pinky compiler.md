@@ -591,15 +591,16 @@ elif isinsinstance(node, ForStmt):
 
 	var_name = node.assignment.left.name
 	cur_type, cur_val = new_env.get_value(var_name)
-	# 혅재 값이 조건 값보다 작다면
-  
 	if cur_val <= cond_val:
+		# 현재 값이 조건 값보다 작다면
+		step_val = self.expr()
 		while cur_val <= cond_val:
 			self.interpret(node.do_stmts, new_env.new_env())
 			cur_type, cur_val = new_env.get_value(var_name)
 			cur_val = cur_val + step_val
 			new_env.set_vale(var_name, (cur_type, cur_val))
 	else:
+		# 현재 값이 조건 값보다 크다면
 		if node.step_val == None: step_val = -1
 		while cur_val >= cond_val:
 			self.interpret(node.do_stmts, new_env.new_env())
