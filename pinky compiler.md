@@ -527,7 +527,18 @@ class WhileStmt(Stmt):
         self.do_stmts = do_stmts
         self.line = line
 ```
-###### interpreter
+###### Parser
+```python
+def while_stmt(self):
+	if self.match(TOK_WHILE):
+		condition = self.expr()
+	if self.match(TOK_DO):
+	  do_stmts = self.stmts()
+	  if self.match(TOK_END): return WhileStmt(condition, do_stmts, self.previous_token().line)
+	  else: raise SyntaxError(f'Error: "end" expected.')
+	else: raise SyntaxError(f'Error: "do" expected.')
+```
+###### Interpreter
 ```python
 elif isinstance(node, WhileStmt):
 	type, value = self.interpret(node.condition, env)
