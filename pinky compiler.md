@@ -610,8 +610,6 @@ elif isinsinstance(node, ForStmt):
 ```
 #### Compiler-Compilers
 > 컴파일러를 만드는 컴파일러라는 의미.
-> 지금까지 만들어 왔던 일련의 과정들을 BNF 문법을 정의한 ㅍ 자동화하는 도구이다.
-
+> 지금까지 만들어 왔던 일련의 과정들을 BNF 문법을 정의한 파일을 통해 lexer 및 parser를 생성하는 도구이다.
 > 대표적으로 YACC, Bison, ANTLR, etc가 있다.
-> 해당 컴파일러들은 BNF를 통해 문법을 정의하고, 이를 통해 lexer 및 parser를 생성한다.
 > 대부분 사람들은 직접 컴파일러를 만들기보다 이러한 도구를 사용한다.
