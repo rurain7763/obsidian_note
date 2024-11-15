@@ -451,3 +451,8 @@ if self.match(TOK_ASSIGN):
 else:
 	pass
 ```
+
+**Environment**
+> 현재 블록에서 사용 
+```python
+```
