@@ -530,6 +530,7 @@ class WhileStmt(Stmt):
 ###### ForStmt
 ```python
 class ForStmt(Stmt):
+	# for <assignment>, <expr>, <expr>? do
     def __init__(self, assignment : Assignment, condition_val : Expr, step_val : Expr, do_stmts : Stmts, line):
         assert isinstance(assignment, Assignment), assignment
         assert isinstance(condition_val, Expr), condition
@@ -556,9 +557,8 @@ def for_stmt(self):
 	assignment = self.assignment()
 	self.expect(TOK_TO)
 	condition_val = self.expr()
-	if self.match(TOK_STEP):
+	if self.match(TOK_STEP): step_val = self.expr()
 	else: step_val = None
-	step_val = self.expr()
 	self.expect(TOK_DO)
 	do_stmts = self.stmts()
 	self.expect(TOK_END)
