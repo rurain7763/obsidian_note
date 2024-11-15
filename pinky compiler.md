@@ -429,5 +429,4 @@ elif isinstance(node, PrintStmt):
 	print(value)
 # etc ...
 ```
-
-****
+#### Variable
