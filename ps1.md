@@ -853,5 +853,29 @@ typedef struct {
 ```
 ###### 코드
 ```c
+u_long* bytes;
+u_long size;
 
+bytes = (u_long*)FileRead(file, &size);
+
+if(bytes) {
+	u_long bytesRead = 0;
+	TIM_IMAGE tim;
+
+	// TIM 파일을 읽어서 TIM_IMAGE 구조체에 저장
+	OpenTIM(bytes);
+	ReadTIM(&tim);
+
+	// color 데이터를 vram에 로드
+	LoadImage(&tim.prect, tim.paddr);
+	DrawSync(0);
+
+	// clu
+	if(tim.mode & 0x8) {
+		LoadImage(&tim.crect, tim.caddr);
+		DrawSync(0);
+	}
+
+	free(bytes);
+}
 ```
