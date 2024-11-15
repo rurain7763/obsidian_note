@@ -359,8 +359,6 @@ if_stmt :=
 		('elif' expr 'then' stmts)*
 		('else' stmts)?
 	'end'
-
-
 ```
 
 **코드**
