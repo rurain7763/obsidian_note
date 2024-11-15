@@ -470,39 +470,14 @@ class Environment:
 ###### Interpreter
 ```python
 def interpret(self, ast, env):
-    if isinstance(ast, Integer):
-        return float(ast.value)
-    elif isinstance(ast, Float):
-        return float(ast.value)
-    elif isinstance(ast, Grouping):
-        return self.interpret(ast.value, env)
-    elif isinstance(ast, BinOp):
-        left = self.interpret(ast.left, env)
-        right = self.interpret(ast.right, env)
-        if ast.op.token_type == TOK_PLUS: return left + right
-        elif ast.op.token_type == TOK_MINUS: return left - right
-        elif ast.op.token_type == TOK_STAR: return left * right
-        elif ast.op.token_type == TOK_SLASH: return left / right
-    elif isinstance(ast, UnOp):
-        val = self.interpret(ast.operand, env)
-        if ast.op.token_type == TOK_PLUS: return +val
-        elif ast.op.token_type == TOK_MINUS: return -val
-        elif ast.op.token_type == TOK_NOT: return not val
-    elif isinstance(ast, LogicalOp):
-        left_type, left_value = self.interpret(ast.left, env)
-        if (ast.op.token_type == TOK_AND and left_value) or (ast.op.token_type == TOK_OR and not left_value):
-            return self.interpret(ast.right, env)
-        else:
-            return (left_type, left_value)
-    elif isinstance(ast, Identifier):
-        return env.get_value(ast.name)
-    elif isinstance(ast, Assignment):
-        value = self.interpret(ast.right, env)
-        env.set_value(ast.left.name, value)
-    elif isinstance(ast, PrintStmt):
-        type, value = self.interpret(ast.value, env)
-        print(value)
-    elif isinstance(ast, Stmts):
-        for stmt in ast.stmts:
-            self.interpret(stmt, env)
+    if isinstance(node, IfStmt):
+            type, value = self.interpret(node.condition, env)
+            if type != TYPE_BOOL:
+                runtime_error('Condition is not a boolean expression', node.line)
+
+            if value:
+                return self.interpret(node.then_stmts, env.new_env())
+            else:
+                return self.interpret(node.else_stmts, env.new_env())
+    # etc ...
 ```
