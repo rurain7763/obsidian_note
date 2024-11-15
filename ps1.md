@@ -798,6 +798,8 @@ char* FileRead(const char* filename, u_long* size) {
 
 **파일 read 이후 모델링 데이터 불러오기 예시**
 ```c
+char* bytes;
+u_long size;
 bytes = FileRead("\\MODEL.BIN;1", &size);
     
 if(bytes) {
@@ -814,7 +816,6 @@ if(bytes) {
 	cube.faces = (short*)malloc3(cube.numFaces * sizeof(short));
 	for(short i = 0; i < cube.numFaces; i++) {
 		cube.faces[i] = GetShortBE(bytes, &bytesRead);
-		printf("%d\n", cube.faces[i]);
 	}
 
 	cube.numColors = (short)GetByte(bytes, &bytesRead);
@@ -829,3 +830,4 @@ if(bytes) {
 	free(bytes);
 }
 ```
+#### T
