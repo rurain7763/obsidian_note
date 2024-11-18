@@ -611,7 +611,7 @@ elif isinsinstance(node, ForStmt):
 ####  Function
 ```python
 class FuncDecl(Decl):
-	# func <identifier> '(' <params>? ')' 
+	# func <identifier> "(" <params>? ")" <body_stmts> end
 ```
 #### Compiler-Compilers
 > 컴파일러를 만드는 컴파일러라는 의미.
