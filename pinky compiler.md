@@ -429,27 +429,6 @@ elif isinstance(node, PrintStmt):
 	print(value)
 # etc ...
 ```
-#### Variable
-###### Identifier
-```python
-class Identifier(Expr):
-    # x, PI, _a, start_val, etc...
-    def __init__(self, name, line):
-        assert isinstance(name, str), name
-        self.name = name
-        self.line = line
-```
-###### Assignment
-```python
-class Assignment(Stmt):
-	# x := 4, y := x + 3, etc...
-    def __init__(self, left : Expr, right : Expr, line):
-        assert isinstance(left, Expr), left
-        assert isinstance(right, Expr), right
-        self.left = left
-        self.right = right
-        self.line = line
-```
 ###### Environment
 > 현재 블록에서 사용할 수 있는 변수들을 저장하는 공간 (함수 호출이나 if 블록 생성 시 새로운 environment 생성)
 > Environment는 부모를 가지며, 부모의 변수에 접근할 수 있다.
@@ -479,6 +458,27 @@ class Environment:
 
     def new_env(self):
         return Environment(parent=self)
+```
+#### Variable
+###### Identifier
+```python
+class Identifier(Expr):
+    # x, PI, _a, start_val, etc...
+    def __init__(self, name, line):
+        assert isinstance(name, str), name
+        self.name = name
+        self.line = line
+```
+###### Assignment
+```python
+class Assignment(Stmt):
+	# x := 4, y := x + 3, etc...
+    def __init__(self, left : Expr, right : Expr, line):
+        assert isinstance(left, Expr), left
+        assert isinstance(right, Expr), right
+        self.left = left
+        self.right = right
+        self.line = line
 ```
 ###### Parser
 ```python
@@ -684,7 +684,28 @@ def ret_stmt(self):
 ```
 ###### Interpreter
 ```python
+elif isinstance(node, FuncDecl):
+	env.set_func(node.identifier.name, (node, env))
+elif isinstance(node, FuncCall):
+	func, func_org_env = env.get_func(node.identifier.name)
 
+	if func == None:
+		runtime_error(f"Function {node.identifier.name} not declared", node.line)
+	if len(func.params) != len(node.args):
+		runtime_error(f"Function {node.identifier.name} expected {len(func.params)} arguments, but {len(node.args)} arguments were passed", node.line)
+
+	new_env = func_org_env.new_env()
+	for i in range(0, len(func.params)):
+		new_env.set_value_as_local(func.params[i].identifier.name, self.interpret(node.args[i], env))
+
+	try:
+		self.interpret(func.body_stmts, new_env)
+	except Return as e:
+		return e.args[0]
+elif isinstance(node, FuncCallStmt):
+	self.interpret(node.func_call, env)
+elif isinstance(node, RetStmt):
+	raise Return(self.interpret(node.value, env))
 ```
 #### Compiler-Compilers
 > 컴파일러를 만드는 컴파일러라는 의미.
