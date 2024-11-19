@@ -718,7 +718,7 @@ instruction set : PUSH 2,  PUSH 3,  PUSH 4, MUL, ADD
 cf) 두 수의 연산 순서는 스택에 먼저 들어온 순서대로 연산한다. 예를 들어 2, 3을 가진 스택에 SUB를 하면 2 - 3이 된다.
 ###### Instruction set
 ```
-<
+data instruction
 PUSH <value> : stack에 value 추가
 POP : stack에서 pop
 ADD : stack에서 두개 pop 후 더한 값 push
@@ -727,7 +727,9 @@ MUL : stack에서 두개 pop 후 곱한 값 push
 DIV : stack에서 두개 pop 후 나눈 값 push
 etc ...
 
-
+control-flow instruction
+JMP <label> : label로 이동
+JMP
 ```
 ###### Compiler
 ```python
