@@ -704,7 +704,35 @@ class Return(Exception):
 > 대부분 사람들은 직접 컴파일러를 만들기보다 이러한 툴을 사용하여 언어를 개발한다.
 #### Virtual Machine
 > 지금까지 ast를 해석하고 해당 코드를 interperter를 통해 python으로 직접 실행했지만, 이제는 compiler를 통해 instructions(여전히 cpu에 고유한 instruction은 아님) set을 생성하고 이를 virtual machine을 통해 실행한다.
+###### 특징
+
 ###### Compiler
 ```python
+class Compiler:
+    def __init__(self):
+        self.code = []
 
+    def emit(self, instruction):
+        self.code.append(instruction)
+
+    def compile(self, node):
+        if isinstance(node, Integer):
+            value = (TYPE_NUMBER, float(node.value))
+            self.emit(('PUSH', value))
+        elif isinstance(node, Float):
+            value = (TYPE_NUMBER, float(node.value))
+            self.emit(('PUSH', value))
+        elif isinstance(node, Bool):
+            value = (TYPE_BOOL, node.value)
+            self.emit(('PUSH', value))
+        elif isinstance(node, String):
+            value = (TYPE_STRING, stringify(node.value))
+            self.emit(('PUSH', value))
+        # etc ...
+
+    def generate_code(self, root):
+        self.emit(('LABEL', 'START'))
+        self.compile(root)
+        self.emit(('HALT', None))
+        return self.code
 ```
