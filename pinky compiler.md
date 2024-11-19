@@ -729,7 +729,12 @@ etc ...
 
 control-flow instruction
 JMP <label> : label로 이동
-JMP
+JMPZ <label> : stack에서 pop 후 0이면 label로 이동
+JSR <label> : subroutine call
+RTS : return from subroutine
+HALT : 프로그램 종료
+```
+etc ...
 ```
 ###### Compiler
 ```python
