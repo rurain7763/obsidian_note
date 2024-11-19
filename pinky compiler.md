@@ -628,6 +628,7 @@ class FuncDecl(Decl):
         self.line = line
 
 class FuncCall(Expr):
+	# <identifier> "(" <expr>? ("," <expr>)* ")"
     def __init__(self, identifier, args, line):
         assert isinstance(identifier, Identifier), identifier
         assert all(isinstance(arg, Expr) for arg in args), args
@@ -636,11 +637,13 @@ class FuncCall(Expr):
         self.line = line
 
 class FuncCallStmt(Stmt):
+	# wrapper class for FuncCall
     def __init__(self, func_call : FuncCall):
         assert isinstance(func_call, FuncCall)
         self.func_call = func_call
 
 class RetStmt(Stmt):
+	# ret <expr>
     def __init__(self, value : Expr, line):
         assert isinstance(value, Expr)
         self.value = value
