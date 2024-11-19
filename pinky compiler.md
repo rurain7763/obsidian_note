@@ -681,6 +681,8 @@ elif isinstance(node, FuncCall):
 	for i in range(0, len(func.params)):
 		new_env.set_value_as_local(func.params[i].identifier.name, self.interpret(node.args[i], env))
 
+	# 함수 실행 부분
+	# 함수 내부에서 ret 값을 만나면 Exception을 raise
 	try:
 		self.interpret(func.body_stmts, new_env)
 	except Return as e:
