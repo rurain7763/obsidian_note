@@ -665,8 +665,7 @@ def func_decl(self):
 	while not self.match(TOK_RPAREN):
 		self.expect(TOK_IDENTIFIER)
 
-	    if curr_parmas_cnt >= max_params_cnt:
-      parse_error(f"Functions can not have arguments more than {max_params_cnt}", self.previous_token().line)
+		# 파라미터가 max_params_cnt보다 많으면 에러 발생
 		if curr_parmas_cnt >= max_params_cnt:
 			parse_error(f"Functions can not have arguments more than {max_params_cnt}", self.previous_token().line)
 
@@ -678,11 +677,12 @@ def func_decl(self):
 	self.expect(TOK_END)
 	return FuncDecl(identifier, params, body_stmts, self.previous_token().line)
 
+# 함수 반환
 def ret_stmt(self):
 	self.expect(TOK_RET)
 	return RetStmt(self.expr(), self.previous_token().line)
-
 ```
+###### 
 #### Compiler-Compilers
 > 컴파일러를 만드는 컴파일러라는 의미.
 > 지금까지 만들어 왔던 일련의 과정들을 BNF 문법을 정의한 파일을 통해 lexer 및 parser를 생성하는 도구이다.
