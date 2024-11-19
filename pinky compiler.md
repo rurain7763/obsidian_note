@@ -403,42 +403,44 @@ class Environment:
 ###### Expression
 AST를 후위 순회하여 계산한다.
 ```python
-if isinstance(ast, Integer):
-	return float(ast.value)
-elif isinstance(ast, Float):
-	return float(ast.value)
-elif isinstance(ast, Grouping):
-	return self.interpret(ast.value, env)
-elif isinstance(ast, BinOp):
-	left = self.interpret(ast.left, env)
-	right = self.interpret(ast.right, env)
-	if ast.op.token_type == TOK_PLUS: return left + right
-	elif ast.op.token_type == TOK_MINUS: return left - right
-	elif ast.op.token_type == TOK_STAR: return left * right
-	elif ast.op.token_type == TOK_SLASH: return left / right
-elif isinstance(ast, UnOp):
-	val = self.interpret(ast.operand)
-	if ast.op.token_type == TOK_PLUS: return +val
-	elif ast.op.token_type == TOK_MINUS: return -val
-	elif ast.op.token_type == TOK_NOT: return not val
-elif isinstance(ast, LogicalOp):
-	# and의 경우 왼쪽이 이미 false라면 오른쪽을 계산할 필요가 없고, or의 경우 왼쪽이 이미 true라면 오른쪽을 계산할 필요가 없다.
-	left_type, left_value = self.interpret(ast.left, env)
-	if (ast.op.token_type == TOK_AND and left_value) or (ast.op.token_type == TOK_OR and not left_value):
-		return self.interpret(ast.right, env)
-	else:
-		return (left_type, left_value)
-# etc ...
+def interpret(self, ast, env):
+	if isinstance(ast, Integer):
+		return float(ast.value)
+	elif isinstance(ast, Float):
+		return float(ast.value)
+	elif isinstance(ast, Grouping):
+		return self.interpret(ast.value, env)
+	elif isinstance(ast, BinOp):
+		left = self.interpret(ast.left, env)
+		right = self.interpret(ast.right, env)
+		if ast.op.token_type == TOK_PLUS: return left + right
+		elif ast.op.token_type == TOK_MINUS: return left - right
+		elif ast.op.token_type == TOK_STAR: return left * right
+		elif ast.op.token_type == TOK_SLASH: return left / right
+	elif isinstance(ast, UnOp):
+		val = self.interpret(ast.operand)
+		if ast.op.token_type == TOK_PLUS: return +val
+		elif ast.op.token_type == TOK_MINUS: return -val
+		elif ast.op.token_type == TOK_NOT: return not val
+	elif isinstance(ast, LogicalOp):
+		# and의 경우 왼쪽이 이미 false라면 오른쪽을 계산할 필요가 없고, or의 경우 왼쪽이 이미 true라면 오른쪽을 계산할 필요가 없다.
+		left_type, left_value = self.interpret(ast.left, env)
+		if (ast.op.token_type == TOK_AND and left_value) or (ast.op.token_type == TOK_OR and not left_value):
+			return self.interpret(ast.right, env)
+		else:
+			return (left_type, left_value)
+	# etc ...
 ```
 ###### Statement
 ```python
-if isinstance(node, Stmts):
-	for stmt in node.stmts:
-		self.interpret(stmt, env)
-elif isinstance(node, PrintStmt):
-	type, value = self.interpret(node.value, env)
-	print(value)
-# etc ...
+def interpret(self, ast, env):
+	if isinstance(node, Stmts):
+		for stmt in node.stmts:
+			self.interpret(stmt, env)
+	elif isinstance(node, PrintStmt):
+		type, value = self.interpret(node.value, env)
+		print(value)
+	# etc ...
 ```
 #### Variable
 ###### Identifier
