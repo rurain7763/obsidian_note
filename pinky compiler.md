@@ -709,9 +709,12 @@ stack-based로 구현을 목표로 한다.
 
 **Stack-based**
 2 + 3 * 4
-instruction set : 2, 3, 4, MUL, ADD
-stack : 2, 3, 4
-1. 
+instruction set : PUSH 2,  PUSH 3,  PUSH 4, MUL, ADD
+1. PUSH 2 => stack  = [2]
+2. PUSH 3 => stack = [2, 3]
+3. PUSH 4 => stack = [2, 3, 4]
+4. MUL => stack = [2, 12]
+5. ADD => stack = [14]
 ###### Instruction set
 ###### Compiler
 ```python
