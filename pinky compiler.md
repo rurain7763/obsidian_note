@@ -652,6 +652,35 @@ class RetStmt(Stmt):
 ```
 ###### Paser
 ```python
+# 함수 정의
+def func_decl(self):
+	self.expect(TOK_FUNC)
+	self.expect(TOK_IDENTIFIER)
+	identifier = Identifier(self.previous_token().lexeme, self.previous_token().line)
+	self.expect(TOK_LPAREN)
+
+	max_params_cnt = 255
+	curr_parmas_cnt = 0
+	params = []
+	while not self.match(TOK_RPAREN):
+		self.expect(TOK_IDENTIFIER)
+
+	    if curr_parmas_cnt >= max_params_cnt:
+      parse_error(f"Functions can not have arguments more than {max_params_cnt}", self.previous_token().line)
+		if curr_parmas_cnt >= max_params_cnt:
+			parse_error(f"Functions can not have arguments more than {max_params_cnt}", self.previous_token().line)
+
+		params.append(Param(Identifier(self.previous_token().lexeme, self.previous_token().line), self.previous_token().line))
+		curr_parmas_cnt += 1
+		self.match(TOK_COMMA)
+
+	body_stmts = self.stmts()
+	self.expect(TOK_END)
+	return FuncDecl(identifier, params, body_stmts, self.previous_token().line)
+
+def ret_stmt(self):
+	self.expect(TOK_RET)
+	return RetStmt(self.expr(), self.previous_token().line)
 
 ```
 #### Compiler-Compilers
