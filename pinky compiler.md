@@ -706,7 +706,10 @@ class Return(Exception):
 > 지금까지 ast를 해석하고 해당 코드를 interperter를 통해 python으로 직접 실행했지만, 이제는 compiler를 통해 instructions(여전히 cpu에 고유한 instruction은 아님) set을 생성하고 이를 virtual machine을 통해 실행한다.
 ###### 특징
 stack-based로 구현을 목표로 한다.
-**Stack-
+
+**Stack-based**
+2 + 3 * 4
+Stack : 2, 3, 4, MUL, ADD
 ###### Instruction set
 ###### Compiler
 ```python
