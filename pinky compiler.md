@@ -390,6 +390,16 @@ def stmts(self):
 ```
 #### Interpreter
 > AST를 통해 해당 CPU의 instruction set에 맞게 코드를 생성하고 실행한다. (모든 cpu instruction set을 다루기는 힘들기 때문에 이번 프로젝트에서는 python을 interface로 활용한다)
+###### Environment
+> 현재 블록에서 사용할 수 있는 변수들을 저장하는 공간 (함수 호출이나 if 블록 생성 시 새로운 environment 생성)
+> Environment는 부모를 가지며, 부모의 변수에 접근할 수 있다.
+```python
+class Environment:
+    def __init__(self, parent=None):
+        self.vars = {}
+        self.funcs = {}
+        self.parent = parent
+```
 ###### Expression
 AST를 후위 순회하여 계산한다.
 ```python
@@ -413,11 +423,12 @@ elif isinstance(ast, UnOp):
 	elif ast.op.token_type == TOK_NOT: return not val
 elif isinstance(ast, LogicalOp):
 	# and의 경우 왼쪽이 이미 false라면 오른쪽을 계산할 필요가 없고, or의 경우 왼쪽이 이미 true라면 오른쪽을 계산할 필요가 없다.
-	left_type, left_value = self.interpret(ast.left)
+	left_type, left_value = self.interpret(ast.left, env)
 	if (ast.op.token_type == TOK_AND and left_value) or (ast.op.token_type == TOK_OR and not left_value):
-		return self.interpret(ast.right)
+		return self.interpret(ast.right, env)
 	else:
 		return (left_type, left_value)
+# etc ...
 ```
 ###### Statement
 ```python
@@ -428,16 +439,6 @@ elif isinstance(node, PrintStmt):
 	type, value = self.interpret(node.value, env)
 	print(value)
 # etc ...
-```
-###### Environment
-> 현재 블록에서 사용할 수 있는 변수들을 저장하는 공간 (함수 호출이나 if 블록 생성 시 새로운 environment 생성)
-> Environment는 부모를 가지며, 부모의 변수에 접근할 수 있다.
-```python
-class Environment:
-    def __init__(self, parent=None):
-        self.vars = {}
-        self.funcs = {}
-        self.parent = parent
 ```
 #### Variable
 ###### Identifier
