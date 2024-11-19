@@ -703,4 +703,4 @@ class Return(Exception):
 > 대표적으로 YACC, Bison, ANTLR, etc가 있다.
 > 대부분 사람들은 직접 컴파일러를 만들기보다 이러한 툴을 사용하여 언어를 개발한다.
 #### Virtual Machine
-> 지금까지 ast를 해석하고 해당 코드를 
+> 지금까지 ast를 해석하고 해당 코드를 python으로 직접 실행했지만, 이제는 virtual machine을 통해 instructions(여)을 생성하고
