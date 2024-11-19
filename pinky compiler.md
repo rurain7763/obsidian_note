@@ -398,10 +398,10 @@ if isinstance(ast, Integer):
 elif isinstance(ast, Float):
 	return float(ast.value)
 elif isinstance(ast, Grouping):
-	return self.interpret(ast.value)
+	return self.interpret(ast.value, env)
 elif isinstance(ast, BinOp):
-	left = self.interpret(ast.left)
-	right = self.interpret(ast.right)
+	left = self.interpret(ast.left, env)
+	right = self.interpret(ast.right, env)
 	if ast.op.token_type == TOK_PLUS: return left + right
 	elif ast.op.token_type == TOK_MINUS: return left - right
 	elif ast.op.token_type == TOK_STAR: return left * right
@@ -423,9 +423,9 @@ elif isinstance(ast, LogicalOp):
 ```python
 if isinstance(node, Stmts):
 	for stmt in node.stmts:
-		self.interpret(stmt)
+		self.interpret(stmt, env)
 elif isinstance(node, PrintStmt):
-	type, value = self.interpret(node.value)
+	type, value = self.interpret(node.value, env)
 	print(value)
 # etc ...
 ```
@@ -436,28 +436,8 @@ elif isinstance(node, PrintStmt):
 class Environment:
     def __init__(self, parent=None):
         self.vars = {}
+        self.funcs = {}
         self.parent = parent
-
-    def get_value(self, name):
-        env = self
-        while env != None:
-            val = env.vars.get(name)
-            if val != None: return val
-            env = env.parent
-        return None
-
-    def set_vale(self, name, value):
-        env = self
-        while env != None:
-            if name in env.vars:
-                env.vars[name] = value
-                return env.vars[name]
-            env = env.parent
-        self.vars[name] = value
-        return self.vars[name]
-
-    def new_env(self):
-        return Environment(parent=self)
 ```
 #### Variable
 ###### Identifier
