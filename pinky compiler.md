@@ -715,7 +715,7 @@ instruction set : PUSH 2,  PUSH 3,  PUSH 4, MUL, ADD
 3. PUSH 4 => stack = [2, 3, 4]
 4. MUL => stack = [2, 12]
 5. ADD => stack = [14]
-cf) 연산 순서는 
+cf) 두 수의 연산 순서는 스택에 먼저 들어온 순서대로 연산한다. 예를 들어 2, 3임
 ###### Instruction set
 ```
 PUSH <value> : stack에 value 추가
