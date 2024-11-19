@@ -733,10 +733,10 @@ JMPZ <label> : stack에서 pop 후 0이면 label로 이동
 JSR <label> : subroutine call
 RTS : return from subroutine
 HALT : 프로그램 종료
-```
 etc ...
 ```
 ###### Compiler
+> ast를 통해 instruction set을 생성한다.
 ```python
 class Compiler:
     def __init__(self):
@@ -765,4 +765,8 @@ class Compiler:
         self.compile(root)
         self.emit(('HALT', None))
         return self.code
+```
+###### Virtual Machine
+```python
+
 ```
