@@ -702,3 +702,5 @@ class Return(Exception):
 > 지금까지 만들어 왔던 일련의 과정들을 BNF 문법을 정의한 파일을 통해 lexer 및 parser를 생성하는 도구이다.
 > 대표적으로 YACC, Bison, ANTLR, etc가 있다.
 > 대부분 사람들은 직접 컴파일러를 만들기보다 이러한 툴을 사용하여 언어를 개발한다.
+#### Virtual Machine
+> 지금까지 ast를 해석하고 해당 코드를 
