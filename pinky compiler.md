@@ -610,8 +610,41 @@ elif isinsinstance(node, ForStmt):
 ```
 ####  Function
 ```python
+class Param(Decl):
+	# <idetifier>
+    def __init__(self, identifier, line):
+        assert isinstance(identifier, Identifier), identifier
+        self.identifier = identifier
+        self.line = line
+
 class FuncDecl(Decl):
 	# func <identifier> "(" <params>? ")" <body_stmts> end
+    def __init__(self, identifier, params, body_stmts, line):
+        assert isinstance(identifier, Identifier), identifier
+        assert all(isinstance(param, Param) for param in params), params
+        self.identifier = identifier
+        self.params = params
+        self.body_stmts = body_stmts
+        self.line = line
+
+class FuncCall(Expr):
+    def __init__(self, identifier, args, line):
+        assert isinstance(identifier, Identifier), identifier
+        assert all(isinstance(arg, Expr) for arg in args), args
+        self.identifier = identifier
+        self.args = args
+        self.line = line
+
+class FuncCallStmt(Stmt):
+    def __init__(self, func_call : FuncCall):
+        assert isinstance(func_call, FuncCall)
+        self.func_call = func_call
+
+class RetStmt(Stmt):
+    def __init__(self, value : Expr, line):
+        assert isinstance(value, Expr)
+        self.value = value
+        self.line = line
 ```
 #### Compiler-Compilers
 > 컴파일러를 만드는 컴파일러라는 의미.
