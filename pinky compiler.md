@@ -715,7 +715,15 @@ instruction set : PUSH 2,  PUSH 3,  PUSH 4, MUL, ADD
 3. PUSH 4 => stack = [2, 3, 4]
 4. MUL => stack = [2, 12]
 5. ADD => stack = [14]
+cf) 연산 순서는 
 ###### Instruction set
+```
+PUSH <value> : stack에 value 추가
+POP : stack에서 pop
+ADD : stack에서 두개 pop 후 더한 값 push
+SUB : stack에서 두개 pop 후 뺀 값 push
+MUL : stack에서 두개 pop 후 곱한 값 push
+```
 ###### Compiler
 ```python
 class Compiler:
