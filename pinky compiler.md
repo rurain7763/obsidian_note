@@ -682,7 +682,7 @@ elif isinstance(node, FuncCall):
 		new_env.set_value_as_local(func.params[i].identifier.name, self.interpret(node.args[i], env))
 
 	# 함수 실행 부분
-	# 함수 내부에서 ret 값을 만나면 Exception을 raise하여 이후의 모든 코드를 실행하지 않고 catch문을 만날때 까지 거슬러 올라간다.
+	# 함수 내부에서 ret 값을 만나면 Exception을 raise하여 이후의 모든 코드를 실행하지 않고 catch문을 만날때 까지 stack unwinding을 진행한다.
 	try:
 		self.interpret(func.body_stmts, new_env)
 	except Return as e:
@@ -692,6 +692,9 @@ elif isinstance(node, FuncCallStmt):
 elif isinstance(node, RetStmt):
 	# Exception raise
 	raise Return(self.interpret(node.value, env))
+
+class Return(Exception):
+    pass
 ```
 #### Compiler-Compilers
 > 컴파일러를 만드는 컴파일러라는 의미.
