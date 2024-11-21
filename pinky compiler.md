@@ -778,9 +778,10 @@ class VM:
     def run(self, instructions):
         self.is_running = True
         while self.is_running:
+	        # args는 * operator를 통해 unpacking
             opcode, *args = instructions[self.pc]
-            # args에 
-            self.pc += 1
+			self.pc += 1
+			# opcode와 같은 이름의 메소드 수행
             getattr(self, opcode)(*args)
 
     def HALT(self):
