@@ -768,5 +768,32 @@ class Compiler:
 ```
 ###### Virtual Machine
 ```python
+class VM:
+    def __init__(self):
+        self.stack = []
+        self.pc = 0
+        self.sp = 0
+        self.is_running = False
 
+    def run(self, instructions):
+        self.is_running = True
+        while self.is_running:
+            opcode, *args = instructions[self.pc]
+            # args에 
+            self.pc += 1
+            getattr(self, opcode)(*args)
+
+    def HALT(self):
+        self.is_running = False
+
+    def PUSH(self, value):
+        if len(self.stack) <= self.sp: self.stack.append(value)
+        else: self.stack[self.sp] = value
+        self.sp += 1
+    
+    def POP(self):
+        self.sp -= 1
+        return self.stack[self.sp]
+
+	# etc ...
 ```
