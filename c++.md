@@ -450,4 +450,5 @@ union Test {
 	char a;
 	float b;
 };
+// 위 구조체의 크기는 4byte
 ```
