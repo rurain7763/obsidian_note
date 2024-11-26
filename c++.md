@@ -442,3 +442,11 @@ int main() {
 }
 ```
 #### Union
+```cpp
+struct Test {
+  union value {
+	char a;
+	int b;
+  };
+};
+```
