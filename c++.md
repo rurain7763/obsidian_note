@@ -442,11 +442,11 @@ int main() {
 }
 ```
 #### Union
-> 가장 큰 데이터 타입의 크기를 공유하는 데이터 타입
+> 가장 큰 데이터 타입
 
 ```cpp
 union Test {
-  int a;
-  float b;
+	char a;
+	float b;
 };
 ```
