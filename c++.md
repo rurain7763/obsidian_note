@@ -441,3 +441,4 @@ int main() {
 	auto&& other = std::move(knight); // ok. 오른쪽 참조객체로 생성, cf) 이 경우 other는 왼쪽값이 된다
 }
 ```
+#### Union
