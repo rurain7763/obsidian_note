@@ -773,7 +773,7 @@ class Compiler:
 ```
 
 **Global variable**
-compiler에서 symbol table을 통해 global 변수를 관리한다.
+compiler에서 symbol table을 통해 global 변수를 추적하고 instruction set을 생성한다.
 ```python
 class Symbol:
     def __init__(self, name):
@@ -817,6 +817,10 @@ LOAD_GLOBAL y
 ADD
 STORE_GLOBAL z
 ```
+
+**Local variable**
+compiler에서 sc
+
 ###### Virtual Machine
 ```python
 class VM:
