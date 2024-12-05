@@ -773,7 +773,7 @@ class Compiler:
 ```
 
 **Global variable**
-
+compiler에서 symbol table을 통해 global 변수를 관리한다.
 ```python
 class Symbol:
     def __init__(self, name):
@@ -783,18 +783,18 @@ elif isinstance(node, Assignment):
 	self.compile(node.right)
 	symbol = self.get_symbol(node.left.name)
 	if not symbol:
+		# 현재 symbol이 없다면 새로 추가
 		new_symbol = Symbol(node.left.name)
 		self.globals.append(new_symbol)
 		self.emit(('STORE_GLOBAL', new_symbol.name))
 		self.num_globals += 1
 	else:
+		# 이미 존재하는 symbol이라면 update
 		self.emit(('STORE_GLOBAL', symbol.name))
 elif isinstance(node, Identifier):
 	symbol = self.get_symbol(node.name)
 	if not symbol:
-		# show error : variable not defined
 		compile_error(f'Variable {node.name} is not defined', node.line)
-		pass
 	else:
 		self.emit(('LOAD_GLOBAL', symbol.name))
 ```
