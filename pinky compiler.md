@@ -839,12 +839,14 @@ elif isinstance(node, Assignment):
 			self.num_globals += 1
 		else:
 			self.locals.append(new_symbol)
+			#vm의 stack에 이미 값이 존재하므로 STORE_LOCAL을 사용 필요하지 않음.
 			#self.emit(('STORE_LOCAL', self.num_locals))
 			self.num_locals += 1
 	else:
 		if symbol.depth == 0:
 			self.emit(('STORE_GLOBAL', symbol.name))
 		else:
+			#local 변수는 vm stack의
 			self.emit(('STORE_LOCAL', idx))
 elif isinstance(node, Identifier):
 	symbol, idx = self.get_symbol(node.name)
