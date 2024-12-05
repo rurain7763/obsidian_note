@@ -807,7 +807,7 @@ x := 200
 y := 300
 z := x + y
 
-컴파일러를 거친 instruction set
+// 컴파일러를 거친 instruction set
 PUSH 200
 STORE_GLOBAL x
 PUSH 300
