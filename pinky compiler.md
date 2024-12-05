@@ -827,7 +827,34 @@ class Symbol:
         self.name = name
         self.depth = depth
 
-
+# 기존 조건문에 depth에 따라 STORE_LOCAL, LOAD_LOCAL instruction을 생성 코드 추가
+elif isinstance(node, Assignment):
+	self.compile(node.right)
+	symbol, idx = self.get_symbol(node.left.name)
+	if not symbol:
+		new_symbol = Symbol(node.left.name, self.scope_depth)
+		if self.scope_depth == 0:
+			self.globals.append(new_symbol)
+			self.emit(('STORE_GLOBAL', new_symbol.name))
+			self.num_globals += 1
+		else:
+			self.locals.append(new_symbol)
+			#self.emit(('STORE_LOCAL', self.num_locals))
+			self.num_locals += 1
+	else:
+		if symbol.depth == 0:
+			self.emit(('STORE_GLOBAL', symbol.name))
+		else:
+			self.emit(('STORE_LOCAL', idx))
+elif isinstance(node, Identifier):
+	symbol, idx = self.get_symbol(node.name)
+	if not symbol:
+		compile_error(f'Variable {node.name} is not defined', node.line)
+	else:
+		if symbol.depth == 0:
+			self.emit(('LOAD_GLOBAL', symbol.name))
+		else:
+			self.emit(('LOAD_LOCAL', idx))
 ```
 ###### Virtual Machine
 ```python
