@@ -802,8 +802,20 @@ elif isinstance(node, Identifier):
 
 위 코드를 통한 instruction set 생성 예시
 ```
-test.pinky
+// test.pinky
+x := 200
+y := 300
+z := x + y
 
+컴파일러를 거친 instruction set
+PUSH 200
+STORE_GLOBAL x
+PUSH 300
+STORE_GLOBAL y
+LOAD_GLOBAL x
+LOAD_GLOBAL y
+ADD
+STORE_GLOBAL z
 ```
 ###### Virtual Machine
 ```python
