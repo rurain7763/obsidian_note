@@ -846,7 +846,7 @@ elif isinstance(node, Assignment):
 		if symbol.depth == 0:
 			self.emit(('STORE_GLOBAL', symbol.name))
 		else:
-			#local 변수는 vm stack의
+			#local 변수는 vm stack의 위치를 통해 접근
 			self.emit(('STORE_LOCAL', idx))
 elif isinstance(node, Identifier):
 	symbol, idx = self.get_symbol(node.name)
@@ -856,6 +856,7 @@ elif isinstance(node, Identifier):
 		if symbol.depth == 0:
 			self.emit(('LOAD_GLOBAL', symbol.name))
 		else:
+			#local 변수는 vm stack의 위치를 통해 접근
 			self.emit(('LOAD_LOCAL', idx))
 ```
 ###### Virtual Machine
