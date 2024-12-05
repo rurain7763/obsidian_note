@@ -771,6 +771,9 @@ class Compiler:
         self.emit(('HALT', None))
         return self.code
 ```
+
+**Global variable**
+
 ###### Virtual Machine
 ```python
 class VM:
