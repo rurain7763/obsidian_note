@@ -706,11 +706,6 @@ class Return(Exception):
 > 지금까지 ast를 해석하고 해당 코드를 interperter를 통해 python으로 직접 실행했지만, 이제는 compiler를 통해 instructions(여전히 cpu에 고유한 instruction은 아님) set을 생성하고 이를 virtual machine을 통해 실행한다.
 ###### 특징
 stack-based로 구현을 목표로 한다.
-###### Memory model
-![img](https://study.com/cimages/multimages/16/1724cf83-a8ad-4ad5-aeca-0311114a819c_memory_alloc_cpp.png)
-- Heap : 동적 메모리 할당
-- Stack : 지역 변수, 함수 호출, etc
-
 **Stack-based**
 2 + 3 * 4
 instruction set : PUSH 2,  PUSH 3,  PUSH 4, MUL, ADD
@@ -720,6 +715,12 @@ instruction set : PUSH 2,  PUSH 3,  PUSH 4, MUL, ADD
 4. MUL => stack = [2, 12]
 5. ADD => stack = [14]
 cf) 두 수의 연산 순서는 스택에 먼저 들어온 순서대로 연산한다. 예를 들어 2, 3을 가진 스택에 SUB를 하면 2 - 3이 된다.
+###### Memory model
+![img](https://study.com/cimages/multimages/16/1724cf83-a8ad-4ad5-aeca-0311114a819c_memory_alloc_cpp.png)
+- Heap : 동적 메모리 할당
+- Stack : 지역 변수, 함수 호출, etc
+- Data : 전역 변수, static 변수, etc
+- Code : 프로그램 코드
 ###### Instruction set
 ```
 data instruction
