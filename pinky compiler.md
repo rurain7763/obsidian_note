@@ -875,22 +875,16 @@ elif isinstance(node, Identifier):
 			#local 변수는 vm stack의 위치를 통해 접근
 			self.emit(('LOAD_LOCAL', idx))
 elif isinstance(node, IfStmt):
-	self.compile(node.condition)
-	then_label = self.make_label()
-	else_label = self.make_label()
-	exit_label = self.make_label()
-	self.emit(('JMPZ', else_label))
-	self.emit(('LABEL', then_label))
-	self.begin_block()
+	# ...
+	self.begin_block() # if 문의 then 블록 시작
 	self.compile(node.then_stmts)
-	self.end_block()
-	self.emit(('JMP', exit_label))
-	self.emit(('LABEL', else_label))
+	self.end_block() # if 문의 then 블록 종료
+	# ...
 	if node.else_stmts != None:
-		self.begin_block()
+		self.begin_block() # if 문의 else 블록 시작
 		self.compile(node.else_stmts)
-		self.end_block()
-	self.emit(('LABEL', exit_label))
+		self.end_block() #  if 문의 else 블록 종료
+	# ...
 ```
 
 ```
