@@ -829,10 +829,11 @@ class Symbol:
 
 scopre_depth = 0
 
-#
+# 함수 호출 시, if, while 등의 블록 생성 시 depth 증가
 def begin_block(self):
 	self.scope_depth += 1
-    
+
+# 블록 종료 시, 현재 depth에 따라 local 변수 pop 이후 depth 감소
 def end_block(self):
 	i = len(self.locals) - 1
 	while i > -1 and self.locals[i].depth == self.scope_depth:
