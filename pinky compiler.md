@@ -886,8 +886,6 @@ elif isinstance(node, IfStmt):
 		self.end_block() #  if 문의 else 블록 종료
 	# ...
 ```
-
-```
 ###### Virtual Machine
 ```python
 class VM:
