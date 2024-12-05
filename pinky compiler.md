@@ -702,12 +702,14 @@ class Return(Exception):
 > 지금까지 만들어 왔던 일련의 과정들을 BNF 문법을 정의한 파일을 통해 lexer 및 parser를 생성하는 도구이다.
 > 대표적으로 YACC, Bison, ANTLR, etc가 있다.
 > 대부분 사람들은 직접 컴파일러를 만들기보다 이러한 툴을 사용하여 언어를 개발한다.
-
-
 #### Virtual Machine
 > 지금까지 ast를 해석하고 해당 코드를 interperter를 통해 python으로 직접 실행했지만, 이제는 compiler를 통해 instructions(여전히 cpu에 고유한 instruction은 아님) set을 생성하고 이를 virtual machine을 통해 실행한다.
 ###### 특징
 stack-based로 구현을 목표로 한다.
+###### Memory model
+![img](https://study.com/cimages/multimages/16/1724cf83-a8ad-4ad5-aeca-0311114a819c_memory_alloc_cpp.png)
+- Heap : 동적 메모리 할당
+- Stack : 지역 변수, 함수 호출, etc
 
 **Stack-based**
 2 + 3 * 4
