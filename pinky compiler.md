@@ -819,8 +819,16 @@ STORE_GLOBAL z
 ```
 
 **Local variable**
-compiler에서 sc
+compiler에서 scope_depth를 통해 local 변수를 추적하고 instruction set을 생성한다.
+```python
+# 기존 Symbol 클래스에 depth 추가
+class Symbol:
+    def __init__(self, name, depth = 0):
+        self.name = name
+        self.depth = depth
 
+
+```
 ###### Virtual Machine
 ```python
 class VM:
