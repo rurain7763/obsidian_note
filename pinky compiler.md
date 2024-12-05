@@ -796,7 +796,14 @@ elif isinstance(node, Identifier):
 	if not symbol:
 		compile_error(f'Variable {node.name} is not defined', node.line)
 	else:
+		# global 변수에 접근
 		self.emit(('LOAD_GLOBAL', symbol.name))
+```
+
+위 코드를 통한 instruction set 생성 예시
+```
+test.pinky
+
 ```
 ###### Virtual Machine
 ```python
