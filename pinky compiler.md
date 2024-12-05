@@ -829,6 +829,19 @@ class Symbol:
 
 scopre_depth = 0
 
+#
+def begin_block(self):
+	self.scope_depth += 1
+    
+def end_block(self):
+	i = len(self.locals) - 1
+	while i > -1 and self.locals[i].depth == self.scope_depth:
+		self.locals.pop()
+		self.emit(('POP',))
+		i -= 1
+
+	self.scope_depth -= 1
+
 # 기존 조건문에 depth에 따라 STORE_LOCAL, LOAD_LOCAL instruction을 생성 코드 추가
 elif isinstance(node, Assignment):
 	self.compile(node.right)
