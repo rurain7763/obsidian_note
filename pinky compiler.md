@@ -827,6 +827,8 @@ class Symbol:
         self.name = name
         self.depth = depth
 
+scopre_depth = 0
+
 # 기존 조건문에 depth에 따라 STORE_LOCAL, LOAD_LOCAL instruction을 생성 코드 추가
 elif isinstance(node, Assignment):
 	self.compile(node.right)
