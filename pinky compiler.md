@@ -969,7 +969,12 @@ elif isinstance(node, FuncCall):
 	self.emit(('JSR', node.identifier.name))
 ```
 ###### RetStmt
-
+return 시 stack의 
+```python
+elif isinstance(node, RetStmt):
+  self.compile(node.value)
+  self.emit(('RTS',))
+```
 ###### Virtual Machine
 ```python
 class VM:
