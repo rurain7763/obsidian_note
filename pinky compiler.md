@@ -947,7 +947,7 @@ elif isinstance(node, FuncDecl):
 ``` python
 elif isinstance(node, FuncCallStmt):
 	self.compile(node.func_call)
-	self.emit(('POP',))
+	self.emit(('POP',)) # 반환값이 없는 함수이므로 스택에서 pop (FuncDecl은 return)
 ```
 ###### FuncCall
 ###### RetStmt
