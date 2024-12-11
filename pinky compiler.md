@@ -927,6 +927,7 @@ elif isinstance(node, FuncDecl):
 
 실행 후 예시
 ```
+// 인자
 00000000 START:
 00000001  PUSH 0
 00000002  STORE_GLOBAL 0
