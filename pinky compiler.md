@@ -1025,6 +1025,8 @@ def JSR(self, name):
 	# 함수의 인자 갯수를 이용하여 frame_pointer 계산 이후 stack frame 생성
 	new_frame = Frame(name, self.pc, self.sp - arg_cnt)
 	self.frames.append(new_frame)
+
+	# 해당 함수 라벨로 이동
 	self.pc = self.labels[name]
 
 def RTS(self):
