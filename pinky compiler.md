@@ -1019,6 +1019,7 @@ class VM:
 ###### 함수 호출
 ```python
 def JSR(self, name):
+
 	_, arg_cnt = self.POP()
 	new_frame = Frame(name, self.pc, self.sp - arg_cnt)
 	self.frames.append(new_frame)
