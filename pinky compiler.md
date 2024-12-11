@@ -855,8 +855,8 @@ elif isinstance(node, Assignment):
 			self.num_globals += 1
 		else:
 			self.locals.append(new_symbol)
-			#vm의 stack에 이미 값이 존재하므로 STORE_LOCAL을 사용 필요하지 않음.
-			#self.emit(('STORE_LOCAL', self.num_locals))
+			#vm의 stack에 이미 값이 저장되어 있기 때문에 SET_SLOT은 더미 명령어라고 보면 됨
+			self.emit(('SET_SLOT', (len(self.locals) - 1, node.left.name)))
 			self.num_locals += 1
 	else:
 		if symbol.depth == 0:
