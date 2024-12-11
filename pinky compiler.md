@@ -980,8 +980,8 @@ elif isinstance(node, RetStmt):
 class Frame:
     def __init__(self, name, ret_pc, fp):
         self.name = name
-        self.ret_pc = ret_pc
-        self.fp = fp
+        self.ret_pc = ret_pc # 함수 호출 이후 돌아갈 pc
+        self.fp = fp # 함수 호출 시 stack의 위치
 
 class VM:
     def __init__(self):
@@ -989,8 +989,8 @@ class VM:
         self.frames = []
         self.labels = {}
         self.globals = {}
-        self.pc = 0
-        self.sp = 0
+        self.pc = 0 # 프로그램 실행 위치
+        self.sp = 0 # 스택 위치
         self.is_running = False
 
     def run(self, instructions):
@@ -1037,6 +1037,6 @@ def RTS(self):
 	# return 값 push
 	self.PUSH(ret)
 
-	# r
+	# 함수 호출 했던 pc로 이동
 	self.pc = last_frame.ret_pc
 ```
