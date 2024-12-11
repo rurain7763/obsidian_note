@@ -935,10 +935,14 @@ elif isinstance(node, FuncDecl):
 
 // 인자가 있는 함수 정의
 00000001 add:
-00000002  LOAD_LOCAL 0
-00000003  LOAD_LOCAL 1
-00000004  ADD
+00000002  SET_SLOT 0
+00000003  SET_SLOT 1
+00000004  LOAD_LOCAL 0
+00000005  LOAD_LOCAL 1
+00000006  ADD
+00000007  RTS
 ```
+###### 
 ###### Virtual Machine
 ```python
 class VM:
