@@ -886,6 +886,48 @@ elif isinstance(node, IfStmt):
 		self.end_block() #  if 문의 else 블록 종료
 	# ...
 ```
+###### Function
+
+**FuncDecl**
+```python
+elif isinstance(node, FuncDecl):
+	# 함수 이름이 중복되는지 확인
+	func_symbol = self.get_func_symbol(node.identifier.name)
+	if func_symbol:
+		compile_error(f'A function with the name {node.identifier.name} was already declared', node.line)
+
+	# 함수 이름이 변수 이름과 중복되는지 확인
+	var_symbol, idx = self.get_var_symbol(node.identifier.name)
+	if var_symbol:
+		compile_error(f'A function with the name {node.identifier.name} was already defined in this scope', node.line)
+
+	new_symbol = Symbol(node.identifier.name, SYM_FUNC, self.scope_depth)
+	self.functions.append(new_symbol)
+	exit_label = self.make_label()
+	# 함수 정의만 하고 실행하지 않기 위해 exit_label로 점프
+	self.emit(('JMP', exit_label))
+	self.emit(('LABEL', new_symbol.name))
+	# 실제 함수 실행 코드
+	self.begin_block()
+	self.compile(node.body_stmts)
+	self.end_block()
+	self.emit(('RTS',))
+	self.emit(('LABEL', exit_label))
+```
+
+실행 후 예시
+```
+00000000 START:
+00000001  PUSH 0
+00000002  STORE_GLOBAL 0
+00000003  JMP LBL1
+00000004 say:
+00000005  PUSH hello
+00000006  PRINTLN
+00000007  RTS
+00000008 LBL1:
+00000009  HALT
+```
 ###### Virtual Machine
 ```python
 class VM:
