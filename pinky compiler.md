@@ -1018,13 +1018,17 @@ class VM:
 ```
 ###### 변수 선언
 ```python
+# 전역 변수 저장
 def STORE_GLOBAL(self, idx):
 	self.globals[idx] = self.POP()
 
+# 전역 변수 값 stack에 저장
 def LOAD_GLOBAL(self, idx):
 	self.PUSH(self.globals[idx])
 
+# local 변수 저장
 def STORE_LOCAL(self, idx):
+	# 
 	if len(self.frames) > 0:
 		idx += self.frames[-1].fp
 
