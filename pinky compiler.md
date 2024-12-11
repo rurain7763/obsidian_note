@@ -947,9 +947,24 @@ elif isinstance(node, FuncDecl):
 ``` python
 elif isinstance(node, FuncCallStmt):
 	self.compile(node.func_call)
-	self.emit(('POP',)) # 반환값이 없는 함수이므로 스택에서 pop (FuncDecl은 return)
+	self.emit(('POP',)) # 반환값이 없는 함수이므로 스택에서 pop (FuncDecl에 따라 return 값이 없으면 0을 반환)
 ```
 ###### FuncCall
+일반 함수 호출
+```python
+func_symbol = self.get_func_symbol(node.identifier.name)
+	if not func_symbol:
+		compile_error(f'A function with the name {node.identifier.name} was not declared', node.line)
+
+	if len(node.args) != func_symbol.arg_cnt:
+		compile_error(f'A function with the name {node.identifier.name} expected {func_symbol.arg_cnt} params', node.line)
+
+	for arg in node.args:
+		self.compile(arg)
+
+	self.emit(('PUSH', (TYPE_NUMBER, len(node.args))))
+	self.emit(('JSR', node.identifier.name))
+```
 ###### RetStmt
 
 ###### Virtual Machine
