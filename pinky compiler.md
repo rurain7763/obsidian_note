@@ -977,9 +977,18 @@ elif isinstance(node, RetStmt):
 ```
 ###### Virtual Machine
 ```python
+class Frame:
+    def __init__(self, name, ret_pc, fp):
+        self.name = name
+        self.ret_pc = ret_pc
+        self.fp = fp
+
 class VM:
     def __init__(self):
         self.stack = []
+        self.frames = []
+        self.labels = {}
+        self.globals = {}
         self.pc = 0
         self.sp = 0
         self.is_running = False
@@ -1006,4 +1015,8 @@ class VM:
         return self.stack[self.sp]
 
 	# etc ...
+```
+###### 함수 호출
+```python
+
 ```
