@@ -1029,7 +1029,7 @@ def LOAD_GLOBAL(self, idx):
 # local 변수 저장
 def STORE_LOCAL(self, idx):
 	if len(self.frames) > 0:
-		**
+		# 호출 한 함수가 존재할 시 실제 stack idx를 마지막 stack frame의 frame_pointer를 이용하여 계산
 		idx += self.frames[-1].fp
 
 	self.stack[idx] = self.POP()
@@ -1039,6 +1039,7 @@ def SET_SLOT(self, _):
 
 def LOAD_LOCAL(self, idx):
 	if len(self.frames) > 0:
+		# 호출 한 함수가 존재할 시 실제 stack idx를 마지막 stack frame의 frame_pointer를 이용하여 계산
 		idx += self.frames[-1].fp
 
 	self.PUSH(self.stack[idx])
