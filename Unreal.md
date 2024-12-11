@@ -14,3 +14,5 @@ this reference
 UPROPERTY(EditAnywhere, Category = "Category")
 int32 variable;
 ```
+
+cf) UPROPERTY()
