@@ -964,6 +964,7 @@ elif isinstance(node, FuncCall):
 	for arg in node.args:
 		self.compile(arg)
 
+	# 함수 인자 갯수를 stack에 저장 (vm에서 frame_pointer를 계산히기 위해 사용)
 	self.emit(('PUSH', (TYPE_NUMBER, len(node.args))))
 	self.emit(('JSR', node.identifier.name))
 ```
