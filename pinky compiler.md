@@ -909,6 +909,13 @@ elif isinstance(node, FuncDecl):
 	self.emit(('LABEL', new_symbol.name))
 	# 실제 함수 실행 코드
 	self.begin_block()
+
+	# 파라미터 변수 추가
+	for param in node.params:
+	    new_symbol = Symbol(param.identifier.name, SYM_VAR, self.scope_depth)
+	    self.locals.append(new_symbol)
+	    self.emit(('STORE_LOCAL', self.num_locals))
+
 	self.compile(node.body_stmts)
 	self.end_block()
 	self.emit(('RTS',))
