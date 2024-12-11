@@ -942,7 +942,10 @@ elif isinstance(node, FuncDecl):
 00000006  ADD
 00000007  RTS
 ```
-###### 
+###### FuncCallStmt
+###### FuncCall
+###### RetStmt
+
 ###### Virtual Machine
 ```python
 class VM:
