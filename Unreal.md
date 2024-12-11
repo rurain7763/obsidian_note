@@ -7,3 +7,10 @@ side effect가 없는 함수. side effect란 해당 함수를 실행하고 난 �
 **디테일 패널에 Pure 체크박스 활성화 시 Pure 함수로 작동**
 ###### self node
 this reference
+#### C++
+###### UPROPERTY
+변수를 에디터에서 수정 가능하게 만들어줌.
+```cpp
+UPROPERTY(EditAnywhere, Category = "Category")
+int32 variable;
+```
