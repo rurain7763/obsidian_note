@@ -904,7 +904,7 @@ elif isinstance(node, FuncDecl):
 	new_symbol = Symbol(node.identifier.name, SYM_FUNC, self.scope_depth)
 	self.functions.append(new_symbol)
 	exit_label = self.make_label()
-	# 함수 정의만 하고 실행하지 않기 위해 exit_label로 점프
+ 	# 함수 정의만 하고 실행하지 않기 위해 exit_label로 점프
 	self.emit(('JMP', exit_label))
 	self.emit(('LABEL', new_symbol.name))
 	# 실제 함수 실행 코드
@@ -943,6 +943,12 @@ elif isinstance(node, FuncDecl):
 00000007  RTS
 ```
 ###### FuncCallStmt
+반환값이 없는 함수 statement
+``` python
+elif isinstance(node, FuncCallStmt):
+	self.compile(node.func_call)
+	self.emit(('POP',))
+```
 ###### FuncCall
 ###### RetStmt
 
