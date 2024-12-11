@@ -918,6 +918,9 @@ elif isinstance(node, FuncDecl):
 
 	self.compile(node.body_stmts)
 	self.end_block()
+
+	# return 이 존재하지 않는 함수일 경우를 대비하여 return 0 추가
+	self.emit(('PUSH', (TYPE_NUMBER, 0)))
 	self.emit(('RTS',))
 	self.emit(('LABEL', exit_label))
 ```
