@@ -1019,8 +1019,10 @@ class VM:
 ###### 함수 호출
 ```python
 def JSR(self, name):
-
+	# stack의 마지막 값은 함수의 인자 갯수
 	_, arg_cnt = self.POP()
+
+	# 함수의 인자 갯수를 이용하여 frame_pointer 계산 이후 stack frame 생성
 	new_frame = Frame(name, self.pc, self.sp - arg_cnt)
 	self.frames.append(new_frame)
 	self.pc = self.labels[name]
