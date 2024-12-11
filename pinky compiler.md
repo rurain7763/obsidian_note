@@ -1016,6 +1016,29 @@ class VM:
 
 	# etc ...
 ```
+###### 변수 선언
+```python
+def STORE_GLOBAL(self, idx):
+	self.globals[idx] = self.POP()
+
+def LOAD_GLOBAL(self, idx):
+	self.PUSH(self.globals[idx])
+
+def STORE_LOCAL(self, idx):
+	if len(self.frames) > 0:
+		idx += self.frames[-1].fp
+
+	self.stack[idx] = self.POP()
+
+def SET_SLOT(self, _):
+	pass
+
+def LOAD_LOCAL(self, idx):
+	if len(self.frames) > 0:
+		idx += self.frames[-1].fp
+
+	self.PUSH(self.stack[idx])
+```
 ###### 함수 호출
 ```python
 def JSR(self, name):
