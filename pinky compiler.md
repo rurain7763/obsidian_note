@@ -1018,5 +1018,21 @@ class VM:
 ```
 ###### 함수 호출
 ```python
+def JSR(self, name):
+	_, arg_cnt = self.POP()
+	new_frame = Frame(name, self.pc, self.sp - arg_cnt)
+	self.frames.append(new_frame)
+	self.pc = self.labels[name]
 
+def RTS(self):
+	last_frame = self.frames.pop()
+
+	# frame_pointer까지 stack으리
+	ret = self.POP()
+	while last_frame.fp < self.sp:
+		self.POP()
+		
+	self.PUSH(ret)
+
+	self.pc = last_frame.ret_pc
 ```
