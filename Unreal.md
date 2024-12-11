@@ -15,4 +15,4 @@ UPROPERTY(EditAnywhere, Category = "Category")
 int32 variable;
 ```
 
-cf) UPROPERTY()
+cf) UPROPERTY()의 변수를 에디터에서 수정하고 라이브 코딩으로 빌드를 하면 당장에는 적용되지만 에디터를 나가면 적용이 안되는 현상이 일어남. 이럴때는 
