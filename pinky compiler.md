@@ -1028,8 +1028,8 @@ def LOAD_GLOBAL(self, idx):
 
 # local 변수 저장
 def STORE_LOCAL(self, idx):
-	# 
 	if len(self.frames) > 0:
+		**
 		idx += self.frames[-1].fp
 
 	self.stack[idx] = self.POP()
