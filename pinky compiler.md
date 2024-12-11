@@ -1027,12 +1027,16 @@ def JSR(self, name):
 def RTS(self):
 	last_frame = self.frames.pop()
 
-	# frame_pointer까지 stack으리
+	# return 값 백업
 	ret = self.POP()
+	
+	# frame_pointer까지 stack을 pop하여 함수 호출 시 사용한 stack frame 모두 제거
 	while last_frame.fp < self.sp:
 		self.POP()
-		
+
+	# return 값 push
 	self.PUSH(ret)
 
+	# r
 	self.pc = last_frame.ret_pc
 ```
