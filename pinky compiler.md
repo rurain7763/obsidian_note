@@ -950,15 +950,17 @@ elif isinstance(node, FuncCallStmt):
 	self.emit(('POP',)) # 반환값이 없는 함수이므로 스택에서 pop (FuncDecl에 따라 return 값이 없으면 0을 반환)
 ```
 ###### FuncCall
-일반 함수 호출
+일반 함수 statement
 ```python
-func_symbol = self.get_func_symbol(node.identifier.name)
+elif isinstance(node, FuncCall):
+	func_symbol = self.get_func_symbol(node.identifier.name)
 	if not func_symbol:
 		compile_error(f'A function with the name {node.identifier.name} was not declared', node.line)
 
 	if len(node.args) != func_symbol.arg_cnt:
 		compile_error(f'A function with the name {node.identifier.name} expected {func_symbol.arg_cnt} params', node.line)
 
+	# 함수 호출 시 사용할 인자를 스택에 저장
 	for arg in node.args:
 		self.compile(arg)
 
