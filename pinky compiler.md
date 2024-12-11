@@ -905,4 +905,58 @@ elif isinstance(node, FuncDecl):
 	self.functions.append(new_symbol)
 	exit_label = self.make_label()
 	# 함수 정의만 하고 실행하지 않기 위해 exit_label로 점프
-	self.emit((
+	self.emit(('JMP', exit_label))
+	self.emit(('LABEL', new_symbol.name))
+	# 실제 함수 실행 코드
+	self.begin_block()
+	self.compile(node.body_stmts)
+	self.end_block()
+	self.emit(('RTS',))
+	self.emit(('LABEL', exit_label))
+```
+
+실행 후 예시
+```
+00000000 START:
+00000001  PUSH 0
+00000002  STORE_GLOBAL 0
+00000003  JMP LBL1
+00000004 say:
+00000005  PUSH hello
+00000006  PRINTLN
+00000007  RTS
+00000008 LBL1:
+00000009  HALT
+```
+###### Virtual Machine
+```python
+class VM:
+    def __init__(self):
+        self.stack = []
+        self.pc = 0
+        self.sp = 0
+        self.is_running = False
+
+    def run(self, instructions):
+        self.is_running = True
+        while self.is_running:
+	        # args는 * operator를 통해 unpacking
+            opcode, *args = instructions[self.pc]
+			self.pc += 1
+			# opcode와 같은 이름의 메소드 수행
+            getattr(self, opcode)(*args)
+
+    def HALT(self):
+        self.is_running = False
+
+    def PUSH(self, value):
+        if len(self.stack) <= self.sp: self.stack.append(value)
+        else: self.stack[self.sp] = value
+        self.sp += 1
+    
+    def POP(self):
+        self.sp -= 1
+        return self.stack[self.sp]
+
+	# etc ...
+```
