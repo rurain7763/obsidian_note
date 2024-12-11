@@ -910,12 +910,11 @@ elif isinstance(node, FuncDecl):
 	# 실제 함수 실행 코드
 	self.begin_block()
 
-	# 파라미터 변수 추가
+	# 함수 호출 시 현재 스택에 저장되어 있는 값들을 함수의 인자로서 사용
 	for parm in node.params:
 		new_symbol = Symbol(parm.identifier.name, SYM_VAR, self.scope_depth)
-                self.locals.append(new_symbol)
-                self.emit(('SET_SLOT', (len(self.locals) - 1, parm.identifier.name)))
-
+		self.locals.append(new_symbol)
+		self.emit(('SET_SLOT', (len(self.locals) - 1, parm.identifier.name)))
 
 	self.compile(node.body_stmts)
 	self.end_block()
