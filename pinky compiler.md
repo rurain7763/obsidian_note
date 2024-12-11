@@ -969,7 +969,7 @@ elif isinstance(node, FuncCall):
 	self.emit(('JSR', node.identifier.name))
 ```
 ###### RetStmt
-return 시 stack의 
+return 시 stack의 top의 값이 반환값이 된다.
 ```python
 elif isinstance(node, RetStmt):
   self.compile(node.value)
