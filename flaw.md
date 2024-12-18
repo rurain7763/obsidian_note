@@ -16,4 +16,4 @@ Event의 우선 순위를 정할 수 있어야함
 - physical device 선택
 - logical device 생성
 **swapchain 생성**
-
+render pass 생성
