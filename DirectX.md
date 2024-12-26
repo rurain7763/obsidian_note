@@ -32,6 +32,13 @@
 - 버퍼는 당연히 하나의 텍스쳐.
 - `ResizeBuffers()`
 - `Present()`
+
+**DXGI_SWAP_CHAIN_DESC**
+SwapEffect
+- DXGI_SWAP_EFFECT_DISCARD :  비트 전송 방식버퍼를 버림
+- DXGI_SWAP_EFFECT_FLIP_DISCARD : 버퍼를 버리고 새로 만듬
+- DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL : 버퍼를 버리지 않음
+- DXGI_SWAP_EFFECT_SEQUENTIAL : 버퍼를 버리지 않음
 #### Command List
 - 하나의 command allocator를 가진다.
 #### Command Queue
