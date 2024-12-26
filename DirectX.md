@@ -40,7 +40,12 @@ SwapEffect
 - DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL :  대칭 이동 전송 방식/버퍼를 버리지 않음
 - DXGI_SWAP_EFFECT_SEQUENTIAL : 대칭 이동 전송 방식/버퍼를 버리지 않음
 
-비트 브
+**비트 블록 전송 방식**
+백 버퍼를 복사하여 전면 버퍼로 전송하는 방식
+버퍼 
+
+**대칭 이동 전송 방식**
+
 #### Command List
 - 하나의 command allocator를 가진다.
 #### Command Queue
