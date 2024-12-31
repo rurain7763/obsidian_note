@@ -6,6 +6,19 @@
 - cpu가 gpu에게 결과물을 출력하라는 명령을 주기 위한 단계
 - vertex shader -> resterizer -> pixel shader -> output merger
 ![pipeline](http://www.braynzarsoft.net/image/100202)
+#### Graphics pipeline
+###### Input assembler
+그리기에 필요한 리소스(vertex buffer, index buffer, topology, layout etc) 로드
+###### vertex shader
+점에 대한 연산 프로그램 실행
+###### tessellation : hull + domain
+###### geometry shader
+###### rasterizer
+도형별 내부 픽셀 계산 
+###### pixel shader
+각 픽셀에 대한 연산 프로그램 실행
+###### output merger
+깊이 테스트, 블렌딩
 #### 동작 과정
 ![process](http://www.braynzarsoft.net/image/100204)
 #### DXGI
@@ -47,6 +60,11 @@ SwapEffect
 **대칭 이동 전송 방식**
 백 버퍼의 포인터를 전면 버퍼로 전송하는 방식
 버퍼 카운터가 두 개 필요함.
+v-sync를 사용할 때 사용.
+#### Vertex Buffer
+정점의 배열
+#### Layout Input
+정점 배열의 구조
 #### Command List
 - 하나의 command allocator를 가진다.
 #### Command Queue
