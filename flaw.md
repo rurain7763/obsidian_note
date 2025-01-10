@@ -21,4 +21,4 @@ command buffer 생성
 #### TODO
 현재 model, view, projection matrix를 현산을 매 프레임당 계산하고 있음. 이를 개선해야함.
 충돌 체크 시 모든 entity에 대해 체크하고 있음. 공간 분할을 통해 개선해야함.
-텍스쳐의 속성을 개별적으로 변경하지 못함. 개선해야함.
+텍스쳐의 속성을 개별적으로 변경하지 못함. 개선해야함. (opengl과 directx의 차이 때문에)
