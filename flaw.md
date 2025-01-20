@@ -20,6 +20,7 @@ render pass 생성
 command buffer 생성
 ###### GPGPU
 General Purpose Graphic Processing Unit
+단순 작업이 여러개 일때 유용
 ###### CUDA
 NVIDIA에서 개발한 GPGPU를 위한 툴킷
 ###### Compute Shader
