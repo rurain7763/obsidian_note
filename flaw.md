@@ -32,3 +32,4 @@ command buffer 생성
 - 렌더링 시스템에 대해 2d, 3d 구분이 필요함.
 - 현재 opengl에 대한 렌더링이 지체되고 있음. 시간이 나면 directx와 같이 미구현 된 부분을 구현해야함.
 - StructedBuffer를 Map, Unmap을 통해 구현하면 성능 향상이 될것 같다.
+- rect transform 추가 구현 (anchor, pivot)
