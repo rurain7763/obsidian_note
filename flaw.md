@@ -18,6 +18,10 @@ Event의 우선 순위를 정할 수 있어야함
 **swapchain 생성**
 render pass 생성
 command buffer 생성
+###### GPGPU
+General Purpose Graphic Processing Unit
+###### CUDA
+NVIDIA에서 개발한 GPGPU를 위한 툴킷
 #### TODO
 - 현재 model, view, projection matrix를 현산을 매 프레임당 계산하고 있음. 이를 개선해야함. (precalculation system 구현) - done
 - 충돌 체크 시 모든 entity에 대해 체크하고 있음. 공간 분할을 통해 개선해야함.
