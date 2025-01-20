@@ -28,7 +28,7 @@ NVIDIA에서 개발한 GPGPU를 위한 툴킷
 GPU에서 병렬로 처리되는 프로그램
 
 **directx11**
-u로 시작하는 레지스터리에 바인드
+u(unordered register)로 시작하는 레지스터리에 바인드
 unordered access view에 바인드를 하면 쓰기가 가능하다.
 #### TODO
 - 현재 model, view, projection matrix를 현산을 매 프레임당 계산하고 있음. 이를 개선해야함. (precalculation system 구현) - done
