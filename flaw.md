@@ -21,6 +21,7 @@ command buffer 생성
 ###### GPGPU
 General Purpose Graphic Processing Unit
 단순 작업이 여러개 일때 유용
+gpu에서 데이터를 처리하므로 데이터 전달 작업이 필요없다.
 ###### CUDA
 NVIDIA에서 개발한 GPGPU를 위한 툴킷
 ###### Compute Shader
