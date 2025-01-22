@@ -47,3 +47,4 @@ unordered access view에 바인드를 하면 쓰기가 가능하다.
 - 현재 opengl에 대한 렌더링이 지체되고 있음. 시간이 나면 directx와 같이 미구현 된 부분을 구현해야함.
 - StructedBuffer를 Map, Unmap을 통해 구현하면 성능 향상이 될것 같다.
 - rect transform 추가 구현 (anchor, pivot을 기반으로 위치 및 크기 조정)
+- Pipeline 코드에 대해 
