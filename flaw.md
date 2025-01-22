@@ -45,6 +45,6 @@ unordered access view에 바인드를 하면 쓰기가 가능하다.
 - 셰이더에 매트릭스를 넘겨줄때 미리 곱한 매트릭스를 넘겨주면 성능 향상이 될것 같다.
 - 렌더링 시스템에 대해 2d, 3d 구분이 필요함.
 - 현재 opengl에 대한 렌더링이 지체되고 있음. 시간이 나면 directx와 같이 미구현 된 부분을 구현해야함.
-- StructedBuffer를 Map, Unmap을 통해 구현하면 성능 향상이 될것 같다.
+- StructedBuffer를 Map, Unmap을 통해 구현하면 성능 향상이 될것 같다. - done
 - rect transform 추가 구현 (anchor, pivot을 기반으로 위치 및 크기 조정)
-- Pipeline 코드에 대해 
+- Pipeline 코드에 대한 모호성이 조금 있는것 같음. 코드를 다시 한번 확인해야함.
