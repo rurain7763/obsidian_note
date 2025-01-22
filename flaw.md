@@ -51,3 +51,4 @@ unordered access view에 바인드를 하면 쓰기가 가능하다.
 - StructedBuffer를 Map, Unmap을 통해 구현하면 성능 향상이 될것 같다. - done
 - rect transform 추가 구현 (anchor, pivot을 기반으로 위치 및 크기 조정)
 - Pipeline 코드에 대한 모호성이 조금 있는것 같음. 코드를 다시 한번 확인해야함.
+- image를 불러올때 rg 혹은 grayscale인지 사용자가 구분하게 해야함. (현재는 무조건 channel이 2개면 grayscale로 간주)
