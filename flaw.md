@@ -31,6 +31,7 @@ GPU에서 병렬로 처리되는 프로그램
 u(unordered register)로 시작하는 레지스터리에 바인드
 unordered access view에 바인드를 하면 쓰기가 가능하다.
 #### Particle system
+###### billboard
 #### Instancing drawing
 #### Tesellation Shader
 #### Geometry Shader
