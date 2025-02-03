@@ -18,6 +18,8 @@ Event의 우선 순위를 정할 수 있어야함
 **swapchain 생성**
 render pass 생성
 command buffer 생성
+#### Material
+###### dynamic material(동적 재질)
 ###### GPGPU
 General Purpose Graphic Processing Unit
 단순 작업이 여러개 일때 유용
@@ -32,8 +34,6 @@ u(unordered register)로 시작하는 레지스터리에 바인드
 unordered access view에 바인드를 하면 쓰기가 가능하다.
 #### Particle system
 ###### billboard
-#### Material
-###### dynamic material(동적 재질)
 #### Instancing drawing
 #### Tesellation Shader
 #### Geometry Shader
