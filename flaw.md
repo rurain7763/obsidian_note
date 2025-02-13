@@ -48,6 +48,10 @@ unordered access view에 바인드를 하면 쓰기가 가능하다.
 ###### docking이 화면을 벗어나면 생기는 문제 해결
 #### AssetStore
 ###### Lazy loading
+#### 계층구조
+###### 주의점
+`SetParent()` : 자식 중에 부모가 되려하면 막아야 한다.
+`AddChild()`
 #### TODO
 - 현재 model, view, projection matrix를 현산을 매 프레임당 계산하고 있음. 이를 개선해야함. (precalculation system 구현) - done
 - 충돌 체크 시 모든 entity에 대해 체크하고 있음. 공간 분할을 통해 개선해야함.
