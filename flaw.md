@@ -71,4 +71,6 @@ unordered access view에 바인드를 하면 쓰기가 가능하다.
 - image를 불러올때 rg 혹은 grayscale인지 사용자가 구분하게 해야함. (현재는 무조건 channel이 2개면 grayscale로 간주)
 - 2d spot light 추가 구현
 - 에셋 참조를 경로로 하는 것이 아니라 guid로 하는 것이 좋을것 같다.
-- outliner ui를 게임 오브젝트가 갱신될때 refresh하는 로직으로 변경.
+- outliner ui를 게임 오브젝트가 갱신될때 refresh하는 로직으로 변경
+#### Memo
+- 에셋은 객체를 생성하는 틀 역할을 하는것도 좋을것 같음.
