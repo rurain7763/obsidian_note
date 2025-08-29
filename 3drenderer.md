@@ -457,4 +457,6 @@ void clip_polygon(polygon_t* polygon) {
 }
 ```
 #### Post-processing
-반전효과 : 1.0 - color
+반전효과 : 1.0 - RGB
+GrayScale : (R + G + B) / 3.0 or 0.299 * R + 0.587 * G + 0.114 * B
+
