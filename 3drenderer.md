@@ -479,11 +479,13 @@ void main() {
         vec2(texel_size.x, texel_size.y)   // bottom-right
     );
 
-    float sharkernel[9] = float[](
+    float sharpen_kernel[9] = float[](
         -1, -1, -1,
         -1,  9, -1,
         -1, -1, -1
     );
+    
+    float kernel[9] = <kernel values>;
 
     vec3 sum = vec3(0.0);
     for (int i = 0; i < 9; i++) {
