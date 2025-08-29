@@ -462,7 +462,6 @@ void clip_polygon(polygon_t* polygon) {
 ##### GrayScale
 (R + G + B) / 3.0 or 0.299 * R + 0.587 * G + 0.114 * B
 ##### Kernel
-###### Sharpen
 ``` glsl
 void main() {
 	vec2 texture_size = textureSize(final_texture, 0);
@@ -480,7 +479,7 @@ void main() {
         vec2(texel_size.x, texel_size.y)   // bottom-right
     );
 
-    float kernel[9] = float[](
+    float sharkernel[9] = float[](
         -1, -1, -1,
         -1,  9, -1,
         -1, -1, -1
