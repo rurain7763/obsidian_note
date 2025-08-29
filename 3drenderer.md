@@ -456,3 +456,5 @@ void clip_polygon(polygon_t* polygon) {
 	clip_polygon_against_plane(polygon, FAR_FRUSTUM_PLANE);
 }
 ```
+#### Post-processing
+반전효과 : 1.0 - color
