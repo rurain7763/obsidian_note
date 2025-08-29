@@ -495,10 +495,4 @@ void main() {
     fragColor = vec4(sum, 1.0);
 }
 ```
-###### Blur
-```
-void main() {
-	
-}
-```
 
