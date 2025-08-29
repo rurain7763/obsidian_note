@@ -461,5 +461,37 @@ void clip_polygon(polygon_t* polygon) {
 1.0 - RGB
 ##### GrayScale
 (R + G + B) / 3.0 or 0.299 * R + 0.587 * G + 0.114 * B
-Kernel
+##### Kernel
+###### Sharpen
+``` glsl
+void main() {
+	vec2 texture_size = textureSize(final_texture, 0);
+    vec2 texel_size = 1.0 / texture_size;
+
+    vec2 offsets[9] = vec2[](
+        vec2(-texel_size.x, -texel_size.y), // top-left
+        vec2(0.0, -texel_size.y),           // top-center
+        vec2(texel_size.x, -texel_size.y),  // top-right
+        vec2(-texel_size.x, 0.0),           // center-left
+        vec2(0.0, 0.0),                      // center
+        vec2(texel_size.x, 0.0),            // center-right
+        vec2(-texel_size.x, texel_size.y), // bottom-left
+        vec2(0.0, texel_size.y),            // bottom-center
+        vec2(texel_size.x, texel_size.y)   // bottom-right
+    );
+
+    float kernel[9] = float[](
+        -1, -1, -1,
+        -1,  9, -1,
+        -1, -1, -1
+    );
+
+    vec3 sum = vec3(0.0);
+    for (int i = 0; i < 9; i++) {
+        sum += texture(final_texture, in_tex_coord + offsets[i]).rgb * kernel[i];
+    }
+
+    fragColor = vec4(sum, 1.0);
+}
+```
 
