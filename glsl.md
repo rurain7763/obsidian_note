@@ -133,7 +133,7 @@ void main() {
 #### Built-in variables
 ###### gl_VertexID
 integer index of the vertex
-use index buffer drawing, this value is the index in the index buffer, if not, it is the index of the vertex in the array of vertices
+when index drawing, this value is the index in the index buffer, if not, it is the index of the vertex in the array of vertices
 ###### gl_FragCoord
 .x : screen space x coordinate
 .y : screen space y coordinate
