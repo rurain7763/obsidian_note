@@ -131,14 +131,18 @@ void main() {
 }
 ```
 #### Built-in variables
+##### Vertex Shader
 ###### gl_VertexID
 integer index of the vertex
 when index drawing, this value is the index in the index buffer, if not, it is the index of the vertex in the array of vertices
 ###### gl_PointSize
 size of the point when drawing points
+##### Fragment Shader
 ###### gl_FragCoord
 .x : screen space x coordinate
 .y : screen space y coordinate
 .z : depth value (not linear)
 ###### gl_FrontFacing
 true if the fragment belongs to a front-facing primitive
+###### gl_FragDepth
+can be used to override the depth value of a fragment
