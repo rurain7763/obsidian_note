@@ -131,3 +131,7 @@ void main() {
 }
 ```
 #### Built-in variables
+###### gl_FragCoord
+.x : screen space x coordinate
+.y : screen space y coordinate
+.z : depth value (not linear)
