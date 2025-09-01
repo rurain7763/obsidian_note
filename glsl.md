@@ -131,8 +131,12 @@ void main() {
 }
 ```
 #### Built-in variables
+###### gl_VertexID
+integer index of the vertex
+if use index buffer
 ###### gl_FragCoord
 .x : screen space x coordinate
 .y : screen space y coordinate
 .z : depth value (not linear)
 ###### gl_FrontFacing
+true if the fragment belongs to a front-facing primitive
